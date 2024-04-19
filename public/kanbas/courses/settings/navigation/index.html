@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/Kanbas/styles.css" />
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css" />
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css" />
+</head>
+<body>
+    <table>
+        <td valign="Top">
+            <div class="d-none d-sm-block">
+                <ul class="wd-kanbas-navigation">
+                    <li class="main-logo-container">
+                        <a href="https://northeastern.edu">
+                            <img src="/assets/icons/NU_main_logo.png" alt="">
+                        </a>
+                    </li>
+                    <ul class="wd-kanbas-navigation main-options">
+                        <li>
+                            <a href="/kanbas/account/profile/screen.html">
+                                <i class="fa fa-user"></i>
+                                Account
+                            </a>
+                        </li>
+                        <li class="wd-active">
+                            <a href="/Kanbas/Dashboard/screen.html">
+                                <i class="fa fa-tachometer"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/kanbas/courses/home/screen.html">
+                                <i class="fa fa-book"></i>
+                                Courses
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-calendar"></i>
+                                Calendar
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-inbox"></i>
+                                Inbox
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-history"></i>
+                                History
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-cogs"></i>
+                                Studio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-comments"></i>
+                                Comments
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-question-circle"></i>
+                                Help
+                            </a>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </td>
+        <td valign="Top">
+            <div>
+                <ul class="wd-navigation">
+                    <li><a href="/kanbas/courses/home/screen.html">Home</a></li>
+                    <li class="wd-active"><a href="/kanbas/courses/modules/screen.html">Modules</a></li>
+                    <li><a href="#">Piazza</a></li>
+                    <li><a href="#">Zoom Meetings</a></li>
+                    <li><a href="/kanbas/courses/assignments/index.html">Assignments</a></li>
+                    <li><a href="#">Quizzes</a></li>
+                    <li><a href="/kanbas/courses/grades/screen.html">Grades</a></li>
+                    <li><a href="#">People</a></li>
+                    <li><a href="#">Panopto Video</a></li>
+                    <li><a href="#">Discussions</a></li>
+                    <li><a href="#">Announcements</a></li>
+                    <li><a href="#">Pages</a></li>
+                    <li><a href="#">Files</a></li>
+                    <li><a href="#">Rubrics</a></li>
+                    <li><a href="#">Outcomes</a></li>
+                    <li><a href="#">Collaborations</a></li>
+                    <li><a href="#">Syllabus</a></li>
+                    <li><a href="/kanbas/courses/settings/index.html">Settings</a></li>
+                </ul>
+            </div>
+        </td>
+        <td valign="Top">
+            <div>
+                <div class="settings-nav-button-container">
+                    <button class="settings-nav-button" onclick="
+                        window.location.href = '/kanbas/courses/settings/CourseDetails/index.html';
+                    ">
+                        Course Details
+                    </button>
+                    <button class="settings-nav-button">
+                        Sections
+                    </button>
+                    <button class="settings-nav-button" onclick="
+                        window.location.href = '/kanbas/courses/settings/Navigation/index.html';
+                    ">
+                        Navigation
+                    </button>
+                    <button>
+                        Apps
+                    </button>
+                    <button>
+                        Feature Options
+                    </button>
+                    <button>
+                        Integrations
+                    </button>
+                </div>
+                <div>
+                    <div>
+                        <h3>
+                            Drag and drop items to reorder them in the course navigation.
+                        </h3>
+                        <ul>
+                            <li>
+                                Home
+                            </li>
+                            <li>
+                                Modules
+                            </li>
+                            <li>
+                                Piazza
+                            </li>
+                            <li>
+                                Zoom Meetings
+                            </li>
+                            <li>
+                                Assignments
+                            </li>
+                            <li>
+                                Quizzes
+                            </li>
+                            <li>
+                                Grades
+                            </li>
+                            <li>
+                                People
+                            </li>
+                            <li>
+                                Panopto Video
+                            </li>
+                        </ul>
+                    </div>
+                    <br>
+                    <div>
+                        <h3>
+                            Drag items here to hide them from students.
+                        </h3>
+                        <p>
+                            Disablling most pages will cause students who visit those pages to be redirected to the course home page.
+                        </p>
+                        <ul>
+                            <li>
+                                <h5>Chat</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>SCORM</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>Attendance</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>Barnes and Noble Bookstore</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>Digication</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>Top Hat</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>Syllabus</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>Perusall</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>Microsoft Teams Meeting</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>FACT Reporting and Photo Roster</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>Progress Reports (Navigate)</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>Microsoft Teams for Canvas</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>VHL Central</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>Gradescope 1.3</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>Credentials</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                            <li>
+                                <h5>iClicker</h5>
+                                <p>
+                                    Page disabled, won't appear in navigation
+                                </p>
+                            </li>
+                        </ul>
+                        <button>
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </table>
+</body>
+</html>

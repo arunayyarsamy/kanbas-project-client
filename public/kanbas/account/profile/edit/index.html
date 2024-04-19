@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h2>
+            Ashwin Sathiyanarayanan
+        </h2>
+        <div>
+            <form action="">
+                <label for="Name">
+                    Name:*
+                    <input type="text" name="Name" id="Name">
+                </label>
+                <label for="Pronouns">
+                    Pronouns:
+                    <select name="Pronouns" id="Pronouns">
+                        <option value="None" selected>None</option>
+                        <option value="He/Him">He/Him</option>
+                        <option value="She/Her">She/Her</option>
+                        <option value="They/Them">They/Them</option>
+                    </select>
+                </label>
+                <br><br>
+                <label for="Title">
+                    Title:
+                    <input type="text" name="Title" id="Title">
+                </label>
+                <h2>
+                    Contact
+                </h2>
+                <p>
+                    No registered services, you can add some on the <a href="#">settings</a> page.
+                </p>
+                <h2>
+                    Biography
+                </h2>
+                <p>
+                    Faculty, Full Stack Developer, and Software Engineer.
+                </p>
+                <textarea name="Biography" id="" cols="30" rows="10">
+                    Faculty, Full Stack Developer, and Software Engineer.
+                </textarea>
+                <h2>
+                    Links
+                </h2>
+                <ul>
+                    <li><a href="https://ashwinsathiyanarayanan.online">
+                            Portfolio | Links to my portfolio
+                        </a></li>
+                </ul>
+                <div style="
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: flex-end;
+                gap: 10px;
+                text-align: center;
+                ">
+                    <label for="LinkTitle">
+                        Title <br>
+                        <input type="text" name="LinkTitle" id="LinkTitle" value="Portfolio">
+                    </label>
+                    <label for="">
+                        &#x2192
+                    </label>
+                    <label for="LinkURL">
+                        URL <br>
+                        <input type="text" name="LinkURL" id="LinkURL" value="https://ashwinsathiyanarayanan.online">
+                    </label>
+                    <a href="#">Remove</a>
+                </div>
+                <br>
+                <button>
+                    Add another link
+                </button>
+                <div>
+                    <button type="reset" onclick="
+                    window.location.href = '/kanbas/account/profile/screen.html';
+                ">
+                        Cancel
+                    </button>
+                    <button type="reset" onclick="
+                    window.location.href = '/kanbas/account/profile/screen.html';
+                ">
+                        Save Profile
+                    </button>
+                </div>
+                <div>
+                    <button type="reset" onclick="
+                    window.location.href = '/kanbas/account/profile/edit/screen.html';
+                ">
+                        Edit Profile
+                    </button>
+                    <button type="reset" onclick="
+                    window.location.href = '/kanbas/account/profile/screen.html';
+                ">
+                        Cancel Editing
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

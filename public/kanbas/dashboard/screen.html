@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/Kanbas/styles.css" />
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/kanbas/dashboard/index.css">
+</head>
+
+<body>
+    <div class="kanbas-main-dashboard-container" style="
+    height: 100vh;
+    ">
+        <div class="d-none d-sm-block" style="
+        height: 100vh;
+        ">
+            <ul class="wd-kanbas-navigation">
+                <li class="main-logo-container">
+                    <a href="https://northeastern.edu">
+                        <img src="/assets/icons/NU_main_logo.png" alt="">
+                    </a>
+                </li>
+                <ul class="wd-kanbas-navigation main-options">
+                    <li>
+                        <a href="/kanbas/account/profile/screen.html">
+                            <i class="fa fa-user"></i>
+                            Account
+                        </a>
+                    </li>
+                    <li class="wd-active">
+                        <a href="/Kanbas/Dashboard/screen.html">
+                                <i class="fa fa-tachometer"></i>
+                                Dashboard
+                            </a>
+                    </li>
+                    <li>
+                        <a href="/kanbas/courses/home/screen.html">
+                            <i class="fa fa-book"></i>
+                            Courses
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-calendar"></i>
+                            Calendar
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-inbox"></i>
+                            Inbox
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-history"></i>
+                            History
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-cogs"></i>
+                            Studio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-comments"></i>
+                            Comments
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-question-circle"></i>
+                            Help
+                        </a>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+        <div class="kanbas-dashboard-courses-container" style="
+        height: 100vh;
+        overflow: scroll;
+        ">
+            <div class="p-4 overflow-auto">
+                <script>
+                    const courses = [
+                        {
+                            title: "CS1234 React JS",
+                            description: "Full Stack software developer",
+                            image: "/assets/images/webdevelopmentbg.jpg",
+                            link: "/Kanbas/Courses/Home/screen.html"
+                        },
+                        {
+                            title: "CS1234 React JS",
+                            description: "Full Stack software developer",
+                            image: "/assets/images/webdevelopmentbg.jpg",
+                            link: "/Kanbas/Courses/Home/screen.html"
+                        },
+                        {
+                            title: "CS1234 React JS",
+                            description: "Full Stack software developer",
+                            image: "/assets/images/webdevelopmentbg.jpg",
+                            link: "/Kanbas/Courses/Home/screen.html"
+                        },
+                        {
+                            title: "CS4321 Java Development",
+                            description: "Full Stack software developer",
+                            image: "/assets/images/javabg.jpg",
+                            link: "/Kanbas/Courses/Home/screen.html"
+                        },
+                        {
+                            title: "CS4321 Java Development",
+                            description: "Full Stack software developer",
+                            image: "/assets/images/javabg.jpg",
+                            link: "/Kanbas/Courses/Home/screen.html"
+                        },
+                        {
+                            title: "CS4321 Java Development",
+                            description: "Full Stack software developer",
+                            image: "/assets/images/javabg.jpg",
+                            link: "/Kanbas/Courses/Home/screen.html"
+                        },
+                        {
+                            title: "CS4321 Java Development",
+                            description: "Full Stack software developer",
+                            image: "/assets/images/javabg.jpg",
+                            link: "/Kanbas/Courses/Home/screen.html"
+                        }
+                    ];
+                </script>
+                <h1>Dashboard</h1>
+                <hr />
+                <h2>Published Courses (<script>
+                        document.write(courses.length);
+                    </script>)
+                </h2>
+                <hr />
+                <div class="row">
+                    <div class="row row-cols-1 row-cols-md-5 g-4 m-0 ">
+                        <script>
+                            courses.forEach(course => {
+                                document.write(`
+                                    <div class="col" style="width: 300px">
+                                        <div class="card">
+                                            <img src="${course.image}" class="card-img-top" style="max-height: 150px" />
+                                            <div class="card-body">
+                                                <a class="card-title" href="${course.link}" style="text-decoration: none; color: navy; font-weight: bold">
+                                                    ${course.title}
+                                                </a>
+                                                <p class="card-text">${course.description}</p>
+                                                <a href="/kanbas/courses/home/screen.html" class="btn btn-primary"> Go </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `);
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

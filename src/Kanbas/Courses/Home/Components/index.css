@@ -1,0 +1,12 @@
+.red-link {
+    color: #D41B2C;
+    border: none;
+}
+
+.red-link button {
+    text-decoration: none;
+    color: #D41B2C;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}

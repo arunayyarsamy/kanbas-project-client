@@ -1,0 +1,53 @@
+.gradesTable {
+    width: 100%;
+    overflow-x: scroll;    
+}
+
+.gradesTable table {
+    width: 150%;
+    border: none;
+}
+
+.gradesTable table p {
+    margin: 0;
+}
+
+.gradesTable table th {
+    background-color: #F5F5F5;
+    border: 1px solid #E0E0E0;
+    padding: 10px;
+    text-align: center;
+    /* width: 10%; */
+    font-size: 1rem;
+}
+
+.gradesTable table td {
+    border: 1px solid #E0E0E0;
+    padding: 10px;
+    text-align: center;
+    /* width: 10%; */
+}
+
+.gradesTable table tr td:nth-child(1) {
+    text-align: left;
+    color: #D41B2C;
+}
+
+.gradesTable table tr:nth-child(even) {
+    background-color: #F5F5F5;
+}
+
+.gradesTable table tr:nth-child(odd) {
+    background-color: #FFFFFF;
+}
+
+.additional-button-grp {
+    float: right;
+}
+
+.additional-button-grp button {
+    background-color: #F5F5F5;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    padding: 0.5rem;
+}

@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/Kanbas/styles.css" />
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+</head>
+
+<body>
+    <div class="p-4">
+        <script>
+            const courses = [
+                {
+                    title: "CS1234 React JS",
+                    description: "Full Stack software developer",
+                    image: "/assets/images/reactjs.jpg",
+                    link: "/Kanbas/Courses/Home/screen.html"
+                },
+                {
+                    title: "CS1234 React JS",
+                    description: "Full Stack software developer",
+                    image: "/assets/images/reactjs.jpg",
+                    link: "/Kanbas/Courses/Home/screen.html"
+                },
+                {
+                    title: "CS1234 React JS",
+                    description: "Full Stack software developer",
+                    image: "/assets/images/reactjs.jpg",
+                    link: "/Kanbas/Courses/Home/screen.html"
+                },
+                {
+                    title: "CS1234 React JS",
+                    description: "Full Stack software developer",
+                    image: "/assets/images/reactjs.jpg",
+                    link: "/Kanbas/Courses/Home/screen.html"
+                },
+                {
+                    title: "CS1234 React JS",
+                    description: "Full Stack software developer",
+                    image: "/assets/images/reactjs.jpg",
+                    link: "/Kanbas/Courses/Home/screen.html"
+                }
+            ];
+        </script>
+        <h1>Dashboard</h1>
+        <hr />
+        <h2>Published Courses (<script>
+                document.write(courses.length);
+            </script>)
+        </h2>
+        <hr />
+        <div class="row overflow-auto">
+            <div class="row row-cols-1 row-cols-md-5 g-4">
+                <script>
+                    courses.forEach(course => {
+                        document.write(`
+                            <div class="col" style="width: 300px">
+                                <div class="card">
+                                    <img src="${course.image}" class="card-img-top" style="max-height: 150px" />
+                                    <div class="card-body">
+                                        <a class="card-title" href="${course.link}" style="text-decoration: none; color: navy; font-weight: bold">
+                                            ${course.title}
+                                        </a>
+                                        <p class="card-text">${course.description}</p>
+                                        <a html="#" class="btn btn-primary"> Go </a>
+                                    </div>
+                                </div>
+                            </div>
+                    `);
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

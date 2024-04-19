@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    height: max-content;
+}
+
+body * {
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-family: "Lato Extended","Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+}

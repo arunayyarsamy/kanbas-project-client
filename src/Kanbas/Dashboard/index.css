@@ -1,0 +1,9 @@
+.card-title {
+    text-decoration: none;
+    color: navy;
+    font-weight: bold;
+}
+
+.col {
+    width: 300px;
+}

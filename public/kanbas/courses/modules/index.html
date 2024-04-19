@@ -1,0 +1,200 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Modules/index.css" />
+</head>
+
+<body>
+    <div id="main-button-group" class="d-flex flex-row justify-content-end gap-2">
+        <button>Collapse All</button>
+        <button>View Progress</button>
+        <select name="Publish" id="Publish">
+            <option value="Publish All" selected>Publish All</option>
+            <option value="Publish">Publish</option>
+            <option value="Unpublish">Unpublish</option>
+        </select>
+        <button class="bg-danger text-white "><i class="fa fa-plus m-2 "></i>Module</button>
+        <button><i class="fa fa-ellipsis-v ms-2" style="padding: 0%;"></i></button>
+    </div>
+    <!-- Implement buttons Collapse All, View Progress, etc. here -->
+    <script>
+        const Modules = [
+            {
+                title: "Week 1",
+                learningObjectives: [
+                    "Introduction to the Course",
+                    "Learn what is web development",
+                    "Creating a development environment",
+                    "Creating a web application",
+                    "Getting started with the 1st assignment"
+                ],
+                readings: [
+                    "Full Stack Developer - Chapter 1 - Introduction",
+                    "Full Stack Developer - Chapter 2 - Creating User Interfaces with HTML"
+                ],
+                slides: [
+                    "Introduction to Web Development. Links to an external site.",
+                    "Creating an HTTP Server with Node.js. Links to an external site.",
+                    "Creating a React Application. Links to an external site."
+                ]
+            },
+            {
+                title: "Week 2",
+                learningObjectives: [
+                    "Learn how to create user interfaces with HTML",
+                    "Keep working on Assignment 1",
+                    "Deploy the assignment to Netlify"
+                ],
+                readings: [
+                    "Full Stack Developer - Chapter 1 - Introduction",
+                    "Full Stack Developer - Chapter 2 - Creating User Interfaces with HTML"
+                ],
+                slides: [
+                    "Further more about HTML. Links to an external site.",
+                    "Introduction to Deploying to Netlify. Links to an external site."
+                ]
+            }
+        ];
+    </script>
+    <ul class="list-group wd-modules">
+        <script>
+            Modules.forEach((module) => {
+                document.write(`
+                <li class="list-group-item">
+            <div>
+                <i class="fa fa-ellipsis-v"></i> ${module.title}
+                <span class="float-end">
+                    <i class="fa fa-check-circle text-success"></i>
+                    <i class="fa fa-plus ms-2"></i>
+                    <i class="fa fa-ellipsis-v ms-2"></i>
+                </span>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <i class="fa fa-ellipsis-v"></i> Learning Objectives
+                    <span class="float-end">
+                        <i class="fa fa-check-circle text-success"></i>
+                        <i class="fa fa-ellipsis-v ms-2"></i>
+                    </span>
+                </li>
+                <ul>
+                    ${module.learningObjectives.map((objective) => {
+                    return `<li><i class="fa fa-ellipsis-v"></i>${objective}
+                            <span class="float-end">
+                                <i class="fa fa-check-circle text-success"></i>
+                                <i class="fa fa-ellipsis-v ms-2"></i>
+                            </span></li>`;
+                }).join('')}
+                </ul>
+                <li class="list-group-item">
+                    <i class="fa fa-ellipsis-v"></i> Reading
+                    <span class="float-end">
+                        <i class="fa fa-check-circle text-success"></i>
+                        <i class="fa fa-ellipsis-v ms-2"></i>
+                    </span>
+                </li>
+                <ul>
+                    ${module.readings.map((reading) => {
+                    return `<li><i class="fa fa-ellipsis-v"></i>${reading}
+                            <span class="float-end">
+                                <i class="fa fa-check-circle text-success"></i>
+                                <i class="fa fa-ellipsis-v ms-2"></i>
+                            </span></li>`;
+                }).join('')}
+                </ul>
+                <li class="list-group-item">
+                    <i class="fa fa-ellipsis-v"></i> Slides
+                    <span class="float-end">
+                        <i class="fa fa-check-circle text-success"></i>
+                        <i class="fa fa-ellipsis-v ms-2"></i>
+                    </span>
+                </li>
+                <ul>
+                    ${module.slides.map((slide) => {
+                    return `<li><a href="#"><i class="fa fa-ellipsis-v"></i>${slide}</a>
+                            <span class="float-end">
+                                <i class="fa fa-check-circle text-success"></i>
+                                <i class="fa fa-ellipsis-v ms-2"></i>
+                            </span></li>`;
+                }).join('')}
+                </ul>
+            </ul>
+        </li>                
+                `)
+            });
+        </script>
+    </ul>
+</body>
+
+</html>
+
+<!-- <li class="list-group-item">
+            <div>
+                <i class="fa fa-ellipsis-v"></i> Week 1
+                <span class="float-end">
+                    <i class="fa fa-check-circle text-success"></i>
+                    <i class="fa fa-plus ms-2"></i>
+                    <i class="fa fa-ellipsis-v ms-2"></i>
+                </span>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <i class="fa fa-ellipsis-v"></i> Learning Objectives
+                    <span class="float-end">
+                        <i class="fa fa-check-circle text-success"></i>
+                        <i class="fa fa-ellipsis-v ms-2"></i>
+                    </span>
+                </li>
+                <ul>
+                    <li><i class="fa fa-ellipsis-v"></i>Introduction to the Course</li>
+                    <li><i class="fa fa-ellipsis-v"></i>Learn what is web development</li>
+                    <li><i class="fa fa-ellipsis-v"></i>Creating a development environment</li>
+                    <li><i class="fa fa-ellipsis-v"></i>Creating a web application</li>
+                    <li><i class="fa fa-ellipsis-v"></i>Getting started with the 1st assignment</li>
+                </ul>
+                <li class="list-group-item">
+                    <i class="fa fa-ellipsis-v"></i> Reading
+                    <span class="float-end">
+                        <i class="fa fa-check-circle text-success"></i>
+                        <i class="fa fa-ellipsis-v ms-2"></i>
+                    </span>
+                </li>
+                <ul>
+                    <li><i class="fa fa-ellipsis-v"></i>Full Stack Developer - Chapter 1 - Introduction</li>
+                    <li><i class="fa fa-ellipsis-v"></i>Full Stack Developer - Chapter 2 - Creating User Interfaces with
+                        HTML</li>
+                </ul>
+                <li class="list-group-item">
+                    <i class="fa fa-ellipsis-v"></i> Slides
+                    <span class="float-end">
+                        <i class="fa fa-check-circle text-success"></i>
+                        <i class="fa fa-ellipsis-v ms-2"></i>
+                    </span>
+                </li>
+                <ul>
+                    <li><a href="#">
+                            <i class="fa fa-ellipsis-v"></i>Introduction to Web Development. Links to an external site.
+                        </a></li>
+                    <li><a href="#">
+                            <i class="fa fa-ellipsis-v"></i>Creating an HTTP Server with Node.js. Links to an external
+                            site.
+                        </a></li>
+                    <li><a href="#">
+                            <i class="fa fa-ellipsis-v"></i>Creating a React Application. Links to an external site.
+                        </a>
+                    </li>
+                </ul>
+            </ul>
+        </li>
+        <li class="list-group-item">
+            <div>
+                <i class="fa fa-ellipsis-v"></i> Week 2
+                <span class="float-end">
+                    <i class="fa fa-check-circle text-success"></i>
+                    <i class="fa fa-plus ms-2"></i>
+                    <i class="fa fa-ellipsis-v ms-2"></i>
+                </span>
+            </div>
+        </li> -->

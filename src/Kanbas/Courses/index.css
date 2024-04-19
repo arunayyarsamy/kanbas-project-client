@@ -1,0 +1,69 @@
+div {
+    font-family: Arial, sans-serif;
+}
+
+.canvas-home-main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.course-status-button-group button{
+    border: 1px solid #dfdede;
+    background-color: #F5F5F5;
+    border-radius: 4px;
+}
+
+.course-status-button-group :nth-child(2){
+    color: #F5F5F5;
+    background-color: rgb(103, 176, 103);
+}
+
+.course-status-list li {
+    border: 1px solid #dfdede;
+    background-color: #F5F5F5;
+    height: 2.5rem;
+    text-align: left;
+    border-radius: 4px;
+}
+
+.course-status-list li a {
+    text-decoration: none;
+    color: black;
+    padding: 0.5rem;
+}
+
+.comming-up-list li i {
+    color: #9c9c9c;
+}
+
+.comming-up-list li a {
+    text-decoration: none;
+    color: #D41B2C;
+    padding: 0.5rem;
+}
+
+.comming-up-list li a span {
+    color: #9c9c9c;
+}
+
+.bc i {
+    color: #D41B2C;
+}
+
+.bc nav ol a {
+    text-decoration: none;
+    color: #D41B2C;
+    padding: 0.5rem;
+}
+
+.prime {
+    color: #D41B2C;
+}

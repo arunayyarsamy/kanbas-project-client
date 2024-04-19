@@ -1,0 +1,150 @@
+.assiginments-button-grp button{
+    background-color: #F5F5F5;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+}
+
+.assiginments-button-grp .add-assignment{
+    background-color: #D41B2C;
+    color: white;
+}
+
+.assignment-search-input {
+    padding: 10px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+}
+
+.assignment-title-link a {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.input-label-grps .input-grp {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.input-label-grps .input-grp label {
+    width: 20%;
+    text-align: right;
+    padding: 10px;
+}
+
+.input-label-grps .input-grp input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+}
+
+.input-label-grps .input-grp select {
+    width: 500px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.input-label-grps .input-grp textarea {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+}
+
+.input-label-grps .input-grp button {
+    width: 20%;
+    padding: 10px;
+    background-color: #D41B2C;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.special-input-box {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+}
+
+.special-input-box .special-input-grp {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.special-input-box .special-input-grp label {
+    padding: 0%;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.special-input-box .special-input-grp .nested-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+}
+
+.special-input-box .special-input-grp .nested-input div {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: #F5F5F5;
+    border-radius: 5px;
+}
+
+.special-input-box .special-input-grp input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+}
+
+.submission-button-grp button {
+    background-color: #D41B2C;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.submission-button-grp button:nth-child(1) {
+    background-color: #F5F5F5;
+    color: black;
+    border: 1px solid #E0E0E0;
+}
+
+.input-tags {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+}
+
+.icon-button {
+    background-color: #F5F5F5;
+    border: 1px solid #E0E0E0;
+    border-radius: 3px;
+}

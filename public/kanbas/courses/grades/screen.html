@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/Kanbas/styles.css" />
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css" />
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/Kanbas/styles.css" />
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css" />
+    <link rel="stylesheet" href="/Kanbas/styles.css" />
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+    <link rel="stylesheet" href="/Kanbas/courses/home/index.css">
+    <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css" />
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/libs/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Modules/index.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Assignments/index.css" />
+    <link rel="stylesheet" href="/Kanbas/Courses/Grades/index.css" />
+</head>
+
+<body>
+    <div class="d-flex" style="
+    height: 100vh;
+    ">
+        <div class="d-none d-md-block" style="
+        height: 100vh;
+        ">
+            <ul class="wd-kanbas-navigation">
+                <!-- Copy Kanbas Navigation Here -->
+                <div class="d-none d-sm-block">
+                    <ul class="wd-kanbas-navigation">
+                        <li class="main-logo-container">
+                            <a href="https://northeastern.edu">
+                                <img src="/assets/icons/NU_main_logo.png" alt="">
+                            </a>
+                        </li>
+                        <ul class="wd-kanbas-navigation main-options">
+                            <li>
+                                <a href="/kanbas/account/profile/screen.html">
+                                    <i class="fa fa-user"></i>
+                                    Account
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/kanbas/dashboard/screen.html">
+                                    <i class="fa fa-tachometer"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li class="wd-active">
+                                <a href="/kanbas/courses/home/screen.html">
+                                    <i class="fa fa-book"></i>
+                                    Courses
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-calendar"></i>
+                                    Calendar
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-inbox"></i>
+                                    Inbox
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-history"></i>
+                                    History
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-cogs"></i>
+                                    Studio
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-comments"></i>
+                                    Comments
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-question-circle"></i>
+                                    Help
+                                </a>
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+        <div class="d-flex flex-column flex-grow-1 gap-2 p-md-2" style="
+        height: 100vh;
+        overflow: scroll;
+        ">
+            <div class="bc p-2 d-md-flex flex-row gap-4 align-items-center d-none ">
+                <i class="fa fa-bars
+                    "></i>
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb
+                        m-0
+                        ">
+                        <li class="breadcrumb-item m-0 "><a href="#">
+                                CS5610.12631.2024
+                            </a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Grades</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="d-md-none d-flex flex-row justify-content-between align-items-center bg-black text-white px-4">
+                <a href="/Kanbas/navigation/index.html" style="
+                color: white;
+                    ">
+                    <i class="
+                    fa fa-bars
+                    "></i>
+                </a>
+                <div class="p-2">
+                    <h6 class="m-0" style="text-align: center;">
+                        CS5610.12631.2024
+                        <br>
+                        <span>
+                            Grades
+                        </span>
+                    </h6>
+                </div>
+                <div>
+                    <a href="/Kanbas/courses/navigation/index.html" class="text-white ">
+                        <i class="
+                    fa fa-caret-down
+                    "></i>
+                    </a>
+                </div>
+            </div>
+            <hr class="m-0 d-md-block d-none ">
+            <div class="d-flex gap-4 pb-5  ">
+                <div class="d-none d-md-block">
+                    <ul class="wd-navigation">
+                        <!-- Copy Course Navigation Here -->
+                        <div>
+                            <ul class="wd-navigation">
+                                <li><a href="/kanbas/courses/home/screen.html">Home</a></li>
+                                <li><a href="/kanbas/courses/modules/screen.html">Modules</a></li>
+                                <li><a href="#">Piazza</a></li>
+                                <li><a href="#">Zoom Meetings</a></li>
+                                <li><a href="/kanbas/courses/assignments/index.html">Assignments</a></li>
+                                <li><a href="#">Quizzes</a></li>
+                                <li class="wd-active"><a href="/kanbas/courses/grades/screen.html">Grades</a></li>
+                                <li><a href="#">People</a></li>
+                                <li><a href="#">Panopto Video</a></li>
+                                <li><a href="#">Discussions</a></li>
+                                <li><a href="#">Announcements</a></li>
+                                <li><a href="#">Pages</a></li>
+                                <li><a href="#">Files</a></li>
+                                <li><a href="#">Rubrics</a></li>
+                                <li><a href="#">Outcomes</a></li>
+                                <li><a href="#">Collaborations</a></li>
+                                <li><a href="#">Syllabus</a></li>
+                                <li><a href="/kanbas/courses/settings/index.html">Settings</a></li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
+                <div class="flex-fill flex-grow-1 p-2 w-md-100 w-50">
+                    <div class="d-flex flex-column flex-grow-1 gap-2 ">
+                        <div class="additional-button-grp">
+                            <div class="float-end ">
+                                <button>
+                                    <i class="
+                                    fa fa-file
+                                    "></i>
+                                    Import
+                                </button>
+                                <button>
+                                    <i class="
+                                    fa fa-file
+                                    "></i>
+                                    Export
+                                    <i class="
+                                    fa fa-caret-down
+                                    "></i>
+                                </button>
+                                <button>
+                                    <i class="
+                                    fa fa-cogs
+                                    "></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column w-50 flex-md-row justify-content-start align-items-md-center align-items-start gap-4  w-100 ">
+                            <div class="input-groups flex-grow-1 d-flex flex-column ">
+                                <label for="student">
+                                    <h6>
+                                        Student Names
+                                    </h6>
+                                </label>
+                                <div class="input-group mb-3 ">
+                                    <span 
+                                    class="input-group-text"
+                                    id = "basic-addon1">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                    <input type="text" class="form-control" placeholder="Search Students" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="input-groups flex-grow-1 ">
+                                <label for="student">
+                                    <h6>
+                                        Assignment Names
+                                    </h6>
+                                </label>
+                                <div class="input-group mb-3 ">
+                                    <span 
+                                    class="input-group-text"
+                                    id = "basic-addon1">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                    <input type="text" class="form-control" placeholder="Search Students" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="additional-button-grp" style="
+                        float: left;
+                        ">
+                            <button>
+                                <i class="
+                                fa fa-filter
+                                "></i>
+                                Apply Filters
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                    <script>
+                        const Modules = [
+                            {
+                                title: "Week 1",
+                                learningObjectives: [
+                                    "Introduction to the Course",
+                                    "Learn what is web development",
+                                    "Creating a development environment",
+                                    "Creating a web application",
+                                    "Getting started with the 1st assignment"
+                                ],
+                                readings: [
+                                    "Full Stack Developer - Chapter 1 - Introduction",
+                                    "Full Stack Developer - Chapter 2 - Creating User Interfaces with HTML"
+                                ],
+                                slides: [
+                                    "Introduction to Web Development. Links to an external site.",
+                                    "Creating an HTTP Server with Node.js. Links to an external site.",
+                                    "Creating a React Application. Links to an external site."
+                                ]
+                            },
+                            {
+                                title: "Week 2",
+                                learningObjectives: [
+                                    "Learn how to create user interfaces with HTML",
+                                    "Keep working on Assignment 1",
+                                    "Deploy the assignment to Netlify"
+                                ],
+                                readings: [
+                                    "Full Stack Developer - Chapter 1 - Introduction",
+                                    "Full Stack Developer - Chapter 2 - Creating User Interfaces with HTML"
+                                ],
+                                slides: [
+                                    "Further more about HTML. Links to an external site.",
+                                    "Introduction to Deploying to Netlify. Links to an external site."
+                                ]
+                            }
+                        ];
+                    </script>
+                    <div class="gradesTable" style="width: 100%;">
+                        <table>
+                            <thead>
+                                <th>
+                                    Student Name
+                                </th>
+                                <th>
+                                    <div class="fs-6">
+                                        A1 Setup <br>
+                                        Out of 100
+                                    </div>
+                                </th>
+                                <th>
+                                    A2 HTML <br>
+                                    Out of 100
+                                </th>
+                                <th>
+                                    A3 CSS <br>
+                                    Out of 100
+                                </th>
+                                <th>
+                                    A4 Bootstrap <br>
+                                    Out of 100
+                                </th>
+                                <th>
+                                    A5 JavaScript <br>
+                                    Out of 100
+                                </th>
+                                <th>
+                                    A6 React <br>
+                                    Out of 100
+                                </th>
+                                <th>
+                                    A7 REDUX <br>
+                                    Out of 100
+                                </th>
+                                <th>
+                                    A8 Node <br>
+                                    Out of 100
+                                </th>
+                                <th>
+                                    A9 MONGO <br>
+                                    Out of 100
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            John Doe
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Alice Wonderland
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Princess Leia
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Luke Skywalker
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Han Solo
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Lando Calrissian
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            John Doe
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Alice Wonderland
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Princess Leia
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Luke Skywalker
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Han Solo
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Lando Calrissian
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="" id="" value="97"
+                                            style="width: 50%; text-align: center;">
+                                    </td>
+                                    <td>
+                                        <p>
+                                            10%
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            100%
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <table>
+        <td>
+            <div class="d-none d-sm-block">
+                <ul class="wd-kanbas-navigation">
+                    <li class="main-logo-container">
+                        <a href="https://northeastern.edu">
+                            <img src="/assets/icons/NU_main_logo.png" alt="">
+                        </a>
+                    </li>
+                    <ul class="wd-kanbas-navigation main-options">
+                        <li>
+                            <a href="/kanbas/account/profile/screen.html">
+                                <i class="fa fa-user"></i>
+                                Account
+                            </a>
+                        </li>
+                        <li class="wd-active">
+                            <a href="/Kanbas/Dashboard/screen.html">
+                                <i class="fa fa-tachometer"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/kanbas/courses/home/screen.html">
+                                <i class="fa fa-book"></i>
+                                Courses
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-calendar"></i>
+                                Calendar
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-inbox"></i>
+                                Inbox
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-history"></i>
+                                History
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-cogs"></i>
+                                Studio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-comments"></i>
+                                Comments
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-question-circle"></i>
+                                Help
+                            </a>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </td>
+        <td>
+            <div>
+                <ul class="wd-navigation">
+                    <li><a href="/kanbas/courses/home/screen.html">Home</a></li>
+                    <li class="wd-active"><a href="/kanbas/courses/modules/screen.html">Modules</a></li>
+                    <li><a href="#">Piazza</a></li>
+                    <li><a href="#">Zoom Meetings</a></li>
+                    <li><a href="/kanbas/courses/assignments/index.html">Assignments</a></li>
+                    <li><a href="#">Quizzes</a></li>
+                    <li><a href="/kanbas/courses/grades/screen.html">Grades</a></li>
+                    <li><a href="#">People</a></li>
+                    <li><a href="#">Panopto Video</a></li>
+                    <li><a href="#">Discussions</a></li>
+                    <li><a href="#">Announcements</a></li>
+                    <li><a href="#">Pages</a></li>
+                    <li><a href="#">Files</a></li>
+                    <li><a href="#">Rubrics</a></li>
+                    <li><a href="#">Outcomes</a></li>
+                    <li><a href="#">Collaborations</a></li>
+                    <li><a href="#">Syllabus</a></li>
+                    <li><a href="/kanbas/courses/settings/index.html">Settings</a></li>
+                </ul>
+            </div>
+        </td>
+        <td>
+            <div>
+                <div class="grades-button-group">
+                    <select name="Gradebook" id="Gradebook">
+                        <option value="Gradebook" selected>Gradebook</option>
+                        <option value="Spring 2024">Spring 2024</option>
+                        <option value="Fall 2023">Fall 2023</option>
+                        <option value="Spring 2023">Spring 2023</option>
+                        <option value="Fall 2022">Fall 2022</option>
+                    </select>
+                    <button>Import</button>
+                    <select name="Export" id="Export">
+                        <option value="Export" selected>Export</option>
+                        <option value="Spring 2024">Spring 2024</option>
+                        <option value="Fall 2023">Fall 2023</option>
+                        <option value="Spring 2023">Spring 2023</option>
+                        <option value="Fall 2022">Fall 2022</option>
+                    </select>
+                    <button>Configure</button>
+                </div>
+                <br>
+                <div class="filter-group">
+                    <label for="StudentName">
+                        <h3>
+                            Student Name
+                        </h3>
+                        <input type="text" name="StudentName" id="StudentName" placeholder="Search Students">
+                    </label>
+                    <br>
+                    <br>
+                    <label for="Assignments">
+                        <h3>
+                            Assignment Names
+                        </h3>
+                        <input type="text" name="Assignments" id="Assignments" placeholder="Search Assignments">
+                    </label>
+                    <br>
+                    <br>
+                    <button>
+                        Apply Filters
+                    </button>
+                </div>
+                <br>
+                <div class="gradesTable">
+                    <table style="text-align: center;" >
+                        <thead>
+                            <th>
+                                Student Name
+                            </th>
+                            <th>
+                                A1 Setup <br>
+                                Out of 100
+                            </th>
+                            <th>
+                                A2 HTML <br>
+                                Out of 100
+                            </th>
+                            <th>
+                                A3 CSS <br>
+                                Out of 100
+                            </th>
+                            <th>
+                                A4 Bootstrap <br>
+                                Out of 100
+                            </th>
+                            <th>
+                                A5 JavaScript <br>
+                                Out of 100
+                            </th>
+                            <th>
+                                A6 React <br>
+                                Out of 100
+                            </th>
+                            <th>
+                                A7 REDUX <br>
+                                Out of 100
+                            </th>
+                            <th>
+                                A8 Node <br>
+                                Out of 100
+                            </th>
+                            <th>
+                                A9 MONGO <br>
+                                Out of 100
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p>
+                                        John Doe
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        Alice Wonderland
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        Princess Leia
+                                    </p>
+                                </td>
+                                <td>
+                                    <input type="text" name="" id="" disabled value="97" style="width: 50%; text-align: center;">
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <input type="text" name="" id="" disabled value="97" style="width: 50%; text-align: center;">
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        Luke Skywalker
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <input type="text" name="" id="" disabled value="97" style="width: 50%; text-align: center;">
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <input type="text" name="" id="" disabled value="97" style="width: 50%; text-align: center;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        Han Solo
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <input type="text" name="" id="" disabled value="97" style="width: 50%; text-align: center;">
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <input type="text" name="" id="" disabled value="97" style="width: 50%; text-align: center;">
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        Lando Calrissian
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <input type="text" name="" id="" disabled value="97" style="width: 50%; text-align: center;">
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td> 
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td> 
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td> 
+                                <td>
+                                    <input type="text" name="" id="" disabled value="97" style="width: 50%; text-align: center;">
+                                </td> 
+                                <td>
+                                    <p>
+                                        10
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        100
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </td>
+    </table> -->
+</body>
+
+</html>

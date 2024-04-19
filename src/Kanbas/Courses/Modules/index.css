@@ -1,0 +1,66 @@
+.wd-modules,
+.wd-modules * {
+    border-radius: 0%;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.wd-modules {
+    margin: 5px;
+}
+
+.wd-modules>li {
+    background-color: #F5F5F5;
+    border: 1px solid rgb(218, 218, 218) !important;
+    /* border-left: none !important; */
+}
+
+.wd-modules>li>div {
+    padding: 6px;
+}
+
+.wd-modules>li>ul>li {
+    padding: 5px;
+    /* border-top: 1px solid red !important; */
+    border-top: 1px solid rgb(218, 218, 218) !important;
+    border-left: 3px solid green;
+}
+
+.wd-modules>li>ul>ul>li {
+    padding: 5px;
+    border-top: 1px solid rgb(218, 218, 218) !important;
+    border-left: 3px solid green;
+    background-color: white;
+    /* background-color: lightgreen; */
+}
+
+.wd-modules>li>ul>ul>li>i, .wd-modules>li>ul>ul>li>a>i {
+    color: grey;
+    margin-right: 3rem;
+}
+
+.wd-modules>li>ul>ul>li>a {
+    color: #D41B2C;
+}
+
+.wd-modules>li {
+    margin-bottom: 20px;
+}
+
+#main-button-group button, select, option {
+    background-color: #F5F5F5;
+    border: 0.25px solid rgb(193, 193, 193);
+    height: 2.5rem;
+    max-width: 8rem;
+    border-radius: 2.5px;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px #dfdede;
+}
+
+.modules-button-group button {
+    padding: 0.1rem 0.1rem;
+    height: 1.6rem;
+    width: 2rem;
+    border-radius: 2.5px;
+    font-size: 0.8rem;
+}
