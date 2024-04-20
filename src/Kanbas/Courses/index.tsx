@@ -18,6 +18,7 @@ import { createContext } from "react";
 import Quizzes from "./Quizzes";
 import QuizDetails from "./Quizzes/QuizDetails";
 import QuizEditor from "./Quizzes/QuizEditor";
+import NewQuestion from "./Quizzes/QuizEditor/QuizEditorQuestion/NewQuestion";
 
 const API_BASE = process.env.REACT_APP_API_BASE;
 
@@ -126,12 +127,7 @@ function Courses() {
                       element={<AssignmentId courseId={courseId} />}
                     />
                     <Route path="Grades" element={<span>Grades</span>} />
-                    <Route path="Quizzes" element={<Quizzes />} />
-                    <Route path="Quizzes/:quizId" element={<QuizDetails />} />
-                    <Route
-                      path="Quizzes/:quizId/editor"
-                      element={<QuizEditor />}
-                    />
+                    <Route path="Quizzes" element={<span>Quizzes</span>} />
                   </Routes>
                 </li>
               </ol>
@@ -172,12 +168,7 @@ function Courses() {
                     element={<AssignmentId courseId={courseId} />}
                   />
                   <Route path="Grades" element={<span>Grades</span>} />
-                  <Route path="Quizzes" element={<Quizzes />} />
-                  <Route path="Quizzes/:quizId" element={<QuizDetails />} />
-                  <Route
-                    path="Quizzes/:quizId/editor"
-                    element={<QuizEditor />}
-                  />
+                  <Route path="Quizzes" element={<span>Quizzes</span>} />
                 </Routes>
               </h6>
             </div>
@@ -241,6 +232,13 @@ function Courses() {
               <Route path="Assignments/:assignmentId" element={<Editor />} />
               {/* <Route path="Assignments/newAssignment" element={<Editor />} /> */}
               <Route path="Grades" element={<Grades />} />
+              <Route path="Quizzes" element={<Quizzes />} />
+                  <Route path="Quizzes/:quizId" element={<QuizDetails />} />
+                  <Route
+                    path="Quizzes/:quizId/editor"
+                    element={<QuizEditor />}
+                  />
+              <Route path="Quizzes/:quizId/editor/newQuestion" element={<NewQuestion />} />
             </Routes>
           </div>
         </div>
