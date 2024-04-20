@@ -1,13 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import '../../index.css'
 import { FaPlus } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
-function QuizEditorDetails() {
+function QuizEditorDetails(quizId: any) {
+
+    const [newQuiz, setNewQuiz] = React.useState({
+        _id: "",
+        name: "",
+        quizType: "",
+        assignmentGroup: "",
+        shuffleQuestions: false,
+        timeLimit: false,
+        timeLimitMinutes: 0,
+        allowMultipleAttempts: false,
+        assignTo: "",
+        dueDate: "",
+        availableDate: "",
+        untilDate: "",
+        courseId: "",
+    });
+    
+    const [showQuizContextMenu, setShowQuizContextMenu] = useState(false);
+
+
+    if (quizId === "newQuiz") {
+    } else {
+        // const quiz = useSelector((state: KanbasState) => state.quizzesReducer.quizzes.find((quiz) => quiz._id === quizId));
+        // if (quiz) {
+        //     setNewQuiz(quiz);
+        // }
+    }
+
     return (
         <>
+            <div className={
+                `popupwindow ${showQuizContextMenu ? "d-flex" : "d-none"}`
+            }>
+                <div className="popupbox-container">
+                    <h5>
+                        Please save the basic quiz information before adding questions.
+                    </h5>
+                    <button>
+                        Save & Continue
+                    </button>
+                </div>
+            </div>
             <div className="">
                 <div className="d-flex flex-column gap-4 p-4 pt-0 ">
                     <input type="text" className="input-tags" value={"Unnamed Quiz"} />

@@ -169,3 +169,59 @@
 #quiz-select, #quiz-select option {
   width: 600px;
 }
+
+.newQuestion-main-grp .quiz-input-grp label {
+  width: 60%;
+  text-align: right;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+.newQuestion-main-grp .quiz-input-grp label span {
+  width: 30%;
+  text-align: right;
+  padding: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.newQuestion-main-grp .quiz-input-grp label input {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.newQuestion-main-grp .newQuestionButtonContainer button {
+  float: right;
+  color: #d41b2c;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+}
+
+.newQuestion-main-grp .newQuestionButtonContainer button:disabled {
+  color: gray;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+}
+
+.newQuestion-main-grp .newQuestion-heading {
+  font-size: 1.1rem;
+  font-weight: bold;
+}

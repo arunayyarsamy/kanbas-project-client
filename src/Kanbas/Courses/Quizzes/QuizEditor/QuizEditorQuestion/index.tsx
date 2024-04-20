@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { FaPlus, FaSearch, FaPencilAlt, FaTrash } from "react-icons/fa";
 import "../../index.css"
+import { Link, useParams } from "react-router-dom";
 
-function QuizEditorQuestion() {
+function QuizEditorQuestion(quizId: any) {
+
+    const { courseId } = useParams();
+    console.log(quizId.quizId);
+    console.log(courseId);
 
     const [questions, setQuestions] = useState([
         {
@@ -30,6 +35,15 @@ function QuizEditorQuestion() {
             title: "What is the capital of France?"
         },
     ])
+
+    if (quizId === "newQuiz") {
+    } else {
+    }
+
+    const [showQuizContextMenu, setShowQuizContextMenu] = useState(false);
+
+    const handleSaveQuiz = () => {
+    }
 
     return (
         <>
@@ -72,10 +86,14 @@ function QuizEditorQuestion() {
                     <div className="
                         d-flex gap-3
                         ">
-                        <button>
-                            <FaPlus />
-                            New Question
-                        </button>
+                        <Link to={
+                            `/Kanbas/courses/${courseId}/Quizzes/${quizId.quizId}/editor/newQuestion`
+                        }>
+                            <button>
+                                <FaPlus />
+                                New Question
+                            </button>
+                        </Link>
                         <button>
                             <FaPlus />
                             New Question Group

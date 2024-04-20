@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import "../../../index.css"
+import { useParams } from "react-router";
+import { Editor } from '@tinymce/tinymce-react';
+import { idText } from "typescript";
 
 export function PossibleAnswerContainer({ newQuestion, setNewQuestion }: { newQuestion: any, setNewQuestion: any }) {
 
@@ -16,9 +19,9 @@ export function PossibleAnswerContainer({ newQuestion, setNewQuestion }: { newQu
     };
 
     return (
-        <div className="possible-answer">
+        <div className="possible-answer quiz-input-grp">
             <label htmlFor="" className="input-grp">
-                <span>
+                <span className="text-danger">
                     Possible Answer
                 </span>
                 <input
@@ -35,7 +38,10 @@ export function PossibleAnswerContainer({ newQuestion, setNewQuestion }: { newQu
 
 function NewQuestion() {
 
+    const { quizId } = useParams();
+
     const [newQuestion, setNewQuestion] = useState({
+        _id: "" as any,
         title: "",
         type: "",
         points: "0",
@@ -44,6 +50,14 @@ function NewQuestion() {
         possibleAnswers: [] as string[],
         allAnswers: [] as string[]
     });
+
+    if (quizId === "newQuiz") {
+    } else {
+        setNewQuestion({
+            ...newQuestion,
+            _id: quizId
+        });
+    }
 
     useEffect(() => {
         if (newQuestion.type === "Multiple Choice") {
@@ -55,15 +69,18 @@ function NewQuestion() {
         } else if (newQuestion.type === "Fill in the Blank") {
             setPossibleAnswersLimit(1);
             setPossibleAnswersLen(0);
+        } else {
+            setPossibleAnswersLimit(0);
+            setPossibleAnswersLen(0);
         }
         newQuestion.possibleAnswers = []
     }, [newQuestion.type])
 
     const saveQuestion = () => {
-        // if (newQuestion.points === "0") {
-        //     alert("Please provide points");
-        //     return;
-        // }
+        if (newQuestion.points === "0") {
+            alert("Please provide points");
+            return;
+        }
         // if (newQuestion.correctAnswer.length === 0) {
         //     alert("Please provide a correct answer");
         //     return;
@@ -85,7 +102,7 @@ function NewQuestion() {
 
     return (
         <>
-            <div className="d-flex flex-column gap-3">
+            <div className="d-flex flex-column gap-3 newQuestion-main-grp">
                 <div className="d-flex flex-row justify-content-between align-items-center gap-4 ">
                     <div className="d-flex flex-row justify-content-start align-items-center gap-4">
                         <div className="input-grp">
@@ -107,7 +124,7 @@ function NewQuestion() {
                                         type: e.target.value
                                     })
                                 }
-                            }>
+                            } className="w-100">
                                 <option value="" defaultChecked>Question Type</option>
                                 <option value="Multiple Choice">Multiple Choice</option>
                                 <option value="True/False">True/False</option>
@@ -135,25 +152,52 @@ function NewQuestion() {
                     </span>
                     <div className="newquestion-body d-flex flex-column gap-4 ">
                         <div className="newquestion-question-container d-flex flex-column gap-2 ">
-                            <label htmlFor="">
+                            <label htmlFor="" className="newQuestion-heading">
                                 Question:
                             </label>
-                            <textarea name="" id="" cols={30} rows={10} onChange={
+                            {/* <textarea name="" id="" cols={30} rows={10} onChange={
                                 (e) => {
                                     setNewQuestion({
                                         ...newQuestion,
                                         question: e.target.value
                                     })
                                 }
-                            }></textarea>
+                            }></textarea> */}
+                            <h1>
+                                {
+                                    newQuestion.question
+                                }
+                            </h1>
+                            <Editor
+                                apiKey='9cwhor0h9kuvm0z028tcchgsf8v7mi7f3r2fh16a89rtp1z5'
+                                init={{
+                                    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+                                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                                    tinycomments_mode: 'embedded',
+                                    tinycomments_author: 'Author name',
+                                    mergetags_list: [
+                                        { value: 'First.Name', title: 'First Name' },
+                                        { value: 'Email', title: 'Email' },
+                                    ]
+                                }}
+                                initialValue=""
+                                onEditorChange={
+                                    (content, editor) => {
+                                        setNewQuestion({
+                                            ...newQuestion,
+                                            question: content
+                                        })
+                                    }
+                                }
+                            />
                         </div>
                         <div className="newquestion-answers-grp-container">
-                            <h6>
+                            <h6 className="newQuestion-heading">
                                 Answers:
                             </h6>
                             <div className="newquestion-answer-container d-flex flex-column gap-4">
-                                <div className="correct-answer">
-                                    <label htmlFor="" className="input-grp">
+                                <div className="correct-answer quiz-input-grp">
+                                    <label htmlFor="" className="">
                                         <span className="
                                     text-success
                                     ">
@@ -190,11 +234,7 @@ function NewQuestion() {
                             () => {
                                 setPossibleAnswersLen(possibleAnswersLen + 1);
                             }
-                        } className="float-end d-flex flex-row justify-content-center align-items-center 
-                    gap-2 border-0 bg-transparent
-                    " style={{
-                                color: "#007bff"
-                            }}>
+                        }>
                             <FaPlus />
                             Add Another Answer
                         </button>
@@ -206,7 +246,9 @@ function NewQuestion() {
                     <button>
                         Cancel
                     </button>
-                    <button>
+                    <button onClick={
+                        saveQuestion
+                    }>
                         Update Question
                     </button>
                 </div>

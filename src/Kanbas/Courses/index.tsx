@@ -23,137 +23,96 @@ import NewQuestion from "./Quizzes/QuizEditor/QuizEditorQuestion/NewQuestion";
 const API_BASE = process.env.REACT_APP_API_BASE;
 
 export const CourseNavContext = createContext(
-    {
-        openMobileCourseNav: false,
-        setOpenMobileCourseNav: (value: boolean) => { }
-    }
+  {
+    openMobileCourseNav: false,
+    setOpenMobileCourseNav: (value: boolean) => { }
+  }
 );
 
 const AssignmentId = ({
-    courseId
+  courseId
 }: {
-    courseId: any;
+  courseId: any;
 }) => {
-    const { assignmentId } = useParams();
+  const { assignmentId } = useParams();
 
-    return (
-        <>
-            <span className="d-none d-md-inline  ">
-                <Link to={
-                    `/kanbas/courses/${courseId}/Assignments`
-                }>
-                    Assignments
-                </Link> / {assignmentId}
-            </span>
-            <span className="d-md-none d-block">
-                Assignments / {assignmentId}
-            </span>
-        </>
-    );
+  return (
+    <>
+      <span className="d-none d-md-inline  ">
+        <Link to={
+          `/kanbas/courses/${courseId}/Assignments`
+        }>
+          Assignments
+        </Link> / {assignmentId}
+      </span>
+      <span className="d-md-none d-block">
+        Assignments / {assignmentId}
+      </span>
+    </>
+  );
 
 }
 
 function Courses() {
 
-    const [openMobileCourseNav, setOpenMobileCourseNav] = useState(false);
-    const [openMobileMainNav, setOpenMobileMainNav] = useState(false);
-    const { courseId } = useParams();
-    const COURSES_API = `${API_BASE}/api/courses`;
-    const [course, setCourse] = useState<any>({ _id: "" });
-    // const findCourseById = async (courseId?: string) => {
-    //     const response = await axios.get(
-    //         `${COURSES_API}/${courseId}`
-    //     );
-    //     setCourse(response.data);
-    // };
-    useEffect(() => {
-        const findCourseById = async (courseId?: string) => {
-            const response = await axios.get(
-                `${COURSES_API}/${courseId}`
-            );
-            console.log(response.data);
-            setCourse(response.data);
-        };
-        findCourseById(courseId);
-    }, [courseId, COURSES_API]);
+  const [openMobileCourseNav, setOpenMobileCourseNav] = useState(false);
+  const [openMobileMainNav, setOpenMobileMainNav] = useState(false);
+  const { courseId } = useParams();
+  const COURSES_API = `${API_BASE}/api/courses`;
+  const [course, setCourse] = useState<any>({ _id: "" });
+  // const findCourseById = async (courseId?: string) => {
+  //     const response = await axios.get(
+  //         `${COURSES_API}/${courseId}`
+  //     );
+  //     setCourse(response.data);
+  // };
+  useEffect(() => {
+    const findCourseById = async (courseId?: string) => {
+      const response = await axios.get(
+        `${COURSES_API}/${courseId}`
+      );
+      console.log(response.data);
+      setCourse(response.data);
+    };
+    findCourseById(courseId);
+  }, [courseId, COURSES_API]);
 
-    const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(window.innerWidth);
 
-    useEffect(() => {
-        const handleResize = () => {
-            setWidth(window.innerWidth);
-        };
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
-    useEffect(() => {
-        if (width > 768) {
-            setOpenMobileCourseNav(false);
-            setOpenMobileMainNav(false);
-        }
-    }, [width]);
+  useEffect(() => {
+    if (width > 768) {
+      setOpenMobileCourseNav(false);
+      setOpenMobileMainNav(false);
+    }
+  }, [width]);
 
-    return (
-      <div className="p-md-4 p-0 h-100 ">
-        <div className="">
-          <div className="bc p-2 d-md-flex flex-row gap-4 align-items-center d-none ">
-            <HiMiniBars3 />
-            <nav aria-label="breadcrumb">
-              <ol
-                className="breadcrumb
+  return (
+    <div className="p-md-4 p-0 h-100 ">
+      <div className="">
+        <div className="bc p-2 d-md-flex flex-row gap-4 align-items-center d-none ">
+          <HiMiniBars3 />
+          <nav aria-label="breadcrumb">
+            <ol
+              className="breadcrumb
                         m-0
                         "
-              >
-                <li className="prime breadcrumb-item m-0 ">
-                  <Link to={`/kanbas/courses/${course?._id}`}>
-                    {course?.number}
-                  </Link>
-                </li>
-                <li className="breadcrumb-item active" aria-current="page">
-                  <Routes>
-                    <Route path="/" element={<Navigate to="Home" />} />
-                    <Route path="Home" element={<span>Home</span>} />
-                    <Route path="Modules" element={<span>Modules</span>} />
-                    <Route path="Piazza" element={<span>Piazza</span>} />
-                    <Route
-                      path="Assignments"
-                      element={<span>Assignments</span>}
-                    />
-                    <Route
-                      path="Assignments/:assignmentId"
-                      element={<AssignmentId courseId={courseId} />}
-                    />
-                    <Route path="Grades" element={<span>Grades</span>} />
-                    <Route path="Quizzes" element={<span>Quizzes</span>} />
-                  </Routes>
-                </li>
-              </ol>
-            </nav>
-          </div>
-          <div className="d-md-none d-flex flex-row justify-content-between align-items-center bg-black text-white px-4">
-            <Button
-              onClick={() => {
-                setOpenMobileMainNav(!openMobileMainNav);
-                setOpenMobileCourseNav(false);
-              }}
-              aria-controls="mobile-main-nav"
-              aria-expanded={openMobileMainNav}
-              className="bg-transparent border-0 text-white"
             >
-              <HiMiniBars3 />
-            </Button>
-            <div className="p-2">
-              <h6
-                className="m-0"
-                style={{
-                  textAlign: "center",
-                }}
-              >
-                {course?.number}
-                <br />
+              <li className="prime breadcrumb-item m-0 ">
+                <Link to={`/kanbas/courses/${course?._id}`}>
+                  {course?.number}
+                </Link>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
                 <Routes>
                   <Route path="/" element={<Navigate to="Home" />} />
                   <Route path="Home" element={<span>Home</span>} />
@@ -170,80 +129,122 @@ function Courses() {
                   <Route path="Grades" element={<span>Grades</span>} />
                   <Route path="Quizzes" element={<span>Quizzes</span>} />
                 </Routes>
-              </h6>
-            </div>
-            <div>
-              <Button
-                onClick={() => {
-                  setOpenMobileCourseNav(!openMobileCourseNav);
-                  setOpenMobileMainNav(false);
-                }}
-                aria-controls="mobile-course-nav"
-                aria-expanded={openMobileCourseNav}
-                className="bg-transparent border-0 text-white"
-              >
-                <FaCaretDown />
-              </Button>
-            </div>
-          </div>
-          <hr className="d-none d-md-block" />
+              </li>
+            </ol>
+          </nav>
         </div>
-        <CourseNavContext.Provider
-          value={{
-            openMobileCourseNav,
-            setOpenMobileCourseNav,
-          }}
-        >
-          <Collapse in={openMobileCourseNav}>
-            <div id="mobile-course-nav">
-              <CourseNavigation />
-            </div>
-          </Collapse>
-          <Collapse in={openMobileMainNav}>
-            <div id="mobile-main-nav">
-              <Navigation />
-            </div>
-          </Collapse>
-        </CourseNavContext.Provider>
-        <div
-          className={
-            openMobileCourseNav || openMobileMainNav
-              ? "d-none"
-              : " d-flex flex-row p-2 gap-4"
-          }
-        >
-          <div
-            className="
-                d-none d-md-block
-                "
+        <div className="d-md-none d-flex flex-row justify-content-between align-items-center bg-black text-white px-4">
+          <Button
+            onClick={() => {
+              setOpenMobileMainNav(!openMobileMainNav);
+              setOpenMobileCourseNav(false);
+            }}
+            aria-controls="mobile-main-nav"
+            aria-expanded={openMobileMainNav}
+            className="bg-transparent border-0 text-white"
           >
+            <HiMiniBars3 />
+          </Button>
+          <div className="p-2">
+            <h6
+              className="m-0"
+              style={{
+                textAlign: "center",
+              }}
+            >
+              {course?.number}
+              <br />
+              <Routes>
+                <Route path="/" element={<Navigate to="Home" />} />
+                <Route path="Home" element={<span>Home</span>} />
+                <Route path="Modules" element={<span>Modules</span>} />
+                <Route path="Piazza" element={<span>Piazza</span>} />
+                <Route
+                  path="Assignments"
+                  element={<span>Assignments</span>}
+                />
+                <Route
+                  path="Assignments/:assignmentId"
+                  element={<AssignmentId courseId={courseId} />}
+                />
+                <Route path="Grades" element={<span>Grades</span>} />
+                <Route path="Quizzes" element={<span>Quizzes</span>} />
+              </Routes>
+            </h6>
+          </div>
+          <div>
+            <Button
+              onClick={() => {
+                setOpenMobileCourseNav(!openMobileCourseNav);
+                setOpenMobileMainNav(false);
+              }}
+              aria-controls="mobile-course-nav"
+              aria-expanded={openMobileCourseNav}
+              className="bg-transparent border-0 text-white"
+            >
+              <FaCaretDown />
+            </Button>
+          </div>
+        </div>
+        <hr className="d-none d-md-block" />
+      </div>
+      <CourseNavContext.Provider
+        value={{
+          openMobileCourseNav,
+          setOpenMobileCourseNav,
+        }}
+      >
+        <Collapse in={openMobileCourseNav}>
+          <div id="mobile-course-nav">
             <CourseNavigation />
           </div>
-          <div
-            className="flex-grow-1 w-md-100 w-50"
-            style={{ left: "320px", top: "50px", height: "100%" }}
-          >
-            <Routes>
-              <Route path="/" element={<Navigate to="Home" />} />
-              <Route path="Home" element={<Home />} />
-              <Route path="Modules" element={<Modules />} />
-              <Route path="Piazza" element={<h1>Piazza</h1>} />
-              <Route path="Assignments" element={<Assignments />} />
-              <Route path="Assignments/:assignmentId" element={<Editor />} />
-              {/* <Route path="Assignments/newAssignment" element={<Editor />} /> */}
-              <Route path="Grades" element={<Grades />} />
-              <Route path="Quizzes" element={<Quizzes />} />
-                  <Route path="Quizzes/:quizId" element={<QuizDetails />} />
-                  <Route
-                    path="Quizzes/:quizId/editor"
-                    element={<QuizEditor />}
-                  />
-              <Route path="Quizzes/:quizId/editor/newQuestion" element={<NewQuestion />} />
-            </Routes>
+        </Collapse>
+        <Collapse in={openMobileMainNav}>
+          <div id="mobile-main-nav">
+            <Navigation />
           </div>
+        </Collapse>
+      </CourseNavContext.Provider>
+      <div
+        className={
+          openMobileCourseNav || openMobileMainNav
+            ? "d-none"
+            : " d-flex flex-row p-2 gap-4"
+        }
+      >
+        <div
+          className="
+                d-none d-md-block
+                "
+        >
+          <CourseNavigation />
+        </div>
+        <div
+          className="flex-grow-1 w-md-100 w-50"
+          style={{ left: "320px", top: "50px", height: "100%" }}
+        >
+          <Routes>
+            <Route path="/" element={<Navigate to="Home" />} />
+            <Route path="Home" element={<Home />} />
+            <Route path="Modules" element={<Modules />} />
+            <Route path="Piazza" element={<h1>Piazza</h1>} />
+            <Route path="Assignments" element={<Assignments />} />
+            <Route path="Assignments/:assignmentId" element={<Editor />} />
+            {/* <Route path="Assignments/newAssignment" element={<Editor />} /> */}
+            <Route path="Grades" element={<Grades />} />
+            <Route path="Quizzes" element={<Quizzes />} />
+            <Route path="Quizzes/:quizId/details" element={<QuizDetails />} />
+            <Route
+              path="Quizzes/:quizId/editor"
+              element={<QuizEditor />}
+            />
+            <Route path="Quizzes/:quizId/editor/newQuestion" element={<NewQuestion />} />
+
+          </Routes>
         </div>
       </div>
-    );
+    </div>
+  );
 }
 
 export default Courses;

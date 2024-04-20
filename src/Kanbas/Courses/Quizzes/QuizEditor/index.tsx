@@ -3,9 +3,12 @@ import QuizEditorDetails from "./QuizEditorDetails";
 import QuizEditorQuestion from "./QuizEditorQuestion";
 import { FaEllipsisV } from "react-icons/fa";
 import '../index.css'
+import { useParams } from "react-router";
 
 function QuizEditor() {
 
+    const { quizId } = useParams();
+    
     const [activeTab, setActiveTab] = React.useState("details");
 
     return (
@@ -46,14 +49,11 @@ function QuizEditor() {
                     </button>
                 </nav>
                 <div className="">
-                    {/* <QuizEditorDetails /> */}
-                    {/* <QuizEditorQuestion /> */}
                     {
-                        activeTab === "details" ? <QuizEditorDetails /> : <QuizEditorQuestion />
+                        activeTab === "details" ? <QuizEditorDetails quizId={quizId} /> : <QuizEditorQuestion quizId={quizId} />
                     }
                 </div>
             </div>
-            {/* <QuizEditorQuestion /> */}
         </>
     )
 }
