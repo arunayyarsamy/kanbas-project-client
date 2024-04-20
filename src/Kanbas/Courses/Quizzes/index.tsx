@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaPlus, FaEllipsisV } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { KanbasState } from "../../store";
@@ -15,6 +15,7 @@ import { AiOutlineStop } from "react-icons/ai";
 function Quizzes() {
 
     const { courseId } = useParams();
+    const navigate = useNavigate();
     const [currentTime, setCurrentTime] = useState(new Date());
     const [showQuizContextMenu, setShowQuizContextMenu] = useState(false);
     const [currentQuiz, setCurrentQuiz] = useState({} as any);
@@ -29,11 +30,7 @@ function Quizzes() {
         }
         return `Not available until ${quiz.available}`;
     }
-    // const getQuizDetails = (quiz: any) => {
-    //     return quiz.publishStatus === 1 ? 
-    //     `${quiz.points ? quiz.points : "N/A"} pts | ${quiz.numQuestions} Questions` : 
-    //     "Not published";
-    // }
+   
     useEffect(() => {
         client.findQuizzesForCourse(courseId)
             .then((quizzes) => {
@@ -102,7 +99,7 @@ function Quizzes() {
             <div className="d-flex flex-md-row flex-column justify-content-start justify-content-md-between align-items-md-center align-items-start gap-4 ">
                 <input className="assignment-search-input" type="text" placeholder="Search for Assignments" />
                 <div className="assiginments-button-grp d-flex gap-2 ">
-                    <Link className="text-decoration-none" to="">
+                    <Link to={`/Kanbas/courses/${courseId}/Quizzes/newQuiz/editor`}>
                         <button className="add-assignment p-2 px-4">
                             <FaPlus />
                             Quiz
@@ -121,7 +118,7 @@ function Quizzes() {
                             <FaEllipsisV />
                             <FaCaretDown />
                             <h3 className="fs-5 fw-bold ">
-                                Assignments
+                                Quizzes
                             </h3>
                         </div>
                         <span className="float-end d-flex justify-content-center align-items-center gap-2">
@@ -149,15 +146,9 @@ function Quizzes() {
                                         <FaList />
                                         <div className="assignment-title-link d-flex flex-column">
                                             <Link to={`/Kanbas/courses/${courseId}/Assignments/${quiz._id}`}>{quiz.title}</Link>
-                                            <span>{
-                                                // Closed - if current date is after quizzes Available Date
-                                                // Available - if current date is between Available Date and Available Until Date
-                                                // Not available until <AVAILABLE DATE> - if current date is before the Available Date
-                                                
-                                                // currentTime > new Date(quiz.available) ? "Closed" : currentTime > new Date(quiz.due) ? "Available" : `Not available until ${quiz.available}`
-
+                                            <span>
+                                            {
                                                 handleQuizStatus(quiz)
-                                                
                                             } | {quiz.due ? "Due " + quiz.due : "No due date"} | 
                                             {
                                                 quiz.publishStatus === 1 ? 
