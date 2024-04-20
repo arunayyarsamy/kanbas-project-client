@@ -3,8 +3,14 @@ import QuizEditorDetails from "./QuizEditorDetails";
 import QuizEditorQuestion from "./QuizEditorQuestion";
 import { FaEllipsisV } from "react-icons/fa";
 import '../index.css'
+import { useParams } from "react-router";
 
 function QuizEditor() {
+
+    const { quizId } = useParams();
+    
+    const [activeTab, setActiveTab] = React.useState("details");
+
     return (
         <>
             <div className="d-flex flex-column gap-4 ">
@@ -26,11 +32,28 @@ function QuizEditor() {
                     </div>
                 </div>
                 <hr />
+                <nav className="nav nav-tabs mt-2">
+                    <button className={
+                        activeTab === "details" ? "nav-link active" : "nav-link"
+                    } onClick={
+                        () => setActiveTab("details")
+                    }>
+                        Details
+                    </button>
+                    <button className={
+                        activeTab === "Questions" ? "nav-link active" : "nav-link"
+                    } onClick={
+                        () => setActiveTab("Questions")
+                    }>
+                        Questions
+                    </button>
+                </nav>
                 <div className="">
-                    <QuizEditorDetails />
+                    {
+                        activeTab === "details" ? <QuizEditorDetails quizId={quizId} /> : <QuizEditorQuestion quizId={quizId} />
+                    }
                 </div>
             </div>
-            {/* <QuizEditorQuestion /> */}
         </>
     )
 }
