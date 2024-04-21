@@ -3,7 +3,7 @@ import '../../index.css'
 import { FaPlus } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { setQuiz } from "../../reducer";
 import * as client from "../../client";
 
@@ -12,38 +12,6 @@ function QuizEditorDetails(quizId: any) {
     const dispatch = useDispatch();
 
     const currentQuiz = useSelector((state: any) => state.quizzesReducer.quiz);
-
-    useEffect(() => {
-        if (quizId.quizId === "newQuiz") {
-            dispatch(setQuiz({
-                accessCode: "",
-                assignmentGroup: "",
-                availableDate: "",
-                courseId: "",
-                description: "",
-                dueDate: "",
-                lockQuestionsAfterAnswering: "",
-                multipleAttempts: "",
-                name: "",
-                oneQuestionAtATime: "",
-                points: "",
-                published: "",
-                questions: [],
-                quizType: "",
-                showCorrectAnswers: "",
-                shuffleAnswers: "",
-                timeLimit: "",
-                untilDate: "",
-                webcamRequired: "",
-                _id: "",
-            }));
-        } else {
-            client.findQuizById(quizId.quizId)
-                .then((quiz) => {
-                    dispatch(setQuiz(quiz));
-                });
-        }
-    }, []);
 
     const [showQuizContextMenu, setShowQuizContextMenu] = useState(false);
 
@@ -78,7 +46,16 @@ function QuizEditorDetails(quizId: any) {
             </div>
             <div className="">
                 <div className="d-flex flex-column gap-4 p-4 pt-0 ">
-                    <input type="text" className="input-tags" value={currentQuiz.name} />
+                    <input type="text" className="input-tags" value={currentQuiz.name} 
+                    onChange={
+                        (e) => {
+                            dispatch(setQuiz({
+                                ...currentQuiz,
+                                name: e.target.value,
+                            }));
+                        }
+                    }
+                    />
                     <textarea className="input-tags" name="" id="" cols={30}
                         rows={5}
                     >
@@ -88,7 +65,16 @@ function QuizEditorDetails(quizId: any) {
                             Quiz Type
                         </div>
                         <div className="quiz-input-cont">
-                            <select name="" id="quiz-select" className="input-tags">
+                            <select name="" id="quiz-select" className="input-tags"
+                            onChange={
+                                (e) => {
+                                    dispatch(setQuiz({
+                                        ...currentQuiz,
+                                        quizType: e.target.value,
+                                    }));
+                                }
+                            }
+                            >
                                 <option value="">Practice Quiz</option>
                                 <option value="">Graded Quiz</option>
                             </select>
@@ -99,7 +85,15 @@ function QuizEditorDetails(quizId: any) {
                             Assignment Group
                         </div>
                         <div className="quiz-input-cont">
-                            <select name="" id="" className="input-tags">
+                            <select name="" id="" className="input-tags"
+                            onChange={
+                                (e) => {
+                                    dispatch(setQuiz({
+                                        ...currentQuiz,
+                                        assignmentGroup: e.target.value,
+                                    }));
+                            }}
+                            >
                                 <option value="">ASSIGNMENT</option>
                                 <option value="">QUIZ</option>
                             </select>
@@ -115,7 +109,16 @@ function QuizEditorDetails(quizId: any) {
                             <div className="quiz-inner-input-cont">
                                 <div className="">
                                     <label htmlFor="">
-                                        <input type="checkbox" name="" id="" />
+                                        <input type="checkbox" name="" id="" 
+                                        onChange={
+                                            (e) => {
+                                                dispatch(setQuiz({
+                                                    ...currentQuiz,
+                                                    showCorrectAnswers: e.target.checked,
+                                                }));
+                                            }
+                                        }
+                                        />
                                         <span>
                                             Shuffle Questions
                                         </span>
@@ -123,13 +126,31 @@ function QuizEditorDetails(quizId: any) {
                                 </div>
                                 <div className="d-flex flex-row align-items-center justify-content-start gap-4">
                                     <label htmlFor="">
-                                        <input type="checkbox" name="" id="" />
+                                        <input type="checkbox" name="" id="" 
+                                        onChange={
+                                            (e) => {
+                                                dispatch(setQuiz({
+                                                    ...currentQuiz,
+                                                    shuffleAnswers: e.target.checked,
+                                                }));
+                                            }
+                                        }
+                                        />
                                         <span>
                                             Time Limit
                                         </span>
                                     </label>
                                     <label htmlFor="">
-                                        <input type="number" name="" id="" className="w-25" />
+                                        <input type="number" name="" id="" className="w-25" 
+                                        onChange={
+                                            (e) => {
+                                                dispatch(setQuiz({
+                                                    ...currentQuiz,
+                                                    timeLimit: e.target.value,
+                                                }));
+                                            }
+                                        }
+                                        />
                                         <span>
                                             Minutes
                                         </span>
@@ -139,7 +160,16 @@ function QuizEditorDetails(quizId: any) {
                                 border border-gray-300 p-3 rounded
                                 ">
                                     <label htmlFor="">
-                                        <input type="checkbox" name="" id="" />
+                                        <input type="checkbox" name="" id="" 
+                                        onChange={
+                                            (e) => {
+                                                dispatch(setQuiz({
+                                                    ...currentQuiz,
+                                                    webcamRequired: e.target.checked,
+                                                }));
+                                            }
+                                        }
+                                        />
                                         <span>
                                             Allow Multiple Attempts
                                         </span>
@@ -253,9 +283,13 @@ function QuizEditorDetails(quizId: any) {
                         <div className="submission-button-grp
                         d-flex gap-3
                         ">
+                            <Link to={
+                                `/Kanbas/courses/${currentQuiz.courseId}/Quizzes`
+                            }>
                             <button>
                                 Cancel
                             </button>
+                            </Link>
                             <button style={{
                                 backgroundColor: "#f5f5f5",
                                 color: "black",

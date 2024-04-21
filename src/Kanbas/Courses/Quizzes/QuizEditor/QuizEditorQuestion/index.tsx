@@ -3,44 +3,40 @@ import { FaPlus, FaSearch, FaPencilAlt, FaTrash } from "react-icons/fa";
 import "../../index.css"
 import { Link, useParams } from "react-router-dom";
 import * as client from "../../client";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteQuestion } from "../../reducer";
 
 function QuizEditorQuestion(quizId: any) {
 
     const { courseId } = useParams();
     quizId = quizId.quizId;
-    console.log("quizId", quizId);
 
-    const [questions, setQuestions] = useState([]);
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (quizId === "newQuiz") {
-            // setQuestions({
-            //     _id: "",
-            //     title: "",
-            //     points: "",
-            //     description: "",
-            //     questionType: "",
-            //     multipleAnswers: "",
-            //     correctAnswer: "",
-            //     choices: [],
+    // const [questions, setQuestions] = useState([]);
+
+    const questions = useSelector((state: any) => state.quizzesReducer.questions);
+
+    // useEffect(() => {
+    //     if (quizId === "newQuiz") {
+    //         // setQuestions({
+    //         //     _id: "",
+    //         //     title: "",
+    //         //     points: "",
+    //         //     description: "",
+    //         //     questionType: "",
+    //         //     multipleAnswers: "",
+    //         //     correctAnswer: "",
+    //         //     choices: [],
             
-            // });
-        } else {
-            client.findQuestionsForQuiz(quizId)
-                .then((questions) => {
-                    setQuestions(questions);
-                });
-        }
-    }, [quizId]);
-
-    // if (quizId === "newQuiz") {
-    // } else {
-    //     // client.findQuizById(quizId)
-    //     //     .then((quiz) => {
-    //     //         setQuestions(quiz.questions);
-    //     //     });
-    //     console.log("quizId", quizId);
-    // }
+    //         // });
+    //     } else {
+    //         client.findQuestionsForQuiz(quizId)
+    //             .then((questions) => {
+    //                 setQuestions(questions);
+    //             });
+    //     }
+    // }, [quizId]);
 
     const [showQuizContextMenu, setShowQuizContextMenu] = useState(false);
 
@@ -56,7 +52,7 @@ function QuizEditorQuestion(quizId: any) {
                             <div className="quiz-question-container">
                                 <div className="quiz-question-title d-flex flex-row justify-content-between ">
                                     <span>
-                                        Question 1
+                                        {question.title}
                                     </span>
                                     <span>
                                         {question.points} pts
@@ -79,7 +75,11 @@ function QuizEditorQuestion(quizId: any) {
                                                 <FaPencilAlt />
                                             </button>
                                         </Link>
-                                        <button>
+                                        <button onClick={
+                                            () => {
+                                                dispatch(deleteQuestion(question._id));
+                                            }
+                                        }>
                                             <FaTrash />
                                         </button>
                                     </div>
