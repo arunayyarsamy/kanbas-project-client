@@ -238,7 +238,7 @@ function Courses() {
               path="Quizzes/:quizId/editor"
               element={<QuizEditor />}
             />
-            <Route path="Quizzes/:quizId/editor/newQuestion" element={<NewQuestion />} />
+            <Route path="Quizzes/:quizId/editor/:questionId" element={<NewQuestion />} />
 
           </Routes>
         </div>

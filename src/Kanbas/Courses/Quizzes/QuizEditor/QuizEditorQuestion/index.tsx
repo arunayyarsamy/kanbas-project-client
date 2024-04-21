@@ -1,44 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaPlus, FaSearch, FaPencilAlt, FaTrash } from "react-icons/fa";
 import "../../index.css"
 import { Link, useParams } from "react-router-dom";
+import * as client from "../../client";
 
 function QuizEditorQuestion(quizId: any) {
 
     const { courseId } = useParams();
-    console.log(quizId.quizId);
-    console.log(courseId);
+    quizId = quizId.quizId;
+    console.log("quizId", quizId);
 
-    const [questions, setQuestions] = useState([
-        {
-            id: 1,
-            title: "What is the capital of France?"
-        },
-        {
-            id: 2,
-            title: "What is the capital of France?"
-        },
-        {
-            id: 3,
-            title: "What is the capital of France?"
-        },
-        {
-            id: 4,
-            title: "What is the capital of France?"
-        },
-        {
-            id: 5,
-            title: "What is the capital of France?"
-        },
-        {
-            id: 6,
-            title: "What is the capital of France?"
-        },
-    ])
+    const [questions, setQuestions] = useState([]);
 
-    if (quizId === "newQuiz") {
-    } else {
-    }
+    useEffect(() => {
+        if (quizId === "newQuiz") {
+            // setQuestions({
+            //     _id: "",
+            //     title: "",
+            //     points: "",
+            //     description: "",
+            //     questionType: "",
+            //     multipleAnswers: "",
+            //     correctAnswer: "",
+            //     choices: [],
+            
+            // });
+        } else {
+            client.findQuestionsForQuiz(quizId)
+                .then((questions) => {
+                    setQuestions(questions);
+                });
+        }
+    }, [quizId]);
+
+    // if (quizId === "newQuiz") {
+    // } else {
+    //     // client.findQuizById(quizId)
+    //     //     .then((quiz) => {
+    //     //         setQuestions(quiz.questions);
+    //     //     });
+    //     console.log("quizId", quizId);
+    // }
 
     const [showQuizContextMenu, setShowQuizContextMenu] = useState(false);
 
@@ -50,29 +52,33 @@ function QuizEditorQuestion(quizId: any) {
             <div className="d-flex flex-column gap-5">
                 <div className="quiz-questions-grp">
                     {
-                        questions.map((question) => (
+                        questions.map((question:any) => (
                             <div className="quiz-question-container">
                                 <div className="quiz-question-title d-flex flex-row justify-content-between ">
                                     <span>
                                         Question 1
                                     </span>
                                     <span>
-                                        1 pts
+                                        {question.points} pts
                                     </span>
                                 </div>
                                 <div className="quiz-question-body">
                                     <div className="quiz-question-body-text">
                                         <span>
                                             <p>
-                                                What is the capital of France?
+                                                {question.question}
                                             </p>
                                         </span>
                                     </div>
                                     <div className="quiz-editor-question-button-grp quiz-question-button-grp
                         d-flex flex-row gap-4">
-                                        <button>
-                                            <FaPencilAlt />
-                                        </button>
+                                        <Link to={
+                                            `/Kanbas/courses/${courseId}/Quizzes/${quizId}/editor/${question._id}`
+                                        }>
+                                            <button>
+                                                <FaPencilAlt />
+                                            </button>
+                                        </Link>
                                         <button>
                                             <FaTrash />
                                         </button>
@@ -87,7 +93,7 @@ function QuizEditorQuestion(quizId: any) {
                         d-flex gap-3
                         ">
                         <Link to={
-                            `/Kanbas/courses/${courseId}/Quizzes/${quizId.quizId}/editor/newQuestion`
+                            `/Kanbas/courses/${courseId}/Quizzes/${quizId}/editor/newQuestion`
                         }>
                             <button>
                                 <FaPlus />

@@ -23,12 +23,12 @@ function Quizzes() {
         state.quizzesReducer.quizzes);
     const dispatch = useDispatch();
     const handleQuizStatus = (quiz: any) => {
-        if (currentTime > new Date(quiz.available)) {
+        if (currentTime > new Date(quiz.availableDate)) {
             return "Closed";
-        } else if (new Date(quiz.available) < currentTime && currentTime < new Date(quiz.due)) {
+        } else if (new Date(quiz.availableDate) < currentTime && currentTime < new Date(quiz.dueDate)) {
             return "Available";
         }
-        return `Not available until ${quiz.available}`;
+        return `Not available until ${quiz.availableDate}`;
     }
    
     useEffect(() => {
@@ -138,22 +138,24 @@ function Quizzes() {
 
                     <ul className="list-group">
                         {quizzes
-                            .filter((quiz) => quiz.course === courseId)
+                            .filter((quiz) => quiz.courseId === courseId)
                             .map((quiz, index) => (
                                 <li className="d-flex flex-row flex-grow-1 w-100 justify-content-between align-items-center p-2 px-2 bg-white " key={index}>
                                     <div className="d-flex flex-row justify-content-center align-items-center gap-4">
                                         <FaEllipsisV />
                                         <FaList />
                                         <div className="assignment-title-link d-flex flex-column">
-                                            <Link to={`/Kanbas/courses/${courseId}/Assignments/${quiz._id}`}>{quiz.title}</Link>
+                                            <Link to={`/Kanbas/courses/${courseId}/Quizzes/${quiz._id}/details`}>{quiz.name}</Link>
                                             <span>
                                             {
                                                 handleQuizStatus(quiz)
-                                            } | {quiz.due ? "Due " + quiz.due : "No due date"} | 
+                                            } | {quiz.dueDate ? "Due " + quiz.dueDate : "No due date"} | 
                                             {
-                                                quiz.publishStatus === 1 ? 
+                                                quiz.published === "True" ? 
                                                 `${quiz.points ? quiz.points : "N/A"} pts 
-                                                | ${quiz.numQuestions} Questions` : "Not published"
+                                                | ${
+                                                    quiz.questions.length
+                                                } Questions` : "Not published"
                                             }
                                             </span>
                                         </div>
@@ -163,9 +165,9 @@ function Quizzes() {
                                             quiz.publishStatus === 1 ? "text-success" : "text-green-500"
                                         } /> */}
                                         {
-                                            quiz.publishStatus === 1 ? <FaCheckCircle className="text-success" /> : <AiOutlineStop className="text-black" />
+                                            quiz.published === 1 ? <FaCheckCircle className="text-success" /> : <AiOutlineStop className="text-black" />
                                         }
-                                        <Link to={`/kanbas/courses/${courseId}/Assignments/${quiz._id}`} className="text-black">
+                                        <Link to={`/Kanbas/courses/${courseId}/Quizzes/${quiz._id}/editor`} className="text-black">
                                             <FaPen />
                                         </Link>
                                         <FaTrash style={{

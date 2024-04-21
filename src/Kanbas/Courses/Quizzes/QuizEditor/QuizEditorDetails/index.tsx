@@ -1,37 +1,65 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../../index.css'
 import { FaPlus } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
+import { setQuiz } from "../../reducer";
+import * as client from "../../client";
 
 function QuizEditorDetails(quizId: any) {
 
-    const [newQuiz, setNewQuiz] = React.useState({
-        _id: "",
-        name: "",
-        quizType: "",
-        assignmentGroup: "",
-        shuffleQuestions: false,
-        timeLimit: false,
-        timeLimitMinutes: 0,
-        allowMultipleAttempts: false,
-        assignTo: "",
-        dueDate: "",
-        availableDate: "",
-        untilDate: "",
-        courseId: "",
-    });
-    
+    const dispatch = useDispatch();
+
+    const currentQuiz = useSelector((state: any) => state.quizzesReducer.quiz);
+
+    useEffect(() => {
+        if (quizId.quizId === "newQuiz") {
+            dispatch(setQuiz({
+                accessCode: "",
+                assignmentGroup: "",
+                availableDate: "",
+                courseId: "",
+                description: "",
+                dueDate: "",
+                lockQuestionsAfterAnswering: "",
+                multipleAttempts: "",
+                name: "",
+                oneQuestionAtATime: "",
+                points: "",
+                published: "",
+                questions: [],
+                quizType: "",
+                showCorrectAnswers: "",
+                shuffleAnswers: "",
+                timeLimit: "",
+                untilDate: "",
+                webcamRequired: "",
+                _id: "",
+            }));
+        } else {
+            client.findQuizById(quizId.quizId)
+                .then((quiz) => {
+                    dispatch(setQuiz(quiz));
+                });
+        }
+    }, []);
+
     const [showQuizContextMenu, setShowQuizContextMenu] = useState(false);
 
+    const formatDate = (date: any) => {
+        const d = new Date(date);
+        const month = d.getMonth() + 1;
+        const day = d.getDate();
+        const year = d.getFullYear();
+        return `${year}-${month}-${day}`;
+    }
 
-    if (quizId === "newQuiz") {
-    } else {
-        // const quiz = useSelector((state: KanbasState) => state.quizzesReducer.quizzes.find((quiz) => quiz._id === quizId));
-        // if (quiz) {
-        //     setNewQuiz(quiz);
-        // }
+    const checkNewQuiz = () => {
+        if (quizId === "newQuiz") {
+            setShowQuizContextMenu(true);
+        }
+        return false;
     }
 
     return (
@@ -50,7 +78,7 @@ function QuizEditorDetails(quizId: any) {
             </div>
             <div className="">
                 <div className="d-flex flex-column gap-4 p-4 pt-0 ">
-                    <input type="text" className="input-tags" value={"Unnamed Quiz"} />
+                    <input type="text" className="input-tags" value={currentQuiz.name} />
                     <textarea className="input-tags" name="" id="" cols={30}
                         rows={5}
                     >
@@ -150,12 +178,15 @@ function QuizEditorDetails(quizId: any) {
                                                 Due
                                             </label>
                                             <input type="date"
-                                            // onChange={(e) => {
-                                            //     dispatch(setAssignment({
-                                            //         ...assignmentNew,
-                                            //         due: e.target.value,
-                                            //     }));
-                                            // }}
+                                                value={formatDate(currentQuiz.dueDate)}
+                                                onChange={
+                                                    (e) => {
+                                                        dispatch(setQuiz({
+                                                            ...currentQuiz,
+                                                            dueDate: e.target.value,
+                                                        }));
+                                                    }
+                                                }
                                             />
                                         </div>
                                         <div className="w-100 d-flex gap-2 ">
@@ -163,26 +194,33 @@ function QuizEditorDetails(quizId: any) {
                                                 <label htmlFor="">
                                                     Available From
                                                 </label>
-                                                <input type="date" value="2023-09-06"
-                                                // onChange={(e) => {
-                                                //     dispatch(setAssignment({
-                                                //         ...assignmentNew,
-                                                //         availableFromDate: e.target.value,
-                                                //     }));
-                                                // }}
+                                                <input
+                                                    type="date"
+                                                    value={formatDate(currentQuiz.availableDate)}
+                                                    onChange={
+                                                        (e) => {
+                                                            dispatch(setQuiz({
+                                                                ...currentQuiz,
+                                                                availableDate: e.target.value,
+                                                            }));
+                                                        }
+                                                    }
                                                 />
                                             </div>
                                             <div className="w-50">
                                                 <label htmlFor="">
                                                     Until
                                                 </label>
-                                                <input type="date" value="2023-09-20"
-                                                // onChange={(e) => {
-                                                //     dispatch(setAssignment({
-                                                //         ...assignmentNew,
-                                                //         availableUntilDate: e.target.value,
-                                                //     }));
-                                                // }}
+                                                <input type="date"
+                                                    value={formatDate(currentQuiz.untilDate)}
+                                                    onChange={
+                                                        (e) => {
+                                                            dispatch(setQuiz({
+                                                                ...currentQuiz,
+                                                                untilDate: e.target.value,
+                                                            }));
+                                                        }
+                                                    }
                                                 />
                                             </div>
                                         </div>

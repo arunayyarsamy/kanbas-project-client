@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaEllipsisV, FaCheckCircle, FaPencilAlt } from "react-icons/fa";
 import '../index.css'
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import * as client from "../client";
 
 function QuizDetails() {
 
     const { quizId } = useParams();
-    // const currentQuiz = useSelector((state: any) => state.quizzes.quizzes.find((quiz: any) => quiz.id === quizId));
+    const [quiz, setQuiz] = React.useState({} as any);
+
+    useEffect(() => {
+        client.findQuizById(quizId)
+            .then((quiz) => {
+                setQuiz(quiz);
+            });
+    }, []);
 
     return (
         <>
@@ -40,7 +48,9 @@ function QuizDetails() {
                                 Quiz Type
                             </div>
                             <div className="quiz-value">
-                                Graded Quiz
+                                {
+                                    quiz.type
+                                }
                             </div>
                         </div>
                         <div className="quiz-field">
@@ -48,7 +58,9 @@ function QuizDetails() {
                                 Points
                             </div>
                             <div className="quiz-value">
-                                10
+                                {
+                                    quiz.points
+                                }
                             </div>
                         </div>
                         <div className="quiz-field">
@@ -56,7 +68,9 @@ function QuizDetails() {
                                 Assignment Group
                             </div>
                             <div className="quiz-value">
-                                QUIZZES
+                                {
+                                    quiz.assignmentGroup
+                                }
                             </div>
                         </div>
                         <div className="quiz-field">
@@ -64,7 +78,9 @@ function QuizDetails() {
                                 Shuffle Answers
                             </div>
                             <div className="quiz-value">
-                                Yes
+                                {
+                                    quiz.shuffleAnswers
+                                }
                             </div>
                         </div>
                         <div className="quiz-field">
@@ -72,7 +88,7 @@ function QuizDetails() {
                                 Time Limit
                             </div>
                             <div className="quiz-value">
-                                20 minutes
+                                { quiz.timeLimit } minutes
                             </div>
                         </div>
                         <div className="quiz-field">
@@ -80,7 +96,9 @@ function QuizDetails() {
                                 Multiple Attempts
                             </div>
                             <div className="quiz-value">
-                                No
+                                {
+                                    quiz.multipleAttempts
+                                }
                             </div>
                         </div>
                         <div className="quiz-field">
@@ -96,7 +114,9 @@ function QuizDetails() {
                                 Show Correct Answers
                             </div>
                             <div className="quiz-value">
-                                Immediately
+                                {
+                                    quiz.showCorrectAnswers
+                                }
                             </div>
                         </div>
                         <div className="quiz-field">
@@ -104,6 +124,9 @@ function QuizDetails() {
                                 Access Code
                             </div>
                             <div className="quiz-value">
+                                {
+                                    quiz.accessCode
+                                }
                             </div>
                         </div>
                         <div className="quiz-field">
@@ -111,7 +134,9 @@ function QuizDetails() {
                                 One Question at a Time
                             </div>
                             <div className="quiz-value">
-                                Yes
+                                {
+                                    quiz.oneQuestionAtATime
+                                }
                             </div>
                         </div>
                         <div className="quiz-field">
@@ -119,7 +144,9 @@ function QuizDetails() {
                                 Require Respondus LockDown Browser
                             </div>
                             <div className="quiz-value">
-                                No
+                                {
+                                    quiz.lockQuestionsAfterAnswering
+                                }
                             </div>
                         </div>
                         <div className="quiz-field">
@@ -135,7 +162,9 @@ function QuizDetails() {
                                 Webcam Required
                             </div>
                             <div className="quiz-value">
-                                No
+                                {
+                                    quiz.webcamRequired
+                                }
                             </div>
                         </div>
                         <div className="quiz-field">
@@ -143,7 +172,9 @@ function QuizDetails() {
                                 Lock Questions After Answering
                             </div>
                             <div className="quiz-value">
-                                No
+                                {
+                                    quiz.lockQuestionsAfterAnswering
+                                }
                             </div>
                         </div>
                     </div>

@@ -5,17 +5,93 @@ import "../../../index.css"
 import { useParams } from "react-router";
 import { Editor } from '@tinymce/tinymce-react';
 import { idText } from "typescript";
+import * as client from "../../../client";
+
+export function MultipleChoiceAnswerContainer({ questionId, newQuestion, setNewQuestion, possibleAnswersLen }: { questionId:any, newQuestion: any, setNewQuestion: any, possibleAnswersLen:any }) {
+    return (
+        <>
+            <div className="correct-answer quiz-input-grp">
+                <label htmlFor="" className="">
+                    <span className="text-success">
+                        Correct Answer
+                    </span>
+                    <input
+                        type="text"
+                        name=""
+                        id=""
+                        value={newQuestion.answer[0]}
+                        onBlur={(e) => {
+                            setNewQuestion((prevState: any) => ({
+                                ...prevState,
+                                answer: [e.target.value]
+                            }));
+                        }}
+                    />
+                </label>
+            </div>
+            {
+                questionId === "newQuestion" ? Array.from({ length: possibleAnswersLen }, (_, index) => (
+                    <PossibleAnswerContainer
+                        key={index}
+                        newQuestion={newQuestion}
+                        setNewQuestion={setNewQuestion}
+                    />
+                )) : newQuestion.possibleAnswers.map((possibleAnswer: any, index: any) => (
+                    <div className="possible-answer quiz-input-grp" key={index}>
+                        <label htmlFor="" className="input-grp">
+                            <span className="text-danger">
+                                Possible Answer
+                            </span>
+                            <input
+                                type="text"
+                                name=""
+                                id=""
+                                value={possibleAnswer}
+                                onChange={(e) => {
+                                    const updatedPossibleAnswers = newQuestion.possibleAnswers.map((possibleAnswer: any, possibleAnswerIndex: any) => {
+                                        if (possibleAnswerIndex === index) {
+                                            return e.target.value;
+                                        }
+                                        return possibleAnswer;
+                                    });
+                                    setNewQuestion((prevState: any) => ({
+                                        ...prevState,
+                                        possibleAnswers: updatedPossibleAnswers
+                                    }));
+                                }}
+                                onBlur={(e) => {
+                                    const updatedPossibleAnswers = newQuestion.possibleAnswers.map((possibleAnswer: any, possibleAnswerIndex: any) => {
+                                        if (possibleAnswerIndex === index) {
+                                            // Remove HTML tags from the input value
+                                            return e.target.value.replace(/<\/?[^>]+(>|$)/g, "");
+                                        }
+                                        return possibleAnswer;
+                                    });
+                                    setNewQuestion((prevState: any) => ({
+                                        ...prevState,
+                                        possibleAnswers: updatedPossibleAnswers
+                                    }));
+                                }}
+                            />
+                        </label>
+                    </div>
+                ))
+            }
+        </>
+    );
+}
+
 
 export function PossibleAnswerContainer({ newQuestion, setNewQuestion }: { newQuestion: any, setNewQuestion: any }) {
 
     const handlePossibleAnswerBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-        const updatedPossibleAnswer = e.target.value.trim();
-        if (updatedPossibleAnswer !== "") {
-            setNewQuestion((prevState: { possibleAnswers: any; }) => ({
-                ...prevState,
-                possibleAnswers: [...prevState.possibleAnswers, updatedPossibleAnswer]
-            }));
-        }
+        const possibleAnswer = e.target.value;
+        const updatesPossibleAnswers = newQuestion.possibleAnswers.filte
+        console.log("currentChoices", updatesPossibleAnswers);
+        setNewQuestion((prevState: any) => ({
+            ...prevState,
+            possibleAnswers: updatesPossibleAnswers
+        }));
     };
 
     return (
@@ -35,48 +111,88 @@ export function PossibleAnswerContainer({ newQuestion, setNewQuestion }: { newQu
     );
 }
 
+export function FillInBlanksAnswerContainer({ newQuestion, setNewQuestion }: { newQuestion: any, setNewQuestion: any }) {
+
+    return (
+        <div className="possible-answer quiz-input-grp">
+            <label htmlFor="" className="input-grp">
+                <span className="text-danger">
+                    {newQuestion.answer.length + 1}.
+                </span>
+                <input
+                    type="text"
+                    name=""
+                    id=""
+                />
+            </label>
+        </div>
+    );
+}
 
 function NewQuestion() {
 
     const { quizId } = useParams();
+    const { questionId } = useParams();
 
     const [newQuestion, setNewQuestion] = useState({
-        _id: "" as any,
-        title: "",
-        type: "",
-        points: "0",
+        _id: "",
+        title: "new Ques",
+        points: "1",
         question: "",
-        correctAnswer: [] as string[],
-        possibleAnswers: [] as string[],
-        allAnswers: [] as string[]
+        choices: [] as string[],
+        questionType: "",
+        answer: [] as string[],
+        possibleAnswers: [] as string[]
     });
 
-    if (quizId === "newQuiz") {
-    } else {
-        setNewQuestion({
-            ...newQuestion,
-            _id: quizId
-        });
-    }
+    useEffect(() => {
+        if (questionId === "newQuestion") {
+        } else {
+            client.findQuestionById(
+                quizId, questionId
+            ).then((question) => {
+                // setNewQuestion(question, possibleAnswers = question.choices || [])
+                setNewQuestion({
+                    ...question,
+                    possibleAnswers: question.choices.filter((choice: any) => !question.answer.includes(choice))
+                });
+            })
+        }
+    }, []);
 
     useEffect(() => {
-        if (newQuestion.type === "Multiple Choice") {
+        if (newQuestion.questionType === "Multiple Choice") {
             setPossibleAnswersLimit(3);
             setPossibleAnswersLen(0);
-        } else if (newQuestion.type === "True/False") {
+        } else if (newQuestion.questionType === "True/False") {
             setPossibleAnswersLimit(1);
             setPossibleAnswersLen(0);
-        } else if (newQuestion.type === "Fill in the Blank") {
-            setPossibleAnswersLimit(1);
+        } else if (newQuestion.questionType === "Fill in the Blank") {
+            setPossibleAnswersLimit(100);
             setPossibleAnswersLen(0);
         } else {
             setPossibleAnswersLimit(0);
             setPossibleAnswersLen(0);
         }
-        newQuestion.possibleAnswers = []
-    }, [newQuestion.type])
+        newQuestion.choices = []
+    }, [newQuestion.questionType])
 
-    const saveQuestion = () => {
+    const saveQuestion = (finalQuestion: any) => {
+        console.log("newQuestion", finalQuestion);
+        // if (questionId === "newQuestion") {
+        //     client.createQuestion(quizId, finalQuestion)
+        //         .then((question) => {
+        //             setNewQuestion(question);
+        //         });
+        // } else {
+        //     client.updateQuestion(quizId, finalQuestion)
+        //         .then((question) => {
+        //             setNewQuestion(question);
+        //         });
+        // }
+    }
+
+    const getFinalQuestion = () => {
         if (newQuestion.points === "0") {
             alert("Please provide points");
             return;
@@ -89,12 +205,22 @@ function NewQuestion() {
         //     alert("Please provide a question");
         //     return;
         // }
-        const combinedAnswers = [...newQuestion.correctAnswer, ...newQuestion.possibleAnswers];
-        setNewQuestion({
+        // if (newQuestion.choices.includes(newQuestion.answer[0])) {
+        //     alert("Correct answer cannot be in the possible answers");
+        //     return;
+        // }
+
+        const finalChoices = newQuestion.possibleAnswers.concat(newQuestion.answer);
+        const shuffledChoices = finalChoices.sort(() => Math.random() - 0.5);
+        const finalQuestion = {
             ...newQuestion,
-            allAnswers: combinedAnswers
-        });
-        console.log(newQuestion);
+            choices: shuffledChoices
+        };
+        // setNewQuestion({
+        //     ...newQuestion,
+        //     choices: finalChoices
+        // });
+        saveQuestion(finalQuestion);
     }
 
     const [possibleAnswersLimit, setPossibleAnswersLimit] = useState(0);
@@ -121,9 +247,11 @@ function NewQuestion() {
                                 (e) => {
                                     setNewQuestion({
                                         ...newQuestion,
-                                        type: e.target.value
+                                        questionType: e.target.value
                                     })
                                 }
+                            } value={
+                                newQuestion.questionType
                             } className="w-100">
                                 <option value="" defaultChecked>Question Type</option>
                                 <option value="Multiple Choice">Multiple Choice</option>
@@ -155,19 +283,6 @@ function NewQuestion() {
                             <label htmlFor="" className="newQuestion-heading">
                                 Question:
                             </label>
-                            {/* <textarea name="" id="" cols={30} rows={10} onChange={
-                                (e) => {
-                                    setNewQuestion({
-                                        ...newQuestion,
-                                        question: e.target.value
-                                    })
-                                }
-                            }></textarea> */}
-                            <h1>
-                                {
-                                    newQuestion.question
-                                }
-                            </h1>
                             <Editor
                                 apiKey='9cwhor0h9kuvm0z028tcchgsf8v7mi7f3r2fh16a89rtp1z5'
                                 init={{
@@ -180,12 +295,13 @@ function NewQuestion() {
                                         { value: 'Email', title: 'Email' },
                                     ]
                                 }}
-                                initialValue=""
+                                initialValue={newQuestion.question}
                                 onEditorChange={
                                     (content, editor) => {
+                                        const plainTextContent = editor.getContent({ format: 'text' });
                                         setNewQuestion({
                                             ...newQuestion,
-                                            question: content
+                                            question: plainTextContent
                                         })
                                     }
                                 }
@@ -196,7 +312,22 @@ function NewQuestion() {
                                 Answers:
                             </h6>
                             <div className="newquestion-answer-container d-flex flex-column gap-4">
-                                <div className="correct-answer quiz-input-grp">
+                                {
+                                    newQuestion.questionType === "Fill in the Blanks" ?
+                                        <FillInBlanksAnswerContainer
+                                            newQuestion={newQuestion}
+                                            setNewQuestion={setNewQuestion}
+                                        />
+                                        :
+                                        newQuestion.questionType === "Multiple Choice" || newQuestion.questionType === "True/False" ?
+                                            <MultipleChoiceAnswerContainer
+                                                questionId={questionId}
+                                                newQuestion={newQuestion}
+                                                setNewQuestion={setNewQuestion}
+                                                possibleAnswersLen={possibleAnswersLen}
+                                            /> : null
+                                }
+                                {/* <div className="correct-answer quiz-input-grp">
                                     <label htmlFor="" className="">
                                         <span className="
                                     text-success
@@ -207,23 +338,59 @@ function NewQuestion() {
                                             type="text"
                                             name=""
                                             id=""
-                                            onChange={(e) => {
+                                            value={newQuestion.answer[0]}
+                                            // onChange={(e) => {
+                                            //     setNewQuestion((prevState) => ({
+                                            //         ...prevState,
+                                            //         answer: [e.target.value]
+                                            //     }));
+                                            // }}
+                                            onBlur={(e) => {
                                                 setNewQuestion((prevState) => ({
                                                     ...prevState,
-                                                    correctAnswer: [e.target.value]
+                                                    answer: [e.target.value]
                                                 }));
-                                            }}
+                                            }
+                                            }
                                         />
 
                                     </label>
                                 </div>
-                                {Array.from({ length: possibleAnswersLen }, (_, index) => (
-                                    <PossibleAnswerContainer
-                                        key={index}
-                                        newQuestion={newQuestion}
-                                        setNewQuestion={setNewQuestion}
-                                    />
-                                ))}
+                                {
+                                    questionId === "newQuestion" ? Array.from({ length: possibleAnswersLen }, (_, index) => (
+                                        <PossibleAnswerContainer
+                                            key={index}
+                                            newQuestion={newQuestion}
+                                            setNewQuestion={setNewQuestion}
+                                        />
+                                    )) : newQuestion.possibleAnswers.map((possibleAnswer: any, index: any) => (
+                                        <div className="possible-answer quiz-input-grp" key={index}>
+                                            <label htmlFor="" className="input-grp">
+                                                <span className="text-danger">
+                                                    Possible Answer
+                                                </span>
+                                                <input
+                                                    type="text"
+                                                    name=""
+                                                    id=""
+                                                    value={possibleAnswer}
+                                                    onChange={(e) => {
+                                                        const updatedPossibleAnswers = newQuestion.possibleAnswers.map((possibleAnswer: any, possibleAnswerIndex: any) => {
+                                                            if (possibleAnswerIndex === index) {
+                                                                return e.target.value;
+                                                            }
+                                                            return possibleAnswer;
+                                                        });
+                                                        setNewQuestion((prevState) => ({
+                                                            ...prevState,
+                                                            possibleAnswers: updatedPossibleAnswers
+                                                        }));
+                                                    }}
+                                                />
+                                            </label>
+                                        </div>
+                                    ))
+                                } */}
                             </div>
                         </div>
                     </div>
@@ -247,7 +414,7 @@ function NewQuestion() {
                         Cancel
                     </button>
                     <button onClick={
-                        saveQuestion
+                        getFinalQuestion
                     }>
                         Update Question
                     </button>
