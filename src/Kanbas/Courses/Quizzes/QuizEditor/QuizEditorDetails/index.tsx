@@ -273,37 +273,6 @@ function QuizEditorDetails(quizId: any) {
                         </div>
                     </div>
                 </div>
-                <div className="">
-                    <hr />
-                    <div className="d-flex flex-md-row flex-column justify-content-between align-items-md-start align-items-center gap-4 fs-6 ">
-                        <label htmlFor="" className="fs-6 h-100  d-flex align-items-center justify-content-center gap-3 ">
-                            <input type="checkbox" name="" id="" />
-                            Notify users that this content has changed
-                        </label>
-                        <div className="submission-button-grp
-                        d-flex gap-3
-                        ">
-                            <Link to={
-                                `/Kanbas/courses/${currentQuiz.courseId}/Quizzes`
-                            }>
-                            <button>
-                                Cancel
-                            </button>
-                            </Link>
-                            <button style={{
-                                backgroundColor: "#f5f5f5",
-                                color: "black",
-                                border: "1px solid #E0E0E0",
-                            }}>
-                                Save & Publish
-                            </button>
-                            <button>
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                    <hr />
-                </div>
             </div>
         </>
     )

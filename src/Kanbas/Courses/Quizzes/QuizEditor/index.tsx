@@ -3,7 +3,7 @@ import QuizEditorDetails from "./QuizEditorDetails";
 import QuizEditorQuestion from "./QuizEditorQuestion";
 import { FaEllipsisV } from "react-icons/fa";
 import '../index.css'
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { KanbasState } from "../../../store";
 import * as client from "../client";
@@ -14,6 +14,8 @@ import { setQuiz, setQuestions } from "../reducer";
 function QuizEditor() {
 
     const { quizId } = useParams();
+    const { courseId } = useParams();
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
     
@@ -59,6 +61,20 @@ function QuizEditor() {
     
     const [activeTab, setActiveTab] = React.useState("details");
 
+    const handleSaveQuiz = () => {
+        if (quizId === "newQuiz") {
+            client.createQuiz(courseId, quiz)
+                .then((quiz) => {
+                    dispatch(setQuiz(quiz));
+                });
+        } else {
+            client.updateQuiz(quiz)
+                .then((quiz) => {
+                    dispatch(setQuiz(quiz));
+                });
+        }
+    }
+
     return (
         <>
             <div className="d-flex flex-column gap-4 ">
@@ -100,6 +116,37 @@ function QuizEditor() {
                     {
                         activeTab === "details" ? <QuizEditorDetails quizId={quizId} /> : <QuizEditorQuestion quizId={quizId} />
                     }
+                </div>
+                <div className="">
+                    <hr />
+                    <div className="d-flex flex-md-row flex-column justify-content-between align-items-md-start align-items-center gap-4 fs-6 ">
+                        <label htmlFor="" className="fs-6 h-100  d-flex align-items-center justify-content-center gap-3 ">
+                            <input type="checkbox" name="" id="" />
+                            Notify users that this content has changed
+                        </label>
+                        <div className="submission-button-grp
+                        d-flex gap-3
+                        ">
+                            <button onClick={
+                                () => {
+                                    navigate(`/Kanbas/courses/${courseId}/Quizzes`)
+                                }
+                            }>
+                                Cancel
+                            </button>
+                            <button style={{
+                                backgroundColor: "#f5f5f5",
+                                color: "black",
+                                border: "1px solid #E0E0E0",
+                            }}>
+                                Save & Publish
+                            </button>
+                            <button onClick={handleSaveQuiz}>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                    <hr />
                 </div>
             </div>
         </>

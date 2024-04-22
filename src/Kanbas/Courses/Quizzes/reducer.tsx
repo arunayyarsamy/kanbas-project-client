@@ -27,8 +27,8 @@ const initialState = {
     questions: [],
     question: {
         _id: "",
-        title: "new Ques",
-        points: "1",
+        title: "",
+        points: "0",
         question: "",
         choices: [] as string[],
         questionType: "",
@@ -95,20 +95,12 @@ const quizzesSlice = createSlice({
 
         setQuestionFromId: (state, action) => {
 
-            const question = state.questions.filter(
+            let question = state.questions.filter(
                 (question: any) => question._id === action.payload
             );
-            console.log("question", question);
-            // const newQuestion = {
-            //     question[0],
-            //     possibleAnswers: finalQuestion.choices
-            //         .filter((choice: string) => choice !== finalQuestion.answer[0])
-            //         .map((choice: string) => ({ id: `answer_${choice}`, answer: choice })),
-            // };
 
-            // state.question = newQuestion;
+            state.question = question[0];
 
-            // state.question = question[0];1``
         },
 
         updateQuestion: (state, action) => {
@@ -121,6 +113,6 @@ const quizzesSlice = createSlice({
 export const { addQuiz, deleteQuiz, setQuiz, setQuizzes
     , setQuestions, updateQuestions, addQuestion, deleteQuestion,
     setQuestion, updateQuestion, setQuestionFromId
-} = quizzeqce.acti[0]ons;
+} = quizzesSlice.actions;
 
 export default quizzesSlice.reducer;

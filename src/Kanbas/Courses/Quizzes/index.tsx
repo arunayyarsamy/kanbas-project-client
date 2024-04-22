@@ -149,7 +149,7 @@ function Quizzes() {
                                             <span>
                                             {
                                                 handleQuizStatus(quiz)
-                                            } | {quiz.dueDate ? "Due " + quiz.dueDate : "No due date"} | 
+                                            } | {quiz.dueDate ? "Due " + new Date(quiz.dueDate).toDateString() : "No due date"} | 
                                             {
                                                 quiz.published === "True" ? 
                                                 `${quiz.points ? quiz.points : "N/A"} pts 
