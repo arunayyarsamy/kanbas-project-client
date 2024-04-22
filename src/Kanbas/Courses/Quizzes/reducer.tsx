@@ -3,16 +3,38 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     quizzes: [],
     quiz: {
+        accessCode: "",
+        assignmentGroup: "",
+        availableDate: "",
+        courseId: "",
+        description: "",
+        dueDate: "",
+        lockQuestionsAfterAnswering: "",
+        multipleAttempts: "",
+        name: "",
+        oneQuestionAtATime: "",
+        points: "",
+        published: "",
+        questions: [],
+        quizType: "",
+        showCorrectAnswers: "",
+        shuffleAnswers: "",
+        timeLimit: "",
+        untilDate: "",
+        webcamRequired: "",
         _id: "",
-        title: "New Quiz",
-        course: "",
-        points: 10,
-        due: "2023-09-18",
-        available: "2023-09-11",
-        publishStatus: 0,
-        numQuestions: 0,
-        questions: []
     },
+    questions: [],
+    question: {
+        _id: "",
+        title: "",
+        points: "0",
+        question: "",
+        choices: [] as string[],
+        questionType: "",
+        answer: [] as string[],
+        possibleAnswers: [] as { id: string, answer: string }[]
+    }
 };
 
 const quizzesSlice = createSlice({
@@ -42,9 +64,55 @@ const quizzesSlice = createSlice({
         setQuiz: (state, action) => {
             state.quiz = action.payload;
         },
+
+        setQuestions: (state, action) => {
+            state.questions = action.payload;
+        },
+
+        updateQuestions: (state, action) => {
+            state.questions = state.questions.map((question: any) => { // Add type annotation for 'question'
+                if (question._id === action.payload._id) {
+                    return action.payload;
+                } else {
+                    return question;
+                }
+            }) as typeof state.questions;
+        },
+
+        addQuestion: (state, action) => {
+            state.questions = [...state.questions, action.payload,] as typeof state.questions;
+        },
+
+        deleteQuestion: (state, action) => {
+            state.questions = state.questions.filter(
+                (question: any) => question._id !== action.payload
+            );
+        },
+
+        setQuestion: (state, action) => {
+            state.question = action.payload;
+        },
+
+        setQuestionFromId: (state, action) => {
+
+            let question = state.questions.filter(
+                (question: any) => question._id === action.payload
+            );
+
+            state.question = question[0];
+
+        },
+
+        updateQuestion: (state, action) => {
+            state.question = action.payload;
+        },
+
     },
 });
 
-export const { addQuiz, deleteQuiz, setQuiz, setQuizzes } = quizzesSlice.actions;
+export const { addQuiz, deleteQuiz, setQuiz, setQuizzes
+    , setQuestions, updateQuestions, addQuestion, deleteQuestion,
+    setQuestion, updateQuestion, setQuestionFromId
+} = quizzesSlice.actions;
 
 export default quizzesSlice.reducer;
