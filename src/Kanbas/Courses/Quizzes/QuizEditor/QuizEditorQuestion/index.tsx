@@ -13,8 +13,6 @@ function QuizEditorQuestion(quizId: any) {
 
     const dispatch = useDispatch();
 
-    // const [questions, setQuestions] = useState([]);
-
     const questions = useSelector((state: any) => state.quizzesReducer.questions);
 
     // useEffect(() => {
@@ -41,6 +39,12 @@ function QuizEditorQuestion(quizId: any) {
     const [showQuizContextMenu, setShowQuizContextMenu] = useState(false);
 
     const handleSaveQuiz = () => {
+    }
+
+    const handleDeleteQuestion = (questionId: any, quizId: any) => {
+        client.deleteQuestion(questionId, quizId).then(() => {
+            dispatch(deleteQuestion(questionId));
+        });
     }
 
     return (
@@ -77,7 +81,7 @@ function QuizEditorQuestion(quizId: any) {
                                         </Link>
                                         <button onClick={
                                             () => {
-                                                dispatch(deleteQuestion(question._id));
+                                                handleDeleteQuestion(question._id, quizId);
                                             }
                                         }>
                                             <FaTrash />

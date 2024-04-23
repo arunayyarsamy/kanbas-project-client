@@ -9,8 +9,6 @@ import { KanbasState } from "../../../store";
 import * as client from "../client";
 import { setQuiz, setQuestions } from "../reducer";
 
-// {"_id":{"$oid":"6622072ef0f53d357cdca334"},"name":"Quiz 1","courseId":"RS101","description":"This is a quiz","quizType":"Graded Quiz","points":{"$numberInt":"10"},"assignmentGroup":"Quizzes","shuffleAnswers":"Yes","timeLimit":{"$numberInt":"20"},"multipleAttempts":"No","showCorrectAnswers":"No","accessCode":"","oneQuestionAtATime":"Yes","webcamRequired":"No","lockQuestionsAfterAnswering":"No","dueDate":"2021-12-31T23:59:59.999Z","availableDate":"2021-12-01T00:00:00.000Z","untilDate":"2021-12-31T23:59:59.999Z","published":true,"questions":[{"$oid":"6625421ba499f29a7a4734a5"}],"__v":{"$numberInt":"1"}}
-
 function QuizEditor() {
 
     const { quizId } = useParams();
@@ -18,31 +16,31 @@ function QuizEditor() {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
-    
+
     const quiz = useSelector((state: KanbasState) => state.quizzesReducer.quiz);
 
     useEffect(() => {
         if (quizId === "newQuiz") {
             dispatch(setQuiz({
                 accessCode: "",
-                assignmentGroup: "",
+                assignmentGroup: "Quizzes",
                 availableDate: "",
-                courseId: "",
+                courseId: courseId,
                 description: "",
                 dueDate: "",
-                lockQuestionsAfterAnswering: "",
-                multipleAttempts: "",
+                lockQuestionsAfterAnswering: "No",
+                multipleAttempts: "No",
                 name: "",
-                oneQuestionAtATime: "",
-                points: "",
+                oneQuestionAtATime: "Yes",
+                points: "0",
                 published: "",
                 questions: [],
-                quizType: "",
-                showCorrectAnswers: "",
-                shuffleAnswers: "",
+                quizType: "Graded Quiz",
+                showCorrectAnswers: "No",
+                shuffleAnswers: "Yes",
                 timeLimit: "",
                 untilDate: "",
-                webcamRequired: "",
+                webcamRequired: "No",
                 _id: "",
             }));
             dispatch(setQuestions([]));
@@ -58,11 +56,12 @@ function QuizEditor() {
                 });
         }
     }, [quizId]);
-    
+
     const [activeTab, setActiveTab] = React.useState("details");
 
     const handleSaveQuiz = () => {
         if (quizId === "newQuiz") {
+            console.log(quiz);
             client.createQuiz(courseId, quiz)
                 .then((quiz) => {
                     dispatch(setQuiz(quiz));
