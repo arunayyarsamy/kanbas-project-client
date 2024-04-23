@@ -31,15 +31,13 @@ function Quizzes() {
   );
   const dispatch = useDispatch();
   const handleQuizStatus = (quiz: any) => {
-    if (currentTime > new Date(quiz.availableDate)) {
+    if (currentTime > new Date(quiz.untilDate)) {
       return "Closed";
-    } else if (
-      new Date(quiz.availableDate) < currentTime &&
-      currentTime < new Date(quiz.dueDate)
-    ) {
-      return "Available";
     }
-    return `Not available until ${quiz.availableDate}`;
+    if (currentTime < new Date(quiz.availableDate)) {
+      return `Not available until ${quiz.availableDate}`;
+    }
+    return "Available";
   };
 
   useEffect(() => {
