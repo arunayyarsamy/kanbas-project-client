@@ -19,33 +19,33 @@ function QuizDetails() {
   return (
     <>
       <div className="details-button-grp float-end d-flex gap-3">
-          {quiz.published ? (
-            <>
-              <button
-                onClick={() => {
-                  client.publishQuiz(quizId, false).then(() => {
-                    setQuiz({ ...quiz, published: false });
-                  });
-                }}
-              >
-                <FaCheckCircle style={{ color: "green" }} />
-                Published
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                onClick={() => {
-                  client.publishQuiz(quizId, true).then(() => {
-                    setQuiz({ ...quiz, published: true });
-                  });
-                }}
-              >
-                <AiOutlineStop style={{ color: "red" }} />
-                Unpublished
-              </button>
-            </>
-          )}
+        {quiz.published ? (
+          <>
+            <button
+              onClick={() => {
+                client.publishQuiz(quizId, false).then(() => {
+                  setQuiz({ ...quiz, published: false });
+                });
+              }}
+            >
+              <FaCheckCircle style={{ color: "green" }} />
+              Published
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={() => {
+                client.publishQuiz(quizId, true).then(() => {
+                  setQuiz({ ...quiz, published: true });
+                });
+              }}
+            >
+              <AiOutlineStop style={{ color: "red" }} />
+              Unpublished
+            </button>
+          </>
+        )}
         <button>Preview</button>
         <button>
           <FaPencilAlt />
@@ -59,12 +59,12 @@ function QuizDetails() {
       <br />
       <hr />
       <div className="quiz-details-main-container px-5 ">
-        <h1>Quiz Title</h1>
+        <h1>{quiz.name}</h1>
         <div className="d-flex flex-column gap-4 w-100 mt-4">
           <div className="quiz-details d-flex w-50 flex-column gap-2">
             <div className="quiz-field">
               <div className="quiz-label">Quiz Type</div>
-              <div className="quiz-value">{quiz.type}</div>
+              <div className="quiz-value">{quiz.quizType}</div>
             </div>
             <div className="quiz-field">
               <div className="quiz-label">Points</div>
@@ -143,10 +143,10 @@ function QuizDetails() {
                         "
               >
                 <tr>
-                  <td>1/1/2022 12:00 AM</td>
+                  <td>{new Date(quiz.dueDate).toDateString()}</td>
                   <td>Everyone</td>
-                  <td>1/1/2022 12:00 AM</td>
-                  <td>1/1/2022 12:00 AM</td>
+                  <td>{new Date(quiz.availableDate).toDateString()}</td>
+                  <td>{new Date(quiz.untilDate).toDateString()}</td>
                 </tr>
               </tbody>
             </table>
