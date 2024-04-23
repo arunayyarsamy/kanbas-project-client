@@ -10,14 +10,17 @@ function CurrentQuestion() {
     const answeredQuestions = useSelector((state: any) => state.quizzesReducer.answeredQuestions);
     const dispatch = useDispatch();
 
-    const handleAnswerQuestion = (e: any) => {
-        if (e.target.checked) {
-            let answeredQuestion = {
-                question: currentQuestion,
-                answer: e.target.nextSibling.data
-            }
-            dispatch(addAnsweredQuestion(answeredQuestion));
+    const handleAnswerQuestion = (choice: any) => {
+        let answeredQuestion = {
+            _id: currentQuestion._id,
+            answer: [choice]
         }
+        dispatch(addAnsweredQuestion(answeredQuestion));
+        test();
+    }
+
+    const test = () => {
+        console.log(answeredQuestions);
     }
 
     return (
@@ -39,7 +42,15 @@ function CurrentQuestion() {
                         currentQuestion.choices.map((choice: any) => {
                             return (
                                 <label htmlFor="">
-                                    <input type="radio" name="answer" id="" />
+                                    <input
+                                        type="radio"
+                                        name="answer"
+                                        id=""
+                                        value={choice}
+                                        onChange={(e) => {
+                                            handleAnswerQuestion(e.target.value);
+                                        }}
+                                    />
                                     {choice}
                                 </label>
                             )

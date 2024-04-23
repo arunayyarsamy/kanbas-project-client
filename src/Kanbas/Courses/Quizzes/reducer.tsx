@@ -109,7 +109,18 @@ const quizzesSlice = createSlice({
         },
 
         addAnsweredQuestion: (state, action) => {
-            state.answeredQuestions = [...state.answeredQuestions, action.payload] as typeof state.answeredQuestions;
+            const questionId = state.answeredQuestions.findIndex((answeredQuestion: any) => answeredQuestion.question._id === action.payload.question._id);
+            if (questionId === -1) {
+                state.answeredQuestions = [...state.answeredQuestions, action.payload] as typeof state.answeredQuestions;
+            } else {
+                state.answeredQuestions = state.answeredQuestions.map((answeredQuestion: any) => {
+                    if (answeredQuestion.question._id === action.payload.question._id) {
+                        return action.payload;
+                    } else {
+                        return answeredQuestion;
+                    }
+                }) as typeof state.answeredQuestions;
+            }
         },
 
     },

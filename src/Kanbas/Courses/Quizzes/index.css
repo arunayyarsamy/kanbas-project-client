@@ -266,3 +266,23 @@
   flex-direction: column;
   gap: 1rem;
 }
+
+.preview-questions-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* border: 1px solid #c7cdd1; */
+  /* border-radius: 5px; */
+  width: 90%;
+}
+
+.preview-questions-list-container button {
+  background-color: transparent;
+  border: none;
+  color: #d41b2c;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
