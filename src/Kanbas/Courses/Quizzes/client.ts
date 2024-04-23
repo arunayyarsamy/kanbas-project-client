@@ -57,3 +57,8 @@ export const deleteQuestion = async (questionId: any, quizId: any) => {
   const response = await axios.delete(`${QUIZZES_API}/${quizId}/questions/${questionId}`);
   return response.data;
 }
+
+export const publishQuiz = async (quizId: any, published: any) => {
+  const response = await axios.put(`${QUIZZES_API}/${quizId}/publish`, { published });
+  return response.data;
+}
