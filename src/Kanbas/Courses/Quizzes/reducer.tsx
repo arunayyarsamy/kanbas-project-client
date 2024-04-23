@@ -34,7 +34,8 @@ const initialState = {
         questionType: "",
         answer: [] as string[],
         possibleAnswers: [] as { id: string, answer: string }[]
-    }
+    },
+    answeredQuestions: [],
 };
 
 const quizzesSlice = createSlice({
@@ -107,12 +108,16 @@ const quizzesSlice = createSlice({
             state.question = action.payload;
         },
 
+        addAnsweredQuestion: (state, action) => {
+            state.answeredQuestions = [...state.answeredQuestions, action.payload] as typeof state.answeredQuestions;
+        },
+
     },
 });
 
 export const { addQuiz, deleteQuiz, setQuiz, setQuizzes
     , setQuestions, updateQuestions, addQuestion, deleteQuestion,
-    setQuestion, updateQuestion, setQuestionFromId
+    setQuestion, updateQuestion, setQuestionFromId, addAnsweredQuestion
 } = quizzesSlice.actions;
 
 export default quizzesSlice.reducer;
