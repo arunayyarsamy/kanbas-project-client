@@ -109,6 +109,24 @@ function QuizEditorDetails(quizId: any) {
               </select>
             </div>
           </div>
+          <div className="">
+            <label htmlFor="">
+              <span> Points</span>
+              <input
+                name="points"
+                id="points"
+                value={currentQuiz.points}
+                onChange={(e) => {
+                  dispatch(
+                    setQuiz({
+                      ...currentQuiz,
+                      points: e.target.value,
+                    })
+                  );
+                }}
+              />
+            </label>
+          </div>
           <div className="quiz-input-grp">
             <div className="quiz-input-label">Assignment Group</div>
             <div className="quiz-input-cont">
@@ -157,9 +175,7 @@ function QuizEditorDetails(quizId: any) {
                       name=""
                       id=""
                       checked={
-                        currentQuiz.shuffleAnswers === "Yes"
-                          ? true
-                          : false
+                        currentQuiz.shuffleAnswers === "Yes" ? true : false
                       }
                       onChange={(e) => {
                         dispatch(
