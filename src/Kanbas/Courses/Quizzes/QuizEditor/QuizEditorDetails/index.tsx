@@ -112,10 +112,17 @@ function QuizEditorDetails(quizId: any) {
                                         <input type="checkbox" name="" id="" 
                                         onChange={
                                             (e) => {
-                                                dispatch(setQuiz({
-                                                    ...currentQuiz,
-                                                    showCorrectAnswers: e.target.checked,
-                                                }));
+                                                if (e.target.checked) {
+                                                    dispatch(setQuiz({
+                                                        ...currentQuiz,
+                                                        showCorrectAnswers: "Yes",
+                                                    }));
+                                                } else {
+                                                    dispatch(setQuiz({
+                                                        ...currentQuiz,
+                                                        showCorrectAnswers: "No",
+                                                    }));
+                                                }
                                             }
                                         }
                                         />
@@ -129,10 +136,17 @@ function QuizEditorDetails(quizId: any) {
                                         <input type="checkbox" name="" id="" 
                                         onChange={
                                             (e) => {
-                                                dispatch(setQuiz({
-                                                    ...currentQuiz,
-                                                    shuffleAnswers: e.target.checked,
-                                                }));
+                                                if (e.target.checked) {
+                                                    dispatch(setQuiz({
+                                                        ...currentQuiz,
+                                                        showCorrectAnswers: "Yes",
+                                                    }));
+                                                } else {
+                                                    dispatch(setQuiz({
+                                                        ...currentQuiz,
+                                                        showCorrectAnswers: "No",
+                                                    }));
+                                                }
                                             }
                                         }
                                         />
@@ -163,10 +177,17 @@ function QuizEditorDetails(quizId: any) {
                                         <input type="checkbox" name="" id="" 
                                         onChange={
                                             (e) => {
-                                                dispatch(setQuiz({
-                                                    ...currentQuiz,
-                                                    webcamRequired: e.target.checked,
-                                                }));
+                                                if (e.target.checked) {
+                                                    dispatch(setQuiz({
+                                                        ...currentQuiz,
+                                                        showCorrectAnswers: "Yes",
+                                                    }));
+                                                } else {
+                                                    dispatch(setQuiz({
+                                                        ...currentQuiz,
+                                                        showCorrectAnswers: "No",
+                                                    }));
+                                                }
                                             }
                                         }
                                         />

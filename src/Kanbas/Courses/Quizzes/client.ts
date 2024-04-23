@@ -10,7 +10,7 @@ export const deleteQuiz = async (quizId: any) => {
 
 export const createQuiz = async (courseId: any, quiz: any) => {
   const response = await axios.post(
-    `${QUIZZES_API}`, quiz
+    `${COURSES_API}/${courseId}/quizzes`, quiz
   );
   return response.data;
 };
@@ -50,5 +50,10 @@ export const createQuestion = async (quizId: any, question: any) => {
 
 export const updateQuestion = async (quizId: any, question: any) => {
   const response = await axios.put(`${QUIZZES_API}/${quizId}/questions/${question._id}`, question);
+  return response.data;
+}
+
+export const deleteQuestion = async (questionId: any, quizId: any) => {
+  const response = await axios.delete(`${QUIZZES_API}/${quizId}/questions/${questionId}`);
   return response.data;
 }
