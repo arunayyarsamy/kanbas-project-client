@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import * as client from '../client';
 import { setQuestions, setQuestion, addAnsweredQuestion } from '../reducer';
 import CurrentQuestion from './Components/CurrentQuestion';
@@ -13,6 +13,7 @@ function QuizPreview() {
   const { quizId } = useParams();
   const dispatch = useDispatch();
   const [quiz, setQuiz] = useState<any>();
+  const navigate = useNavigate();
 
   const questions = useSelector((state: any) => state.quizzesReducer.questions);
 
@@ -54,7 +55,9 @@ function QuizPreview() {
   }, [quizId]);
 
   const handleSubmitQuiz = () => {
-    console.log(answeredQuestions);
+    // console.log(answeredQuestions);
+    client.submitQuiz(quizId, answeredQuestions);
+    navigate(`/Kanbas/courses/${quiz.courseId}/Quizzes/${quizId}/details`);
   }
 
   const handleNext = () => {

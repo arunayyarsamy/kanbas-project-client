@@ -133,7 +133,6 @@ function QuizEditorDetails(quizId: any) {
                 type="number"
                 className="input-tags w-25 "
                 value={currentQuiz.points}
-                className="input-tags"
                 onChange={(e) => {
                   dispatch(
                     setQuiz({
