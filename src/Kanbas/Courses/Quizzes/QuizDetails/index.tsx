@@ -1,180 +1,172 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaEllipsisV, FaCheckCircle, FaPencilAlt } from "react-icons/fa";
-import '../index.css'
-import { useParams } from "react-router-dom";
+import "../index.css";
+import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import * as client from "../client";
+import { AiOutlineStop } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 function QuizDetails() {
+  const { quizId } = useParams();
+  const [quiz, setQuiz] = React.useState({} as any);
+  const navigate = useNavigate();
 
-    const { quizId } = useParams();
-    // const currentQuiz = useSelector((state: any) => state.quizzes.quizzes.find((quiz: any) => quiz.id === quizId));
+  useEffect(() => {
+    client.findQuizById(quizId).then((quiz) => {
+      setQuiz(quiz);
+    });
+  }, []);
 
-    return (
-        <>
-            <div className="details-button-grp float-end d-flex gap-3">
-                <button>
-                    <FaCheckCircle />
-                    Publish
-                </button>
-                <button>
-                    Preview
-                </button>
-                <button>
-                    <FaPencilAlt />
-                    Edit
-                </button>
-                <button>
-                    <FaEllipsisV />
-                </button>
+  return (
+    <>
+      <div className="details-button-grp float-end d-flex gap-3">
+        {quiz.published ? (
+          <>
+            <button
+              onClick={() => {
+                client.publishQuiz(quizId, false).then(() => {
+                  setQuiz({ ...quiz, published: false });
+                });
+              }}
+            >
+              <FaCheckCircle style={{ color: "green" }} />
+              Published
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={() => {
+                client.publishQuiz(quizId, true).then(() => {
+                  setQuiz({ ...quiz, published: true });
+                });
+              }}
+            >
+              <AiOutlineStop style={{ color: "red" }} />
+              Unpublished
+            </button>
+          </>
+        )}
+        <button onClick={
+          () => {
+            navigate(`/Kanbas/courses/${quiz.courseId}/Quizzes/${quizId}/preview`);
+          }
+        }>
+          Preview
+        </button>
+        <Link to={
+          `/Kanbas/courses/${quiz.courseId}/Quizzes/${quizId}/editor`
+        }>
+          <button>
+            <FaPencilAlt />
+            Edit
+          </button>
+        </Link>
+        <button>
+          <FaEllipsisV />
+        </button>
+      </div>
+      <br />
+      <br />
+      <hr />
+      <div className="quiz-details-main-container px-5 ">
+        <h1>{quiz.name}</h1>
+        <div className="d-flex flex-column gap-4 w-100 mt-4">
+          <div className="quiz-details d-flex w-50 flex-column gap-2">
+            <div className="quiz-field">
+              <div className="quiz-label">Quiz Type</div>
+              <div className="quiz-value">{quiz.quizType}</div>
             </div>
-            <br /><br />
-            <hr />
-            <div className="quiz-details-main-container px-5 ">
-                <h1>
-                    Quiz Title
-                </h1>
-                <div className="d-flex flex-column gap-4 w-100 mt-4">
-                    <div className="quiz-details d-flex w-50 flex-column gap-2">
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                Quiz Type
-                            </div>
-                            <div className="quiz-value">
-                                Graded Quiz
-                            </div>
-                        </div>
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                Points
-                            </div>
-                            <div className="quiz-value">
-                                10
-                            </div>
-                        </div>
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                Assignment Group
-                            </div>
-                            <div className="quiz-value">
-                                QUIZZES
-                            </div>
-                        </div>
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                Shuffle Answers
-                            </div>
-                            <div className="quiz-value">
-                                Yes
-                            </div>
-                        </div>
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                Time Limit
-                            </div>
-                            <div className="quiz-value">
-                                20 minutes
-                            </div>
-                        </div>
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                Multiple Attempts
-                            </div>
-                            <div className="quiz-value">
-                                No
-                            </div>
-                        </div>
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                View Response
-                            </div>
-                            <div className="quiz-value">
-                                Always
-                            </div>
-                        </div>
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                Show Correct Answers
-                            </div>
-                            <div className="quiz-value">
-                                Immediately
-                            </div>
-                        </div>
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                Access Code
-                            </div>
-                            <div className="quiz-value">
-                            </div>
-                        </div>
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                One Question at a Time
-                            </div>
-                            <div className="quiz-value">
-                                Yes
-                            </div>
-                        </div>
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                Require Respondus LockDown Browser
-                            </div>
-                            <div className="quiz-value">
-                                No
-                            </div>
-                        </div>
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                Required to View Quiz Results
-                            </div>
-                            <div className="quiz-value">
-                                No
-                            </div>
-                        </div>
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                Webcam Required
-                            </div>
-                            <div className="quiz-value">
-                                No
-                            </div>
-                        </div>
-                        <div className="quiz-field">
-                            <div className="quiz-label">
-                                Lock Questions After Answering
-                            </div>
-                            <div className="quiz-value">
-                                No
-                            </div>
-                        </div>
-                    </div>
-                    <div className="quiz-details-table mt-4 ">
-                        {/* Due, For, Available from, Until */}
-                        {/* Borderless Table, top and bottom border for table body row */}
-                        <table className="table table-borderless">
-                            <thead>
-                                <tr>
-                                    <th>Due</th>
-                                    <th>For</th>
-                                    <th>Available from</th>
-                                    <th>Until</th>
-                                </tr>
-                            </thead>
-                            <tbody className="
+            <div className="quiz-field">
+              <div className="quiz-label">Points</div>
+              <div className="quiz-value">{quiz.points}</div>
+            </div>
+            <div className="quiz-field">
+              <div className="quiz-label">Assignment Group</div>
+              <div className="quiz-value">{quiz.assignmentGroup}</div>
+            </div>
+            <div className="quiz-field">
+              <div className="quiz-label">Shuffle Answers</div>
+              <div className="quiz-value">{quiz.shuffleAnswers}</div>
+            </div>
+            <div className="quiz-field">
+              <div className="quiz-label">Time Limit</div>
+              <div className="quiz-value">{quiz.timeLimit} minutes</div>
+            </div>
+            <div className="quiz-field">
+              <div className="quiz-label">Multiple Attempts</div>
+              <div className="quiz-value">{quiz.multipleAttempts}</div>
+            </div>
+            <div className="quiz-field">
+              <div className="quiz-label">View Response</div>
+              <div className="quiz-value">Always</div>
+            </div>
+            <div className="quiz-field">
+              <div className="quiz-label">Show Correct Answers</div>
+              <div className="quiz-value">{quiz.showCorrectAnswers}</div>
+            </div>
+            <div className="quiz-field">
+              <div className="quiz-label">Access Code</div>
+              <div className="quiz-value">{quiz.accessCode}</div>
+            </div>
+            <div className="quiz-field">
+              <div className="quiz-label">One Question at a Time</div>
+              <div className="quiz-value">{quiz.oneQuestionAtATime}</div>
+            </div>
+            <div className="quiz-field">
+              <div className="quiz-label">
+                Require Respondus LockDown Browser
+              </div>
+              <div className="quiz-value">
+                {quiz.lockQuestionsAfterAnswering}
+              </div>
+            </div>
+            <div className="quiz-field">
+              <div className="quiz-label">Required to View Quiz Results</div>
+              <div className="quiz-value">No</div>
+            </div>
+            <div className="quiz-field">
+              <div className="quiz-label">Webcam Required</div>
+              <div className="quiz-value">{quiz.webcamRequired}</div>
+            </div>
+            <div className="quiz-field">
+              <div className="quiz-label">Lock Questions After Answering</div>
+              <div className="quiz-value">
+                {quiz.lockQuestionsAfterAnswering}
+              </div>
+            </div>
+          </div>
+          <div className="quiz-details-table mt-4 ">
+            {/* Due, For, Available from, Until */}
+            {/* Borderless Table, top and bottom border for table body row */}
+            <table className="table table-borderless">
+              <thead>
+                <tr>
+                  <th>Due</th>
+                  <th>For</th>
+                  <th>Available from</th>
+                  <th>Until</th>
+                </tr>
+              </thead>
+              <tbody
+                className="
                         border-top border-bottom                       
-                        ">
-                                <tr>
-                                    <td>1/1/2022 12:00 AM</td>
-                                    <td>Everyone</td>
-                                    <td>1/1/2022 12:00 AM</td>
-                                    <td>1/1/2022 12:00 AM</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+                        "
+              >
+                <tr>
+                  <td>{new Date(quiz.dueDate).toDateString()}</td>
+                  <td>Everyone</td>
+                  <td>{new Date(quiz.availableDate).toDateString()}</td>
+                  <td>{new Date(quiz.untilDate).toDateString()}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default QuizDetails;

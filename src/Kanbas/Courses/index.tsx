@@ -19,6 +19,8 @@ import Quizzes from "./Quizzes";
 import QuizDetails from "./Quizzes/QuizDetails";
 import QuizEditor from "./Quizzes/QuizEditor";
 import NewQuestion from "./Quizzes/QuizEditor/QuizEditorQuestion/NewQuestion";
+import QuizPreview from "./Quizzes/QuizPreview";
+import QuizPreviewResult from "./Quizzes/QuizPreviewResult";
 
 const API_BASE = process.env.REACT_APP_API_BASE;
 
@@ -50,7 +52,6 @@ const AssignmentId = ({
       </span>
     </>
   );
-
 }
 
 function Courses() {
@@ -128,6 +129,9 @@ function Courses() {
                   />
                   <Route path="Grades" element={<span>Grades</span>} />
                   <Route path="Quizzes" element={<span>Quizzes</span>} />
+                  <Route path="Quizzes/:quizId/details" element={<span>Quiz Details</span>} />
+                  <Route path="Quizzes/:quizId/editor" element={<span>Quiz Editor</span>} />
+                  <Route path="Quizzes/:quizId/editor/:questionId" element={<span>Quiz Editor / Question Editor</span>} />
                 </Routes>
               </li>
             </ol>
@@ -169,6 +173,9 @@ function Courses() {
                 />
                 <Route path="Grades" element={<span>Grades</span>} />
                 <Route path="Quizzes" element={<span>Quizzes</span>} />
+                <Route path="Quizzes/:quizId/details" element={<span>Quiz Details</span>} />
+                <Route path="Quizzes/:quizId/editor" element={<span>Quiz Editor</span>} />
+                <Route path="Quizzes/:quizId/editor/:questionId" element={<span>Quiz Editor / Question Editor</span>} />
               </Routes>
             </h6>
           </div>
@@ -230,16 +237,13 @@ function Courses() {
             <Route path="Piazza" element={<h1>Piazza</h1>} />
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:assignmentId" element={<Editor />} />
-            {/* <Route path="Assignments/newAssignment" element={<Editor />} /> */}
             <Route path="Grades" element={<Grades />} />
             <Route path="Quizzes" element={<Quizzes />} />
             <Route path="Quizzes/:quizId/details" element={<QuizDetails />} />
-            <Route
-              path="Quizzes/:quizId/editor"
-              element={<QuizEditor />}
-            />
-            <Route path="Quizzes/:quizId/editor/newQuestion" element={<NewQuestion />} />
-
+            <Route path="Quizzes/:quizId/editor" element={<QuizEditor />} />
+            <Route path="Quizzes/:quizId/editor/:questionId" element={<NewQuestion />} />
+            <Route path="Quizzes/:quizId/preview" element={<QuizPreview />} />
+            <Route path="Quizzes/:quizId/preview/results" element={<QuizPreviewResult />} />
           </Routes>
         </div>
       </div>

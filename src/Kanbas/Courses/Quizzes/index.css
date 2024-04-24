@@ -225,3 +225,116 @@
   font-size: 1.1rem;
   font-weight: bold;
 }
+
+.preview-question-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid #c7cdd1;
+  border-radius: 5px;
+  width: 90%;
+}
+
+.preview-question-container .preview-question-title {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  font-weight: bold;
+  border-bottom: 1px solid #c7cdd1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.preview-question-container .preview-question-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+  gap: 2rem;
+}
+
+.preview-question-container .preview-question-body .preview-question {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.preview-question-container .preview-question-body .preview-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.preview-questions-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* border: 1px solid #c7cdd1; */
+  /* border-radius: 5px; */
+  width: 90%;
+}
+
+.preview-choices label {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.preview-questions-list-container button {
+  background-color: transparent;
+  border: none;
+  color: #d41b2c;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.preview-heading {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.preview-heading span {
+  font-weight: lighter;
+  font-size: 1rem;
+  padding: 1rem;
+  background-color: #f9ece8;
+  color: #c22200;
+  border-radius: 5px;
+  display: inline-flex;
+  width: 100%;
+}
+
+.preview-button, .preview-submit-button-container button {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  align-items: center;
+  color: #07132c;
+  background-color: #f2f2f2;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #c7cdd1;
+}
+
+.preview-submit-button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: flex-end;
+  border: 1px solid #c7cdd1;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.preview-choices .fillintheblank input {
+  width: 35%;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}

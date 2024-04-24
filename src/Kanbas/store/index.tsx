@@ -15,6 +15,8 @@ export interface KanbasState {
   quizzesReducer: {
     quizzes: any[];
     quiz: any;
+    questions: any[];
+    question: any;
   };
 }
 

@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
 import { FaFileInvoice } from "react-icons/fa";
 import "./index.css";
+import { useEffect } from "react";
 
 function Dashboard(
     { courses, course, setCourse, addNewCourse,
-        deleteCourse, updateCourse }: {
+        deleteCourse, updateCourse, refresh, setRefresh }: {
             courses: any[]; course: any; setCourse: (course: any) => void;
             addNewCourse: () => void; deleteCourse: (course: any) => void;
-            updateCourse: () => void;
+            updateCourse: () => void; refresh: any; setRefresh: any;
     }) {
+
+    useEffect(() => {
+        setRefresh(!refresh);
+    }, []);
 
     return (
         <>
