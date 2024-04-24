@@ -175,7 +175,7 @@ function NewQuestion() {
         setNewQuestion({
           ...question,
           possibleAnswers: question.choices
-            .filter((choice: string) => choice !== question.answer[0])
+            // .filter((choice: string) => choice !== question.answer[0])
             .map((choice: string) => ({
               id: `answer_${choice}`,
               answer: choice,
@@ -312,10 +312,22 @@ function NewQuestion() {
     }
   };
 
-  const question = newQuestion.question;
-
   return (
     <>
+    {/* {
+      newQuestion.possibleAnswers.map((possibleAnswer, index) => (
+        <h1>
+          {index + 1}. {possibleAnswer.answer}
+        </h1>
+      ))
+    }
+    {
+      newQuestion.choices.map((choice, index) => (
+        <h1>
+          {index + 1}. {choice}
+        </h1>
+      ))
+    } */}
       <div className="d-flex flex-column gap-3 newQuestion-main-grp">
         <div className="d-flex flex-row justify-content-between align-items-center gap-4 ">
           <div className="d-flex flex-row justify-content-start align-items-center gap-4">
@@ -426,6 +438,13 @@ function NewQuestion() {
                     </label>
                   </div>
                 ) : null}
+                {/* {newQuestion.questionType === "Fill in the Blank"
+                  ? newQuestion.possibleAnswers.map((possibleAnswer, index) => (
+                    <h1>
+                      {index + 1}. {possibleAnswer.answer}
+                    </h1>
+                  ))
+                  : null} */}
                 {newQuestion.questionType === "Fill in the Blank"
                   ? newQuestion.possibleAnswers.map((possibleAnswer, index) => (
                     <FillInTheBlanks
