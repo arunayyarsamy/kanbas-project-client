@@ -20,6 +20,8 @@ function Kanbas() {
 
     console.log("API_BASE", API_BASE);
 
+    const [refresh, setRefresh] = useState(false);
+
     // const COURSES_API = "https://kanbas-node-server-app-0rgn.onrender.com/api/courses"
     const COURSES_API = `${API_BASE}/api/courses`;
 
@@ -36,9 +38,7 @@ function Kanbas() {
             setCourses(response.data);
         };
         findAllCourses();
-    }, [
-        COURSES_API
-    ]);
+    }, [refresh]);
 
     const addNewCourse = async () => {
         // const response = await axios.post(COURSES_API, course);
@@ -99,7 +99,9 @@ function Kanbas() {
                             setCourse={setCourse}
                             addNewCourse={addNewCourse}
                             deleteCourse={deleteCourse}
-                            updateCourse={updateCourse} />} />
+                            updateCourse={updateCourse}
+                            refresh={refresh}
+                            setRefresh={setRefresh} />} />
                         <Route path="Courses/:courseId/*" element={<Courses />} />
                     </Routes>
                 </div>
