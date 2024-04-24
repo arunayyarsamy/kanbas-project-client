@@ -63,23 +63,28 @@ function QuizEditor() {
 
     const saveQuiz = (publishStatus: boolean) => {
 
+        if (currentQuiz.name === "") {
+            alert("Please enter a name for the quiz");
+            return;
+        }
+
         if (publishStatus === true) {
             dispatch(setQuiz({ ...currentQuiz, published: true }));
         } else {
             dispatch(setQuiz({ ...currentQuiz, published: false }));
         }
-    
+
         if (quizId === "newQuiz") {
-          client.createQuiz(courseId, currentQuiz).then((res) => {
-            console.log(res);
-          });
+            client.createQuiz(courseId, currentQuiz).then((res) => {
+                console.log(res);
+            });
         } else {
-          client.updateQuiz(currentQuiz).then((res) => {
-            console.log(res);
-          });
+            client.updateQuiz(currentQuiz).then((res) => {
+                console.log(res);
+            });
         }
         navigate(`/Kanbas/courses/${courseId}/quizzes`);
-      };
+    };
 
     return (
         <>

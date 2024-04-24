@@ -63,11 +63,11 @@ function Quizzes() {
           <p>Quiz Title: {currentQuiz.name}</p>
           <div className="d-flex flex-row justify-content-end gap-2">
             <button className="btn btn-secondary"
-            onClick={
-              () => {
-                navigate(`/Kanbas/courses/${courseId}/Quizzes/${currentQuiz._id}/editor`)
+              onClick={
+                () => {
+                  navigate(`/Kanbas/courses/${courseId}/Quizzes/${currentQuiz._id}/editor`)
+                }
               }
-            }
             >
               Edit
             </button>
@@ -196,9 +196,8 @@ function Quizzes() {
                         |
                         {quiz.published === true
                           ? `${quiz.points ? quiz.points : "N/A"} pts 
-                                                | ${
-                                                  quiz.questions.length
-                                                } Questions`
+                                                | ${quiz.questions.length
+                          } Questions`
                           : "Not published"}
                       </span>
                     </div>
@@ -246,6 +245,26 @@ function Quizzes() {
           </ul>
         </li>
       </ul>
+      {
+        quizzes.length === 0 ? (
+          <div className="
+          d-flex
+          flex-row
+          justify-content-center
+          align-items-center
+          gap-4
+          p-4
+          border
+          border-1
+          rounded-4
+          bg-white
+          ">
+            <h2>
+              Please create a quiz
+            </h2>
+          </div>
+        ) : null
+      }
     </>
   );
 }

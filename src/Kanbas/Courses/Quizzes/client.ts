@@ -68,7 +68,7 @@ export const submitQuiz = async (quizId: any, answers: any) => {
   const attempt = answers.map((answer: any) => {
     return {
       _id: answer._id,
-      chosenAnswer: answer.answer
+      chosenAnswer: answer.chosenAnswer
     }
   });
   
