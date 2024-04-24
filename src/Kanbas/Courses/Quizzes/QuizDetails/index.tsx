@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { FaEllipsisV, FaCheckCircle, FaPencilAlt } from "react-icons/fa";
 import "../index.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as client from "../client";
 import { AiOutlineStop } from "react-icons/ai";
@@ -55,10 +55,14 @@ function QuizDetails() {
         }>
           Preview
         </button>
-        <button>
-          <FaPencilAlt />
-          Edit
-        </button>
+        <Link to={
+          `/Kanbas/courses/${quiz.courseId}/Quizzes/${quizId}/editor`
+        }>
+          <button>
+            <FaPencilAlt />
+            Edit
+          </button>
+        </Link>
         <button>
           <FaEllipsisV />
         </button>
