@@ -6,13 +6,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { setQuiz } from "../../reducer";
 import * as client from "../../client";
+import { Editor } from "@tinymce/tinymce-react";
+import { useNavigate } from "react-router-dom";
 
 function QuizEditorDetails(quizId: any) {
+
+  const { courseId } = useParams();
   const dispatch = useDispatch();
 
   const currentQuiz = useSelector((state: any) => state.quizzesReducer.quiz);
 
   const [showQuizContextMenu, setShowQuizContextMenu] = useState(false);
+
+  const navigate = useNavigate();
 
   const assignmentGroupOptions = ["Assignments", "Quizzes", "Exams", "Project"];
   const quizTypeOptions = [
@@ -21,11 +27,6 @@ function QuizEditorDetails(quizId: any) {
     "Graded Survey",
     "Ungraded Survey",
   ];
-//   const yesOrNoCheckBoxList = [
-//     { id: "oneQuestionAtATime", label: "One Question at a time" },
-//     { id: "webCamRequired", label: "Web Cam Required"},
-//     { id: "lockQuestionsAfterAnswering", label: "Lock Questions After Answering"},
-//   ];
 
   const formatDate = (date: any) => {
     if (date === "") {
@@ -68,14 +69,30 @@ function QuizEditorDetails(quizId: any) {
               );
             }}
           />
-          <textarea
-            className="input-tags"
-            name=""
-            id=""
-            value={currentQuiz.description}
-            cols={30}
-            rows={5}
-          ></textarea>
+          <Editor
+                apiKey="9cwhor0h9kuvm0z028tcchgsf8v7mi7f3r2fh16a89rtp1z5"
+                init={{
+                  plugins:
+                    "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown",
+                  toolbar:
+                    "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
+                  tinycomments_mode: "embedded",
+                  tinycomments_author: "Author name",
+                  mergetags_list: [
+                    { value: "First.Name", title: "First Name" },
+                    { value: "Email", title: "Email" },
+                  ],
+                }}
+                value={currentQuiz.description}
+                onEditorChange={(content: any, editor: any) => {
+                  dispatch(
+                    setQuiz({
+                      ...currentQuiz,
+                      description: content,
+                    })
+                  );
+                }}
+              />
           <div className="quiz-input-grp">
             <div className="quiz-input-label">Quiz Type</div>
             <div className="quiz-input-cont">
@@ -109,12 +126,12 @@ function QuizEditorDetails(quizId: any) {
               </select>
             </div>
           </div>
-          <div className="">
-            <label htmlFor="">
-              <span> Points</span>
+          <div className="quiz-input-grp">
+            <div className="quiz-input-label">Points</div>
+            <div className="quiz-input-cont">
               <input
-                name="points"
-                id="points"
+                type="number"
+                className="input-tags w-25 "
                 value={currentQuiz.points}
                 onChange={(e) => {
                   dispatch(
@@ -124,8 +141,10 @@ function QuizEditorDetails(quizId: any) {
                     })
                   );
                 }}
+                min={0}
+                max={100}
               />
-            </label>
+            </div>
           </div>
           <div className="quiz-input-grp">
             <div className="quiz-input-label">Assignment Group</div>
@@ -191,7 +210,9 @@ function QuizEditorDetails(quizId: any) {
                 </div>
                 <div className="d-flex flex-row align-items-center justify-content-start gap-4">
                   <label htmlFor="">
-                    <input type="checkbox" name="" id="" />
+                    <input type="checkbox" name="
+                    timeLimit
+                    " id="" />
                     <span>Time Limit</span>
                   </label>
                   <label htmlFor="">
@@ -209,15 +230,17 @@ function QuizEditorDetails(quizId: any) {
                           })
                         );
                       }}
+                      min={0}
+                      max={240}
                     />
                     <span>Minutes</span>
                   </label>
                 </div>
-                <div className="border border-gray-300 p-3 rounded">
+                <div className="border border-gray-300 p-3 rounded d-flex flex-row align-items-center  gap-4">
                   <label htmlFor="">
                     <input
                       type="checkbox"
-                      name=""
+                      name="multipleAttempts"
                       id=""
                       checked={
                         currentQuiz.multipleAttempts === "Yes" ? true : false
@@ -233,6 +256,9 @@ function QuizEditorDetails(quizId: any) {
                     />
                     <span>Allow Multiple Attempts</span>
                   </label>
+                  <input type="number" min={0} max={240} disabled={
+                    currentQuiz.multipleAttempts === "Yes" ? false : true
+                  }/>
                 </div>
                 <div className="">
                   <label htmlFor="">
@@ -258,19 +284,24 @@ function QuizEditorDetails(quizId: any) {
                 <div className="">
                   <label htmlFor="">
                     <span> Access Code</span>
-                    <input
-                      name="accessCode"
-                      id="accessCode"
-                      value={currentQuiz.accessCode}
-                      onChange={(e) => {
-                        dispatch(
-                          setQuiz({
-                            ...currentQuiz,
-                            accessCode: e.target.value,
-                          })
-                        );
-                      }}
-                    />
+                    <div className="quiz-input-cont">
+                      <input
+                        type="number"
+                        name="accessCode"
+                        id="accessCode"
+                        value={currentQuiz.accessCode}
+                        onChange={(e) => {
+                          dispatch(
+                            setQuiz({
+                              ...currentQuiz,
+                              accessCode: e.target.value,
+                            })
+                          );
+                        }}
+                        min={0}
+                        max={9999}
+                      />
+                    </div>
                   </label>
                 </div>
                 <div className="">

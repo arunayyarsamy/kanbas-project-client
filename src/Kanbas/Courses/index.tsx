@@ -51,7 +51,6 @@ const AssignmentId = ({
       </span>
     </>
   );
-
 }
 
 function Courses() {
@@ -129,6 +128,7 @@ function Courses() {
                   />
                   <Route path="Grades" element={<span>Grades</span>} />
                   <Route path="Quizzes" element={<span>Quizzes</span>} />
+                  <Route path="Quizzes/:quizId/details" element={<span>Quiz Details</span>} />
                 </Routes>
               </li>
             </ol>

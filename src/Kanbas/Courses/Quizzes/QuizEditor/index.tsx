@@ -19,6 +19,8 @@ function QuizEditor() {
 
     const quiz = useSelector((state: KanbasState) => state.quizzesReducer.quiz);
 
+    const currentQuiz = useSelector((state: KanbasState) => state.quizzesReducer.quiz);
+
     useEffect(() => {
         if (quizId === "newQuiz") {
             dispatch(setQuiz({
@@ -30,10 +32,10 @@ function QuizEditor() {
                 dueDate: "",
                 lockQuestionsAfterAnswering: "No",
                 multipleAttempts: "No",
-                name: "",
+                name: "Default Quiz",
                 oneQuestionAtATime: "Yes",
                 points: "0",
-                published: "",
+                published: false,
                 questions: [],
                 quizType: "Graded Quiz",
                 showCorrectAnswers: "No",
@@ -59,20 +61,25 @@ function QuizEditor() {
 
     const [activeTab, setActiveTab] = React.useState("details");
 
-    const handleSaveQuiz = () => {
-        if (quizId === "newQuiz") {
-            console.log(quiz);
-            client.createQuiz(courseId, quiz)
-                .then((quiz) => {
-                    dispatch(setQuiz(quiz));
-                });
+    const saveQuiz = (publishStatus: boolean) => {
+
+        if (publishStatus === true) {
+            dispatch(setQuiz({ ...currentQuiz, published: true }));
         } else {
-            client.updateQuiz(quiz)
-                .then((quiz) => {
-                    dispatch(setQuiz(quiz));
-                });
+            dispatch(setQuiz({ ...currentQuiz, published: false }));
         }
-    }
+    
+        if (quizId === "newQuiz") {
+          client.createQuiz(courseId, currentQuiz).then((res) => {
+            console.log(res);
+          });
+        } else {
+          client.updateQuiz(currentQuiz).then((res) => {
+            console.log(res);
+          });
+        }
+        navigate(`/Kanbas/courses/${courseId}/quizzes`);
+      };
 
     return (
         <>
@@ -80,7 +87,7 @@ function QuizEditor() {
                 <div className="d-flex flex-row gap-4 align-self-end justify-content-center align-items-center ">
                     <div className="PointsStatus">
                         <span>
-                            Points: 0
+                            Points: {quiz.points ? quiz.points : "N/A"}
                         </span>
                     </div>
                     <div className="PublishStatus">
@@ -137,10 +144,14 @@ function QuizEditor() {
                                 backgroundColor: "#f5f5f5",
                                 color: "black",
                                 border: "1px solid #E0E0E0",
-                            }}>
+                            }} onClick={
+                                () => saveQuiz(true)
+                            }>
                                 Save & Publish
                             </button>
-                            <button onClick={handleSaveQuiz}>
+                            <button onClick={
+                                () => saveQuiz(false)
+                            }>
                                 Save
                             </button>
                         </div>

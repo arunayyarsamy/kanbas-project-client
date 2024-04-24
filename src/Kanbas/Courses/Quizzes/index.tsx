@@ -25,7 +25,6 @@ function Quizzes() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showQuizContextMenu, setShowQuizContextMenu] = useState(false);
   const [currentQuiz, setCurrentQuiz] = useState({} as any);
-  const [refresh, setRefresh] = useState(false);
   const quizzes = useSelector(
     (state: KanbasState) => state.quizzesReducer.quizzes
   );
@@ -47,12 +46,6 @@ function Quizzes() {
   }, [courseId, dispatch]);
 
   useEffect(() => {
-    client.findQuizzesForCourse(courseId).then((quizzes) => {
-      dispatch(setQuizzes(quizzes));
-    });
-  }, [refresh]);
-
-  useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
@@ -61,25 +54,32 @@ function Quizzes() {
 
   return (
     <>
-      <h1>currentTime: {currentTime.toISOString()}</h1>
+      {/* <h1>currentTime: {currentTime.toISOString()}</h1> */}
       <div
         className={`popupwindow ${showQuizContextMenu ? "d-flex" : "d-none"}`}
       >
         <div className="popupbox-container">
           <h5>Quiz Context Menu</h5>
-          <p>Quiz Title: {currentQuiz.title}</p>
+          <p>Quiz Title: {currentQuiz.name}</p>
           <div className="d-flex flex-row justify-content-end gap-2">
-            <button
-              className="
-                            btn btn-secondary
-                        "
+            <button className="btn btn-secondary"
+            onClick={
+              () => {
+                navigate(`/Kanbas/courses/${courseId}/Quizzes/${currentQuiz._id}/editor`)
+              }
+            }
             >
               Edit
             </button>
             <button
-              className="
-                            btn btn-danger 
-                        "
+              className="btn btn-danger"
+              onClick={
+                () => {
+                  client.deleteQuiz(currentQuiz._id);
+                  setShowQuizContextMenu(!showQuizContextMenu)
+                  navigate(0)
+                }
+              }
             >
               Delete
             </button>
@@ -88,7 +88,9 @@ function Quizzes() {
                 className="btn btn-secondary"
                 onClick={() => {
                   client.publishQuiz(currentQuiz._id, false);
-                  setRefresh(!refresh);
+                  navigate(0)
+                  // setRefresh(!refresh);
+                  setShowQuizContextMenu(!showQuizContextMenu)
                 }}
               >
                 Unpublish
@@ -98,30 +100,26 @@ function Quizzes() {
                 className="btn btn-success"
                 onClick={() => {
                   client.publishQuiz(currentQuiz._id, true);
-                  setRefresh(!refresh);
+                  navigate(0)
+                  // setRefresh(!refresh);
+                  setShowQuizContextMenu(!showQuizContextMenu)
                 }}
               >
                 Publish
               </button>
             )}
             <button
-              className="
-                            btn btn-primary
-                        "
+              className="btn btn-primary"
             >
               Copy
             </button>
             <button
-              className="
-                            btn btn-warning
-                        "
+              className="btn btn-warning"
             >
               Sort
             </button>
             <button
-              className="
-                            btn btn-secondary
-                        "
+              className="btn btn-secondary"
               onClick={() => setShowQuizContextMenu(!showQuizContextMenu)}
             >
               Close
@@ -191,7 +189,7 @@ function Quizzes() {
                         {quiz.name}
                       </Link>
                       <span>
-                        {handleQuizStatus(quiz)} |{" "}
+                        {handleQuizStatus(quiz)} | {" "}
                         {quiz.dueDate
                           ? "Due " + new Date(quiz.dueDate).toDateString()
                           : "No due date"}{" "}
@@ -206,9 +204,6 @@ function Quizzes() {
                     </div>
                   </div>
                   <span className="d-flex flex-row gap-3 align-items-center ">
-                    {/* <FaCheckCircle className={
-                                            quiz.publishStatus === 1 ? "text-success" : "text-green-500"
-                                        } /> */}
                     {quiz.published === true ? (
                       <FaCheckCircle className="text-success" />
                     ) : (
@@ -217,7 +212,8 @@ function Quizzes() {
                           className="text-black"
                           onClick={() => {
                             client.publishQuiz(quiz._id, true);
-                            setRefresh(!refresh);
+                            navigate(0)
+                            // setRefresh(!refresh);
                           }}
                         />
                       </>
@@ -234,7 +230,8 @@ function Quizzes() {
                       }}
                       onClick={() => {
                         client.deleteQuiz(quiz._id);
-                        setRefresh(!refresh);
+                        // setRefresh(!refresh);
+                        navigate(0)
                       }}
                     />
                     <FaEllipsisV
