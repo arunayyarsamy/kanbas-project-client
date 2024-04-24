@@ -130,6 +130,8 @@ function Courses() {
                   <Route path="Grades" element={<span>Grades</span>} />
                   <Route path="Quizzes" element={<span>Quizzes</span>} />
                   <Route path="Quizzes/:quizId/details" element={<span>Quiz Details</span>} />
+                  <Route path="Quizzes/:quizId/editor" element={<span>Quiz Editor</span>} />
+                  <Route path="Quizzes/:quizId/editor/:questionId" element={<span>Quiz Editor / Question Editor</span>} />
                 </Routes>
               </li>
             </ol>
@@ -171,6 +173,9 @@ function Courses() {
                 />
                 <Route path="Grades" element={<span>Grades</span>} />
                 <Route path="Quizzes" element={<span>Quizzes</span>} />
+                <Route path="Quizzes/:quizId/details" element={<span>Quiz Details</span>} />
+                <Route path="Quizzes/:quizId/editor" element={<span>Quiz Editor</span>} />
+                <Route path="Quizzes/:quizId/editor/:questionId" element={<span>Quiz Editor / Question Editor</span>} />
               </Routes>
             </h6>
           </div>

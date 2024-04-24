@@ -61,14 +61,18 @@ function QuizEditorQuestion(quizId: any) {
                         Do you want to save the quiz?
                     </h5>
                     <div className="d-flex flex-row justify-content-end gap-2">
-                        <button onClick={
+                        <button className="
+                        btn btn-primary
+                        " onClick={
                             () => {
                                 handleSaveQuiz();
                             }
                         }>
                             Save
                         </button>
-                        <button onClick={
+                        <button className="
+                        btn btn-danger
+                        " onClick={
                             () => {
                                 setShowQuizContextMenu(!showQuizContextMenu)
                             }

@@ -203,18 +203,6 @@ function CurrentQuestion() {
 
     return (
         <div className="preview-question-container w-75">
-            {
-                answeredQuestions.map((answeredQuestion: any) => {
-                    if (answeredQuestion._id === currentQuestion._id) {
-                        return (
-                            <div className="selected-answer">
-                                Selected Answer: {answeredQuestion.chosenAnswer}
-                            </div>
-                        )
-                    }
-                }
-                )
-            }
             <div className="preview-question-title">
                 <span>
                     {currentQuestion.title}
@@ -242,31 +230,6 @@ function CurrentQuestion() {
                         <TrueFalseComponent choices={currentQuestion.choices} />
                         : null
                 }
-                {/* <div className="preview-choices w-100">
-                    {
-                        currentQuestion.choices.map((choice: any, index: any) => {
-                            return (
-                                <>
-                                    <hr className='m-0' />
-                                    <label htmlFor="">
-                                        <input
-                                            type="radio"
-                                            name="answer"
-                                            id=""
-                                            value={choice}
-                                            onChange={(e) => {
-                                                handleAnswerQuestion(e.target.value);
-                                            }}
-                                        />
-                                        <span>
-                                            {choice}
-                                        </span>
-                                    </label>
-                                </>
-                            )
-                        })
-                    }
-                </div> */}
             </div>
         </div>
     );

@@ -103,6 +103,7 @@ export const TrueFalse = ({
           style={{
             width: "10%",
           }}
+          checked={answer === "True"}
         />
         <span className="text-success">True</span>
       </label>
@@ -116,6 +117,7 @@ export const TrueFalse = ({
           style={{
             width: "10%",
           }}
+          checked={answer === "False"}
         />
         <span className="text-danger">False</span>
       </label>
