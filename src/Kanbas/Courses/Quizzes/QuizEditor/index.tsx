@@ -21,6 +21,31 @@ function QuizEditor() {
 
     const currentQuiz = useSelector((state: KanbasState) => state.quizzesReducer.quiz);
 
+    const currentQuestions = useSelector((state: KanbasState) => state.quizzesReducer.questions);
+
+    const handleFinalSave = () => {
+        let totalPoints = 0;
+        currentQuestions.forEach((question) => {
+            totalPoints += question.points;
+        });
+
+        if (totalPoints > currentQuiz.points) {
+            alert("Total points for questions exceeds total points for quiz");
+            return;
+        } else {
+            if (quizId === "newQuiz") {
+                client.createQuiz(courseId, currentQuiz).then((res) => {
+                    console.log(res);
+                });
+            } else {
+                client.updateQuiz(currentQuiz).then((res) => {
+                    console.log(res);
+                });
+            }
+        }
+
+    };
+
     useEffect(() => {
         if (quizId === "newQuiz") {
             dispatch(setQuiz({
@@ -74,16 +99,28 @@ function QuizEditor() {
             dispatch(setQuiz({ ...currentQuiz, published: false }));
         }
 
-        if (quizId === "newQuiz") {
-            client.createQuiz(courseId, currentQuiz).then((res) => {
-                console.log(res);
-            });
-        } else {
-            client.updateQuiz(currentQuiz).then((res) => {
-                console.log(res);
-            });
-        }
-        navigate(`/Kanbas/courses/${courseId}/quizzes`);
+        client.findQuestionsForQuiz(quizId).then((response) => {
+            dispatch(setQuestions(response));
+        });
+
+        handleFinalSave();
+
+        // if (quizId === "newQuiz") {
+        //     client.createQuiz(courseId, currentQuiz).then((res) => {
+        //         console.log(res);
+        //     });
+        // } else {
+        //     client.updateQuiz(currentQuiz).then((res) => {
+        //         console.log(res);
+        //     });
+        // }
+        // // navigate(`/Kanbas/courses/${courseId}/quizzes`);
+        // if (publishStatus === true) {
+        //     navigate(`/Kanbas/courses/${courseId}/Quizzes`);
+        // } else {
+        //     navigate(`/Kanbas/courses/${courseId}/Quizzes/${quizId}/details`);
+        // }
+
     };
 
     return (

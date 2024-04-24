@@ -34,7 +34,8 @@ function Quizzes() {
       return "Closed";
     }
     if (currentTime < new Date(quiz.availableDate)) {
-      return `Not available until ${quiz.availableDate}`;
+      const date = new Date(quiz.availableDate).toDateString();
+      return `Not available until ${date}`;
     }
     return "Available";
   };

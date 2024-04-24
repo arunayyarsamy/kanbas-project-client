@@ -20,6 +20,7 @@ import QuizDetails from "./Quizzes/QuizDetails";
 import QuizEditor from "./Quizzes/QuizEditor";
 import NewQuestion from "./Quizzes/QuizEditor/QuizEditorQuestion/NewQuestion";
 import QuizPreview from "./Quizzes/QuizPreview";
+import QuizPreviewResult from "./Quizzes/QuizPreviewResult";
 
 const API_BASE = process.env.REACT_APP_API_BASE;
 
@@ -237,6 +238,7 @@ function Courses() {
             <Route path="Quizzes/:quizId/editor" element={<QuizEditor />} />
             <Route path="Quizzes/:quizId/editor/:questionId" element={<NewQuestion />} />
             <Route path="Quizzes/:quizId/preview" element={<QuizPreview />} />
+            <Route path="Quizzes/:quizId/preview/results" element={<QuizPreviewResult />} />
           </Routes>
         </div>
       </div>
