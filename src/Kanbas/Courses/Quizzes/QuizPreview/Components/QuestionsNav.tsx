@@ -13,6 +13,9 @@ function QuestionNav() {
         <div className="preview-questions-list-container w-25 h-100 
         d-flex flex-column justify-content-start align-items-start gap-2
         ">
+            <h3>
+                Questions
+            </h3>
             {
                 questions.map((question: any, index: any) => {
                     return (

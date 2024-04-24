@@ -5,10 +5,12 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as client from "../client";
 import { AiOutlineStop } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 function QuizDetails() {
   const { quizId } = useParams();
   const [quiz, setQuiz] = React.useState({} as any);
+  const navigate = useNavigate();
 
   useEffect(() => {
     client.findQuizById(quizId).then((quiz) => {
@@ -46,7 +48,13 @@ function QuizDetails() {
             </button>
           </>
         )}
-        <button>Preview</button>
+        <button onClick={
+          () => {
+            navigate(`/Kanbas/courses/${quiz.courseId}/Quizzes/${quizId}/preview`);
+          }
+        }>
+          Preview
+        </button>
         <button>
           <FaPencilAlt />
           Edit

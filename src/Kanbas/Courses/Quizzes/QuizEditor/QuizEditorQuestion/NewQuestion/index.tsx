@@ -6,6 +6,8 @@ import { Navigate, useNavigate, useParams } from "react-router";
 import { Editor } from "@tinymce/tinymce-react";
 import { idText } from "typescript";
 import * as client from "../../../client";
+import { useDispatch, useSelector } from "react-redux";
+import { setQuestion } from "../../../reducer";
 
 export const PossibleAnswer = ({
   index,
@@ -127,6 +129,7 @@ function NewQuestion() {
   const { quizId } = useParams<{ quizId: string }>();
   const { questionId } = useParams<{ questionId: string }>();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [newQuestion, setNewQuestion] = useState({
     _id: "",
@@ -143,6 +146,18 @@ function NewQuestion() {
   const [possibleAnswersLimit, setPossibleAnswersLimit] = useState(0);
 
   useEffect(() => {
+    dispatch(
+      setQuestion(
+        {
+          _id: "",
+          question: "",
+          type: "Multiple Choice",
+          options: [],
+          correctAnswer: "",
+          points: 0
+        }
+      )
+    )
     if (questionId === "newQuestion") {
       setNewQuestion({
         _id: "",
@@ -156,7 +171,6 @@ function NewQuestion() {
       });
     } else {
       client.findQuestionById(quizId, questionId).then((question) => {
-        // setNewQuestion(question, possibleAnswers = question.choices || [])
         setNewQuestion({
           ...question,
           possibleAnswers: question.choices
@@ -177,7 +191,7 @@ function NewQuestion() {
     } else if (newQuestion.questionType === "True/False") {
       setPossibleAnswersLimit(1);
       setPossibleAnswersLen(0);
-    } else if (newQuestion.questionType === "Fill in the Blanks") {
+    } else if (newQuestion.questionType === "Fill in the Blank") {
       setPossibleAnswersLimit(100);
       setPossibleAnswersLen(0);
     } else {
@@ -237,10 +251,10 @@ function NewQuestion() {
       alert("Please provide question");
       return;
     }
-    if (newQuestion.answer.length === 0) {
-      alert("Please provide answer");
-      return;
-    }
+    // if (newQuestion.answer.length === 0) {
+    //   alert("Please provide answer");
+    //   return;
+    // }
     if (
       newQuestion.questionType === "Multiple Choice" &&
       newQuestion.possibleAnswers.length < 2
@@ -249,7 +263,7 @@ function NewQuestion() {
       return;
     }
     if (
-      newQuestion.questionType === "Fill in the Blanks" &&
+      newQuestion.questionType === "Fill in the Blank" &&
       newQuestion.possibleAnswers.length === 0
     ) {
       alert("Please provide atleast 1 possible answer");
@@ -279,7 +293,7 @@ function NewQuestion() {
         possibleAnswers: [],
       };
       saveQuestion(finalQuestion);
-    } else if (newQuestion.questionType === "Fill in the Blanks") {
+    } else if (newQuestion.questionType === "Fill in the Blank") {
       const possibleAnswers1 = newQuestion.possibleAnswers.map(
         (possibleAnswer) => possibleAnswer.answer
       );
@@ -330,7 +344,7 @@ function NewQuestion() {
                   Multiple Choice
                 </option>
                 <option value="True/False">True/False</option>
-                <option value="Fill in the Blanks">Fill in the Blanks</option>
+                <option value="Fill in the Blank">Fill in the Blank</option>
               </select>
             </div>
           </div>
@@ -407,27 +421,27 @@ function NewQuestion() {
                     </label>
                   </div>
                 ) : null}
-                {newQuestion.questionType === "Fill in the Blanks"
+                {newQuestion.questionType === "Fill in the Blank"
                   ? newQuestion.possibleAnswers.map((possibleAnswer, index) => (
-                      <FillInTheBlanks
-                        key={possibleAnswer.id}
-                        index={index}
-                        answer={possibleAnswer.answer}
-                        onChange={handlePossibleAnswerChange}
-                        onDelete={handleDeletePossibleAnswer}
-                      />
-                    ))
+                    <FillInTheBlanks
+                      key={possibleAnswer.id}
+                      index={index}
+                      answer={possibleAnswer.answer}
+                      onChange={handlePossibleAnswerChange}
+                      onDelete={handleDeletePossibleAnswer}
+                    />
+                  ))
                   : null}
                 {newQuestion.questionType === "Multiple Choice"
                   ? newQuestion.possibleAnswers.map((possibleAnswer, index) => (
-                      <PossibleAnswer
-                        key={possibleAnswer.id}
-                        index={index}
-                        answer={possibleAnswer.answer}
-                        onChange={handlePossibleAnswerChange}
-                        onDelete={handleDeletePossibleAnswer}
-                      />
-                    ))
+                    <PossibleAnswer
+                      key={possibleAnswer.id}
+                      index={index}
+                      answer={possibleAnswer.answer}
+                      onChange={handlePossibleAnswerChange}
+                      onDelete={handleDeletePossibleAnswer}
+                    />
+                  ))
                   : null}
                 {newQuestion.questionType === "True/False" ? (
                   <TrueFalse
@@ -462,7 +476,13 @@ function NewQuestion() {
                         d-flex gap-3
                         "
         >
-          <button>Cancel</button>
+          <button onClick={
+            () => {
+              navigate(`/kanbas/courses/${courseId}/quizzes/${quizId}/editor`);
+            }
+          }>
+            Cancel
+          </button>
           <button
             onClick={() => {
               getFinalQuestion();

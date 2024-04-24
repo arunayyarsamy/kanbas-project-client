@@ -11,10 +11,10 @@ const initialState = {
         dueDate: "",
         lockQuestionsAfterAnswering: "No",
         multipleAttempts: "No",
-        name: "",
+        name: "Default Quiz",
         oneQuestionAtATime: "Yes",
         points: "0",
-        published: "",
+        published: false,
         questions: [],
         quizType: "Graded Quiz",
         showCorrectAnswers: "No",
@@ -31,7 +31,7 @@ const initialState = {
         points: "0",
         question: "",
         choices: [] as string[],
-        questionType: "",
+        questionType: "Multiple Choice",
         answer: [] as string[],
         possibleAnswers: [] as { id: string, answer: string }[]
     },
@@ -109,17 +109,11 @@ const quizzesSlice = createSlice({
         },
 
         addAnsweredQuestion: (state, action) => {
-            const questionId = state.answeredQuestions.findIndex((answeredQuestion: any) => answeredQuestion.question._id === action.payload.question._id);
-            if (questionId === -1) {
-                state.answeredQuestions = [...state.answeredQuestions, action.payload] as typeof state.answeredQuestions;
+            const findIndex = state.answeredQuestions.findIndex((answeredQuestion: any) => answeredQuestion._id === action.payload._id);
+            if (findIndex === -1) {
+                state.answeredQuestions = [...state.answeredQuestions, action.payload,] as typeof state.answeredQuestions;
             } else {
-                state.answeredQuestions = state.answeredQuestions.map((answeredQuestion: any) => {
-                    if (answeredQuestion.question._id === action.payload.question._id) {
-                        return action.payload;
-                    } else {
-                        return answeredQuestion;
-                    }
-                }) as typeof state.answeredQuestions;
+                state.answeredQuestions[findIndex] = action.payload as typeof state.answeredQuestions[number];
             }
         },
 
