@@ -62,3 +62,17 @@ export const publishQuiz = async (quizId: any, published: any) => {
   const response = await axios.put(`${QUIZZES_API}/${quizId}/publish`, { published });
   return response.data;
 }
+
+export const submitQuiz = async (quizId: any, answers: any) => {
+
+  const attempt = answers.map((answer: any) => {
+    return {
+      _id: answer._id,
+      chosenAnswer: answer.answer
+    }
+  });
+  
+  const response = await axios.post(`${QUIZZES_API}/${quizId}/submit`, attempt);
+  return response.data;
+
+}
