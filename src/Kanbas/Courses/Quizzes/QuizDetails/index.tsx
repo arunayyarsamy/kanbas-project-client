@@ -11,10 +11,27 @@ function QuizDetails() {
   const { quizId } = useParams();
   const [quiz, setQuiz] = React.useState({} as any);
   const navigate = useNavigate();
+  const [previewDisabled, setPreviewDisabled] = React.useState(false);
+  const [previewResults, setPreviewResults] = React.useState({} as any);
+
+  const handleGetQuizResults = () => {
+    client.findAttemptsForQuiz(quizId).then((data) => {
+      console.log(data);
+      setPreviewResults(data);
+    });
+  }
 
   useEffect(() => {
     client.findQuizById(quizId).then((quiz) => {
       setQuiz(quiz);
+    });
+    client.findAttemptsForQuiz(quizId).then((data) => {
+      if (data === "No preview found") {
+        setPreviewDisabled(false);
+      } else {
+        setPreviewDisabled(true);
+        handleGetQuizResults();
+      }
     });
   }, []);
 
@@ -52,6 +69,8 @@ function QuizDetails() {
           () => {
             navigate(`/Kanbas/courses/${quiz.courseId}/Quizzes/${quizId}/preview`);
           }
+        } disabled={
+          previewDisabled
         }>
           Preview
         </button>
@@ -165,6 +184,18 @@ function QuizDetails() {
           </div>
         </div>
       </div>
+      {
+        previewDisabled ? (
+          <div className="Score-container">
+            <h3>
+              score:
+              {
+                previewResults.score
+              }
+            </h3>
+          </div>
+        ) : null
+      }
     </>
   );
 }

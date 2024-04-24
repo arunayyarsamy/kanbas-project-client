@@ -23,7 +23,7 @@ function QuizEditor() {
 
     const currentQuestions = useSelector((state: KanbasState) => state.quizzesReducer.questions);
 
-    const handleFinalSave = (publishStatus: any) => {
+    const handleFinalSave = async (publishStatus: any) => {
         let totalPoints = 0;
         currentQuestions.forEach((question) => {
             totalPoints += question.points;
@@ -36,20 +36,22 @@ function QuizEditor() {
             if (quizId === "newQuiz") {
                 client.createQuiz(courseId, currentQuiz).then((res) => {
                     console.log(res);
+                    if (publishStatus === true) {
+                        navigate(`/Kanbas/courses/${courseId}/Quizzes`);
+                    } else {
+                        navigate(`/Kanbas/courses/${courseId}/Quizzes/${res._id}/details`);
+                    }
                 });
             } else {
                 client.updateQuiz(currentQuiz).then((res) => {
-                    console.log(res);
+                    if (publishStatus === true) {
+                        navigate(`/Kanbas/courses/${courseId}/Quizzes`);
+                    } else {
+                        navigate(`/Kanbas/courses/${courseId}/Quizzes/${res._id}/details`);
+                    }
                 });
             }
         }
-
-        if (publishStatus === true) {
-            navigate(`/Kanbas/courses/${courseId}/Quizzes`);
-        } else {
-            navigate(`/Kanbas/courses/${courseId}/Quizzes/${quizId}/details`);
-        }
-
     };
 
     useEffect(() => {
@@ -105,9 +107,11 @@ function QuizEditor() {
             dispatch(setQuiz({ ...currentQuiz, published: false }));
         }
 
-        client.findQuestionsForQuiz(quizId).then((response) => {
-            dispatch(setQuestions(response));
-        });
+        if (quizId !== "newQuiz") {
+            client.findQuestionsForQuiz(quizId).then((response) => {
+                dispatch(setQuestions(response));
+            });
+        }
 
         handleFinalSave(publishStatus);
 

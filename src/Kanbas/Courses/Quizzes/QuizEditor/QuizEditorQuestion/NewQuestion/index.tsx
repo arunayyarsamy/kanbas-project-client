@@ -174,12 +174,23 @@ function NewQuestion() {
       client.findQuestionById(quizId, questionId).then((question) => {
         setNewQuestion({
           ...question,
-          possibleAnswers: question.choices
-            // .filter((choice: string) => choice !== question.answer[0])
-            .map((choice: string) => ({
+          // possibleAnswers: question.choices
+          //   // .filter((choice: string) => choice !== question.answer[0])
+          //   .map((choice: string) => ({
+          //     id: `answer_${choice}`,
+          //     answer: choice,
+          //   })),
+          possibleAnswers: question.questionType === "Fill in the Blank"
+            ? question.choices.map((choice: string) => ({
               id: `answer_${choice}`,
               answer: choice,
-            })),
+            }))
+            : question.choices
+              .filter((choice: string) => choice !== question.answer[0])
+              .map((choice: string) => ({
+                id: `answer_${choice}`,
+                answer: choice,
+              })),
         });
       });
     }
@@ -314,7 +325,7 @@ function NewQuestion() {
 
   return (
     <>
-    {/* {
+      {/* {
       newQuestion.possibleAnswers.map((possibleAnswer, index) => (
         <h1>
           {index + 1}. {possibleAnswer.answer}
