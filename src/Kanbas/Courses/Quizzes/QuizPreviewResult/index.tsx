@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { addAnsweredQuestion } from "../reducer";
 import * as client from "../client";
+import { find } from "@reduxjs/toolkit/dist/utils";
 
 export function TrueFalseComponent(props: any) {
 
@@ -153,10 +154,6 @@ function QuizPreviewResult() {
     let chosenResponses: any;
     let questionResponses: any;
 
-    const test = () => {
-        console.log(chosenResponses)
-    }
-
     const handleFinalAnswers = () => {
 
         // chosenResponses :// {"_id":{"$oid":"6629156213ee537db9f61b37"},"quizId":{"$oid":"6622072ef0f53d357cdca33c"},"username":"iron_man","score":{"$numberInt":"14"},"chosenAnswers":[{"_id":"6623e991d450586ae92108ab","chosenAnswer":["Paris"]},{"_id":"662732611806e3a77f662b87","chosenAnswer":["Captain America"]},{"_id":"6627e7900a2775ac5d001d44","chosenAnswer":[]},{"_id":"6628a6b513ee537db9f61905","chosenAnswer":["False"]}],"__v":{"$numberInt":"0"}}
@@ -166,15 +163,8 @@ function QuizPreviewResult() {
     }
 
     useEffect(() => {
-        client.findAttemptsForQuiz(quizId).then((data) => {
-            console.log(data);
-            chosenResponses = data;
-        });
-        client.findQuestionsForQuiz(quizId).then((response) => {
-            console.log(response);
-            questionResponses = response;
-        });
-        // client.findQuestionsForQuiz(quizId).then((response) => {
+        chosenResponses = client.findAttemptsForQuiz(quizId);
+        console.log(chosenResponses);
         //     setQuestionResponses(response);
         // });
         // const chosenResponse = client.findAttemptsForQuiz(quizId).then((data) => {
