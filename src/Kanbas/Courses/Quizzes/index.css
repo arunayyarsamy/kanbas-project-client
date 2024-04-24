@@ -338,3 +338,16 @@
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 }
+
+.Score-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.Score-container h3 {
+  font-size: 1.1rem;
+  font-weight: bold;
+}

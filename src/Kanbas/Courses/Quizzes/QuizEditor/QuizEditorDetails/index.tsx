@@ -17,6 +17,7 @@ function QuizEditorDetails(quizId: any) {
   const currentQuiz = useSelector((state: any) => state.quizzesReducer.quiz);
 
   const [showQuizContextMenu, setShowQuizContextMenu] = useState(false);
+  const [timeLimitRequired, setTimeLimitRequired] = React.useState(false);
 
   const navigate = useNavigate();
 
@@ -213,7 +214,9 @@ function QuizEditorDetails(quizId: any) {
                   <label htmlFor="">
                     <input type="checkbox" name="
                     timeLimit
-                    " id="" />
+                    " id="" onChange={
+                      () => setTimeLimitRequired(!timeLimitRequired)
+                    } />
                     <span>Time Limit</span>
                   </label>
                   <label htmlFor="">
@@ -221,7 +224,7 @@ function QuizEditorDetails(quizId: any) {
                       type="number"
                       name=""
                       id=""
-                      className="w-25"
+                      className="quiz-input-cont"
                       value={currentQuiz.timeLimit}
                       onChange={(e) => {
                         dispatch(
@@ -233,6 +236,7 @@ function QuizEditorDetails(quizId: any) {
                       }}
                       min={0}
                       max={240}
+                      disabled={!timeLimitRequired}
                     />
                     <span>Minutes</span>
                   </label>

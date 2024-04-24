@@ -113,6 +113,19 @@ function QuizEditor() {
             });
         }
 
+        if (currentQuiz.dueDate === "") {
+            alert("Please enter a due date for the quiz");
+            return;
+        }
+        if (currentQuiz.availableDate === "") {
+            alert("Please enter an available date for the quiz");
+            return;
+        }
+        if (currentQuiz.untilDate === "") {
+            alert("Please enter an until date for the quiz");
+            return;
+        }
+
         handleFinalSave(publishStatus);
 
         // if (quizId === "newQuiz") {

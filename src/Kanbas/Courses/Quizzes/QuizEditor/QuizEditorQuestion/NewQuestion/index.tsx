@@ -245,13 +245,14 @@ function NewQuestion() {
     if (questionId === "newQuestion") {
       client.createQuestion(quizId, finalQuestion).then((question) => {
         setNewQuestion(question);
+        navigate(`/kanbas/courses/${courseId}/quizzes/${quizId}/editor`);
       });
     } else {
       client.updateQuestion(quizId, finalQuestion).then((question) => {
         setNewQuestion(question);
+        navigate(`/kanbas/courses/${courseId}/quizzes/${quizId}/editor`);
       });
     }
-    navigate(`/kanbas/courses/${courseId}/quizzes/${quizId}/editor`);
   };
 
   const getFinalQuestion = () => {
@@ -294,6 +295,13 @@ function NewQuestion() {
       const possibleAnswers1 = newQuestion.possibleAnswers.map(
         (possibleAnswer) => possibleAnswer.answer
       );
+      possibleAnswers1.map((possibleAnswer) => {
+        if (possibleAnswer === "") {
+          alert("Please provide all possible answers");
+          return;
+        }
+      });
+
       const finalChoices = [...possibleAnswers1, ...newQuestion.answer];
       const shuffledChoices = finalChoices.sort(() => Math.random() - 0.5);
       const finalQuestion = {

@@ -183,19 +183,19 @@ function QuizDetails() {
             </table>
           </div>
         </div>
+        {
+          previewDisabled ? (
+            <div className="Score-container">
+              <h3>
+                Previous Attempt Score:
+                {
+                  previewResults.score
+                }
+              </h3>
+            </div>
+          ) : null
+        }
       </div>
-      {
-        previewDisabled ? (
-          <div className="Score-container">
-            <h3>
-              score:
-              {
-                previewResults.score
-              }
-            </h3>
-          </div>
-        ) : null
-      }
     </>
   );
 }
