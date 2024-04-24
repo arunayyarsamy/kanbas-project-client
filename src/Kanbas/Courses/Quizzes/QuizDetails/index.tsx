@@ -11,12 +11,34 @@ function QuizDetails() {
   const { quizId } = useParams();
   const [quiz, setQuiz] = React.useState({} as any);
   const navigate = useNavigate();
+  const [previewDisabled, setPreviewDisabled] = React.useState(false);
 
   useEffect(() => {
     client.findQuizById(quizId).then((quiz) => {
       setQuiz(quiz);
     });
   }, []);
+
+  useEffect(() => {
+    client.findAttemptsForQuiz(quizId).then((data) => {
+      if (data === "No preview found") {
+        setPreviewDisabled(false);
+      } else {
+        setPreviewDisabled(true);
+        handleGetSavedPreview();
+      }
+    });
+  }, []);
+
+  const handleGetSavedPreview = () => {
+    client.findAttemptsForQuiz(quizId).then((data) => {
+      if (data === "No preview found") {
+      } else {
+        navigate(`/Kanbas/courses/${quiz.courseId}/Quizzes/${quizId}/preview/results`);
+      }
+    });
+  }
+
 
   return (
     <>
@@ -29,6 +51,7 @@ function QuizDetails() {
                   setQuiz({ ...quiz, published: false });
                 });
               }}
+              disabled={previewDisabled}
             >
               <FaCheckCircle style={{ color: "green" }} />
               Published
