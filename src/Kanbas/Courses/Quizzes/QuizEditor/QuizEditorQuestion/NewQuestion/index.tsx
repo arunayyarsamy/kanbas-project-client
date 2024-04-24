@@ -4,7 +4,6 @@ import { FaPlus } from "react-icons/fa";
 import "../../../index.css";
 import { Navigate, useNavigate, useParams } from "react-router";
 import { Editor } from "@tinymce/tinymce-react";
-import { idText } from "typescript";
 import * as client from "../../../client";
 import { useDispatch, useSelector } from "react-redux";
 import { setQuestion } from "../../../reducer";
@@ -165,7 +164,7 @@ function NewQuestion() {
         points: "0",
         question: "",
         choices: [] as string[],
-        questionType: "",
+        questionType: "Multiple Choice",
         answer: [] as string[],
         possibleAnswers: [] as { id: string; answer: string }[],
       });
@@ -243,6 +242,10 @@ function NewQuestion() {
   };
 
   const getFinalQuestion = () => {
+    if (newQuestion.title === "") {
+      alert("Please provide title");
+      return;
+    }
     if (newQuestion.points === "0") {
       alert("Please provide points");
       return;
@@ -251,10 +254,10 @@ function NewQuestion() {
       alert("Please provide question");
       return;
     }
-    // if (newQuestion.answer.length === 0) {
-    //   alert("Please provide answer");
-    //   return;
-    // }
+    if (newQuestion.answer.length === 0) {
+      alert("Please provide answer");
+      return;
+    }
     if (
       newQuestion.questionType === "Multiple Choice" &&
       newQuestion.possibleAnswers.length < 2
@@ -351,7 +354,7 @@ function NewQuestion() {
           <div className="input-grp d-flex gap-2 align-items-center ">
             <span>pts: </span>
             <input
-              type="text"
+              type="number"
               value={newQuestion.points}
               className="form-control"
               onChange={(e) => {
