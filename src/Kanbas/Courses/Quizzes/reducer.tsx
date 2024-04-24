@@ -11,7 +11,7 @@ const initialState = {
         dueDate: "",
         lockQuestionsAfterAnswering: "No",
         multipleAttempts: "No",
-        name: "",
+        name: "New Quiz",
         oneQuestionAtATime: "Yes",
         points: "0",
         published: "",

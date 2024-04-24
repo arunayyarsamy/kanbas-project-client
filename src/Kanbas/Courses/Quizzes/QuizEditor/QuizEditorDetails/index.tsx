@@ -109,13 +109,14 @@ function QuizEditorDetails(quizId: any) {
               </select>
             </div>
           </div>
-          <div className="">
-            <label htmlFor="">
-              <span> Points</span>
+          <div className="quiz-input-grp">
+            <div className="quiz-input-label">Points</div>
+            <div className="quiz-input-cont">
               <input
                 name="points"
                 id="points"
                 value={currentQuiz.points}
+                className="input-tags"
                 onChange={(e) => {
                   dispatch(
                     setQuiz({
@@ -125,7 +126,7 @@ function QuizEditorDetails(quizId: any) {
                   );
                 }}
               />
-            </label>
+            </div>
           </div>
           <div className="quiz-input-grp">
             <div className="quiz-input-label">Assignment Group</div>
