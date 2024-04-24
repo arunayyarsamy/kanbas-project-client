@@ -216,8 +216,7 @@ function QuizPreviewResult() {
           <span>{finalScore}</span>
         </div>
       </div>
-      <div className="preview-question-container w-75">
-        {/* {answeredQuestions.map((question: any, index: any) => {
+      {/* {answeredQuestions.map((question: any, index: any) => {
           return (
             <div className="preview-question w-100">
               <div className="preview-question-header w-100 d-flex flex-row justify-content-between align-items-center">
@@ -237,11 +236,21 @@ function QuizPreviewResult() {
             </div>
           );
         })} */}
-        {questionResponses.map((question: any, index: any) => {
-          return (
+      {questionResponses.map((question: any, index: any) => {
+        return (
+          <div className="preview-question-container w-75">
             <div className="preview-question w-100">
-              <div className="preview-question-header w-100 d-flex flex-row justify-content-between align-items-center">
-                <span>{index + 1}</span>
+              <div className="preview-question-header w-100 d-flex flex-column justify-content-between align-items-center">
+                <span>
+                  Question {index + 1} - {question.points} points
+                </span>
+                <span>
+                  {
+                    finalAnswers.find(
+                      (answer: any) => answer.questionId === question._id
+                    )?.question
+                  }
+                </span>
                 <span>
                   correct answer
                   {
@@ -252,39 +261,17 @@ function QuizPreviewResult() {
                 </span>
               </div>
               <div className="">
-                Chosen Answer:
-                {question.questionType !== "Fill in the blank"
-                  ? (finalAnswers.find(
-                      (answer: any) => answer.questionId === question._id
-                    )?.chosenAnswer[0])
-                  : (
-                    "hello"
-                    // finalAnswers.find(
-                    //   (answer: any) => answer.questionId === question._id
-                    // )?.map((ans:any) => {
-                    //     <h2>{ans}</h2>
-                    // })
-                    )}
+                <span>
+                  chosenAnswer
+                </span>
+                {finalAnswers.find(
+                  (answer: any) => answer.questionId === question._id
+                )?.chosenAnswer[0]}
               </div>
-              {/* <div className="">
-                            Chosen Answer: {
-                                qu
-                            }
-                        </div> */}
-              {/* <div className="preview-question-body w-100">
-                            <span>{question.question}</span>
-                            {question.questionType === "Multiple Choice" ? (
-                                <MultipleChoiceOptionsComponent choices={question.choices} />
-                            ) : question.questionType === "Fill in the Blank" ? (
-                                <FillInTheBlankComponent choices={question.choices} />
-                            ) : (
-                                <TrueFalseComponent choices={question.choices} />
-                            )}
-                        </div> */}
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </>
   );
 }
