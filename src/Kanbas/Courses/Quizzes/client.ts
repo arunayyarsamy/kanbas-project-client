@@ -70,11 +70,16 @@ export const submitQuiz = async (quizId: any, answers: any) => {
   const attempt = answers.map((answer: any) => {
     return {
       _id: answer._id,
-      chosenAnswer: answer.answer
+      chosenAnswer: answer.chosenAnswer
     }
   });
   
   const response = await axios.post(`${QUIZZES_API}/${quizId}/submit`, attempt);
   return response.data;
 
+}
+
+export const findAttemptsForQuiz = async (quizId: any) => {
+  const response = await axios.get(`${QUIZZES_API}/${quizId}/preview`);
+  return response.data;
 }

@@ -85,10 +85,11 @@ function QuizEditorDetails(quizId: any) {
                 }}
                 value={currentQuiz.description}
                 onEditorChange={(content: any, editor: any) => {
+                  const plaintext = editor.getContent({ format: "text" });
                   dispatch(
                     setQuiz({
                       ...currentQuiz,
-                      description: content,
+                      description: plaintext,
                     })
                   );
                 }}

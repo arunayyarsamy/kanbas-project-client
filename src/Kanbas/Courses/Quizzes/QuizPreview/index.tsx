@@ -10,6 +10,8 @@ import '../index.css';
 
 function QuizPreview() {
 
+  const { courseId } = useParams();
+
   const { quizId } = useParams();
   const dispatch = useDispatch();
   const [quiz, setQuiz] = useState<any>();
@@ -34,20 +36,34 @@ function QuizPreview() {
         }
       )
     )
+
+    const response = client.findAttemptsForQuiz(quizId);
+    response.then((data) => {
+      if (data === "No preview found") {
+      } else {
+        navigate(`/Kanbas/courses/${courseId}/Quizzes/${quizId}/preview/results`);
+      }
+    });
+
     client.findQuestionsForQuiz(quizId).then((response) => {
       dispatch(setQuestions(response));
-      dispatch(setQuestion(response[0]));
-      response.forEach((question: any) => {
-        dispatch(addAnsweredQuestion({
-          _id: question._id,
-          question: question.question,
-          type: question.type,
-          options: question.options,
-          correctAnswer: question.correctAnswer,
-          points: question.points,
-          chosenAnswer: [],
-        }));
-      });
+      if (response.length > 0) {
+        dispatch(setQuestion(response[0]));
+        response.forEach((question: any) => {
+          dispatch(addAnsweredQuestion({
+            _id: question._id,
+            question: question.question,
+            type: question.type,
+            options: question.options,
+            correctAnswer: question.correctAnswer,
+            points: question.points,
+            chosenAnswer: [],
+          }));
+        });
+      } else {
+        alert("No questions found for this quiz");
+        navigate(`/Kanbas/courses/${courseId}/Quizzes/${quizId}/details`);
+      }
     });
     client.findQuizById(quizId).then((response) => {
       setQuiz(response);
@@ -86,7 +102,7 @@ function QuizPreview() {
           This is a preview of the published version of the quiz.
         </span>
       </div>
-      <hr className='w-75'/>
+      <hr className='w-75' />
       <div className="d-flex flex-row justify-content-between align-items-start gap-4 ">
         <CurrentQuestion />
         <QuestionNav />
