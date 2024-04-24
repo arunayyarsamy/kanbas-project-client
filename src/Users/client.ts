@@ -66,3 +66,11 @@ export const findUsersByRole = async (role: string) => {
   const response = await api.get(`${USERS_API}?role=${role}`);
   return response.data;
 };
+
+export const isAuthenticated = async () => {
+  const response = await api.post(`${USERS_API}/isloggedin`);
+  if (response.data.isAuthenticated) {
+    return true;
+  }
+  return false;
+}
