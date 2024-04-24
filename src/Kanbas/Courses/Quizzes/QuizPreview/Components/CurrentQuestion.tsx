@@ -10,11 +10,20 @@ export function TrueFalseComponent(props: any) {
     const dispatch = useDispatch();
 
     const handleAnswerQuestion = (choice: any) => {
-        let answeredQuestion = {
+        // let answeredQuestion = {
+        //     _id: currentQuestion._id,
+        //     answer: [choice]
+        // }
+        // dispatch(addAnsweredQuestion(answeredQuestion));
+        dispatch(addAnsweredQuestion({
             _id: currentQuestion._id,
-            answer: [choice]
-        }
-        dispatch(addAnsweredQuestion(answeredQuestion));
+            question: currentQuestion.question,
+            questionType: currentQuestion.questionType,
+            choices: currentQuestion.choices,
+            answer: currentQuestion.answer,
+            points: currentQuestion.points,
+            chosenAnswer: [choice],
+          }));
     }
 
     return (
@@ -34,7 +43,8 @@ export function TrueFalseComponent(props: any) {
                                         handleAnswerQuestion(e.target.value);
                                     }}
                                     checked={
-                                        answeredQuestions.find((answeredQuestion: any) => answeredQuestion._id === currentQuestion._id)?.chosenAnswer.includes(choice)
+                                        answeredQuestions.find((answeredQuestion: any) => 
+                                            answeredQuestion._id === currentQuestion._id)?.chosenAnswer.includes(choice)
                                     }
                                 />
                                 <span>
@@ -150,6 +160,7 @@ export function MultipleChoiceOptionsComponent(props: any) {
             points: currentQuestion.points,
             chosenAnswer: [choice],
           }));
+        // alert(choice)
     }
 
     return (
@@ -197,7 +208,7 @@ function CurrentQuestion() {
                     if (answeredQuestion._id === currentQuestion._id) {
                         return (
                             <div className="selected-answer">
-                                Selected Answer: {answeredQuestion.answer}
+                                Selected Answer: {answeredQuestion.chosenAnswer}
                             </div>
                         )
                     }

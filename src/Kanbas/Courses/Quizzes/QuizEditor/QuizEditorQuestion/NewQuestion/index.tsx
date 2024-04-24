@@ -246,7 +246,7 @@ function NewQuestion() {
       alert("Please provide title");
       return;
     }
-    if (newQuestion.points === "0") {
+    if (newQuestion.points === "0" || newQuestion.points === "") {
       alert("Please provide points");
       return;
     }
@@ -254,7 +254,7 @@ function NewQuestion() {
       alert("Please provide question");
       return;
     }
-    if (newQuestion.answer.length === 0) {
+    if (newQuestion.answer.length === 0 && newQuestion.questionType !== "Fill in the Blank") {
       alert("Please provide answer");
       return;
     }
@@ -475,9 +475,7 @@ function NewQuestion() {
           ) : null}
         </div>
         <div
-          className="submission-button-grp
-                        d-flex gap-3
-                        "
+          className="submission-button-grp d-flex gap-3"
         >
           <button onClick={
             () => {
