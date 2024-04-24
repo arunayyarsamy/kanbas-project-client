@@ -23,7 +23,7 @@ function QuizEditor() {
 
     const currentQuestions = useSelector((state: KanbasState) => state.quizzesReducer.questions);
 
-    const handleFinalSave = () => {
+    const handleFinalSave = (publishStatus: any) => {
         let totalPoints = 0;
         currentQuestions.forEach((question) => {
             totalPoints += question.points;
@@ -42,6 +42,12 @@ function QuizEditor() {
                     console.log(res);
                 });
             }
+        }
+
+        if (publishStatus === true) {
+            navigate(`/Kanbas/courses/${courseId}/Quizzes`);
+        } else {
+            navigate(`/Kanbas/courses/${courseId}/Quizzes/${quizId}/details`);
         }
 
     };
@@ -103,7 +109,7 @@ function QuizEditor() {
             dispatch(setQuestions(response));
         });
 
-        handleFinalSave();
+        handleFinalSave(publishStatus);
 
         // if (quizId === "newQuiz") {
         //     client.createQuiz(courseId, currentQuiz).then((res) => {
